@@ -1,14 +1,14 @@
-<div class="container">
+<div class="container" data-controller="maps">
 
 <% @events.each do |event| %>
   <p><strong><%= event.name %></strong></p>
   <p><%= event.address %></p>
-  <p>[Coordinates: <%= event.latitude %>, <%= event.longitude %>]</p>
+  <p data-maps-target="latitude"><%=event.latitude%></p>
+  <p data-maps-target="longitude"><%= event.longitude %></p>
   <p>Start: <%= event.start_time.strftime("%e %b %Y, %I.%M%P") %></p>
   <p>End: <%= event.end_time.strftime("%e %b %Y, %I.%M%P")  %></p>
 <% end %>
 
-<div id="map">
-</div>
+<div id="map" style="height: 400px" data-maps-target="map" data-action="google-maps-callback@window->maps#initMap"></div>
 
 </div>
