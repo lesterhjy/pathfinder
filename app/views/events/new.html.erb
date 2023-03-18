@@ -6,7 +6,9 @@
       <div class="event-form">
         <%= simple_form_for([@trip, @event]) do |f| %>
           <%= f.input :name %>
-          <%= f.input :address %>
+          <%= f.input :address, input_html: {data: {new_events_target: "address"}},
+                                wrapper_html: {data: {controller: "new-events",
+                                                      new_events_api_key_value: ENV["GOOGLE_API_KEY"]}} %>
           <%= f.submit %>
         <% end %>
       </div>
