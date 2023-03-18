@@ -3,10 +3,8 @@ class CreateHotels < ActiveRecord::Migration[7.0]
     create_table :hotels do |t|
       t.string :name
       t.string :address
-      t.string :start_date
-      t.string :start_time
-      t.string :end_date
-      t.string :end_time
+      t.time :start_time
+      t.time :end_time
       t.string :note
       t.references :trip, null: false, foreign_key: true
 
