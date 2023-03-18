@@ -10,9 +10,94 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_15_112322) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_18_042403) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.string "source_id"
+    t.string "lat"
+    t.string "lng"
+    t.string "category"
+    t.string "address"
+    t.string "website"
+    t.string "phone"
+    t.string "email"
+    t.string "photo"
+    t.string "rating"
+    t.string "review"
+    t.string "note"
+    t.string "start_date"
+    t.string "end_date"
+    t.string "start_time"
+    t.string "end_time"
+    t.bigint "trip_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trip_id"], name: "index_events_on_trip_id"
+  end
+
+  create_table "flights", force: :cascade do |t|
+    t.string "start_date"
+    t.string "start_time"
+    t.string "end_date"
+    t.string "end_time"
+    t.string "departure_city"
+    t.string "arrival_city"
+    t.string "flight_number"
+    t.string "note"
+    t.bigint "trip_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trip_id"], name: "index_flights_on_trip_id"
+  end
+
+  create_table "hotels", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "start_date"
+    t.string "start_time"
+    t.string "end_date"
+    t.string "end_time"
+    t.string "note"
+    t.bigint "trip_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trip_id"], name: "index_hotels_on_trip_id"
+  end
+
+  create_table "recommendations", force: :cascade do |t|
+    t.string "name"
+    t.string "google_id"
+    t.string "lat"
+    t.string "lng"
+    t.string "category"
+    t.string "address"
+    t.string "description"
+    t.string "photo"
+    t.string "rating"
+    t.string "price"
+    t.string "website"
+    t.string "phone"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_trips", force: :cascade do |t|
+    t.bigint "trip_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trip_id"], name: "index_user_trips_on_trip_id"
+    t.index ["user_id"], name: "index_user_trips_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,4 +111,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_112322) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "events", "trips"
+  add_foreign_key "flights", "trips"
+  add_foreign_key "hotels", "trips"
+  add_foreign_key "user_trips", "trips"
+  add_foreign_key "user_trips", "users"
 end
