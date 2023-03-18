@@ -2,9 +2,11 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="maps"
 export default class extends Controller {
-  static targets = ["map", "longitude", "latitude"]
+  static targets = ["map", "longitude", "latitude"];
 
   connect() {
+    this.labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    this.labelIndex = 0;
     if (typeof(google) != "undefined") {
       this.initMap()
     }
@@ -20,7 +22,8 @@ export default class extends Controller {
       const longitude = this.longitudeTargets[index]
       new google.maps.Marker({
         map: this.map,
-        position: { lat: parseFloat(latitude.innerText), lng: parseFloat(longitude.innerText)}
+        position: { lat: parseFloat(latitude.innerText), lng: parseFloat(longitude.innerText)},
+        label: this.labels[this.labelIndex++ % this.labels.length]
       })
     })
 
