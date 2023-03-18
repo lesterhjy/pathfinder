@@ -10,12 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_18_042403) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_18_061905) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
     t.string "name"
+    t.string "source"
+    t.string "source_id"
+    t.string "lat"
+    t.string "lng"
+    t.string "category"
+    t.string "address"
+    t.string "website"
+    t.string "phone"
+    t.string "email"
+    t.string "photo"
+    t.string "rating"
+    t.string "note"
+    t.time "start_time"
+    t.time "end_time"
+    t.string "review"
+    t.bigint "trip_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trip_id"], name: "index_events_on_trip_id"
+  end
+
+  create_table "flights", force: :cascade do |t|
+    t.time "start_time"
+    t.time "end_time"
+    t.string "departure_city"
+    t.string "arrival_city"
+    t.string "flight_number"
+    t.bigint "trip_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trip_id"], name: "index_flights_on_trip_id"
+  end
+
+  create_table "hotels", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.time "start_time"
+    t.time "end_time"
+    t.string "note"
+    t.bigint "trip_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trip_id"], name: "index_hotels_on_trip_id"
+  end
+
+  create_table "recommendations", force: :cascade do |t|
+    t.string "name"
+    t.string "source"
     t.string "source_id"
     t.string "lat"
     t.string "lng"
@@ -27,72 +75,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_18_042403) do
     t.string "photo"
     t.string "rating"
     t.string "review"
-    t.string "note"
-    t.string "start_date"
-    t.string "end_date"
-    t.string "start_time"
-    t.string "end_time"
-    t.bigint "trip_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["trip_id"], name: "index_events_on_trip_id"
-  end
-
-  create_table "flights", force: :cascade do |t|
-    t.string "start_date"
-    t.string "start_time"
-    t.string "end_date"
-    t.string "end_time"
-    t.string "departure_city"
-    t.string "arrival_city"
-    t.string "flight_number"
-    t.string "note"
-    t.bigint "trip_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["trip_id"], name: "index_flights_on_trip_id"
-  end
-
-  create_table "hotels", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.string "start_date"
-    t.string "start_time"
-    t.string "end_date"
-    t.string "end_time"
-    t.string "note"
-    t.bigint "trip_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["trip_id"], name: "index_hotels_on_trip_id"
-  end
-
-  create_table "recommendations", force: :cascade do |t|
-    t.string "name"
-    t.string "google_id"
-    t.string "lat"
-    t.string "lng"
-    t.string "category"
-    t.string "address"
     t.string "description"
-    t.string "photo"
-    t.string "rating"
-    t.string "price"
-    t.string "website"
-    t.string "phone"
-    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "trips", force: :cascade do |t|
+    t.string "destination"
+    t.string "start_date"
+    t.string "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "user_trips", force: :cascade do |t|
-    t.bigint "trip_id", null: false
     t.bigint "user_id", null: false
+    t.bigint "trip_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["trip_id"], name: "index_user_trips_on_trip_id"
