@@ -3,8 +3,9 @@
 <% @events.each do |event| %>
   <p><strong><%= event.name %></strong></p>
   <p><%= event.address %></p>
-  <p><%= event.start_time %></p>
-  <p><%= event.end_time %></p>
+  <p>[Coordinates: <%= event.latitude %>, <%= event.longitude %>]</p>
+  <p>Start: <%= event.start_time.strftime("%e %b %Y, %I.%M%P") %></p>
+  <p>End: <%= event.end_time.strftime("%e %b %Y, %I.%M%P")  %></p>
 <% end %>
 
 </div>
