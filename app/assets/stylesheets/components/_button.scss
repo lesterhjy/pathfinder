@@ -1,0 +1,15 @@
+.btn, .button {
+  border: 1px solid var(--green);
+  border-radius: 18px;
+  padding: 5px 10px;
+  color: var(--green);
+  opacity: 0.8;
+}
+
+.btn:hover, .button:hover {
+  border: 1px solid var(--green);
+  border-radius: 18px;
+  padding: 5px 10px;
+  color: var(--green);
+  opacity: 1;
+}

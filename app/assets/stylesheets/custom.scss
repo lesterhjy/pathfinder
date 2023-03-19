@@ -1,0 +1,40 @@
+:root {
+  --white: #F6F7EB;
+  --black: #393E41;
+  --red: #E94F37;
+  --blue: #3F88C5;
+  --green: #44BBA4;
+}
+
+h1 {
+  color: var(--red);
+  font-size: 30px;
+}
+
+h2 {
+  color: var(--blue);
+  font-size: 25px;
+}
+
+h3 {
+  color: var(--green);
+  font-size: 20px;
+}
+
+p {
+  color: var(--black)
+}
+
+body {
+  background-color: var(--white);
+}
+
+a {
+  text-decoration: none;
+  color: var(--blue);
+  opacity: 0.8;
+}
+
+a:hover {
+  opacity: 1;
+}
