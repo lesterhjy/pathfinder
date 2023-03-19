@@ -11,7 +11,7 @@
                                                       new_events_api_key_value: ENV["GOOGLE_API_KEY"]}} %>
           <%= f.input :start_time, as: :datetime %>
           <%= f.input :end_time, as: :datetime %>
-          <%= f.submit %>
+          <%= f.button :submit, class: "btn" %>
         <% end %>
       </div>
     </div>
