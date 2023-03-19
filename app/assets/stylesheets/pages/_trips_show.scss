@@ -2,8 +2,18 @@
   display: flex;
 }
 
-.events {
-  width: 50%;
+.days {
+  display: flex;
+}
+
+.event {
+  border: 1px solid black;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.event p {
+  margin: 0;
 }
 
 #map {
