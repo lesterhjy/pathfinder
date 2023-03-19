@@ -1,23 +1,42 @@
-<div class="container mt-5 trip-overview" data-controller="maps">
-  <div class="days">
-    <% @days.each do |day| %>
-      <div class="day">
-        <h3>Events on <%= day.first.start_time.strftime("%e %b %Y") %></h3>
-        <div class="events">
-          <% day.each do |event| %>
-            <div class="event">
-              <p><strong><%= event.name %></strong></p>
-              <p><%= event.address %></p>
-              <div class="coordinates d-none">
-                <p data-maps-target="latitude"><%= event.latitude%></p>
-                <p data-maps-target="longitude"><%= event.longitude %></p>
-              </div>
-              <p>Start: <%= event.start_time.strftime("%I.%M%P") %> | End: <%= event.end_time.strftime("%I.%M%P") %></p>
-            </div>
-          <% end %>
-        </div>
+<div class="container mt-5 trip-overview" data-controller="maps toggle">
+  <div class="trip-content">
+
+    <div class="tab-bar">
+      <div class="tabs">
+        <% @days.each_with_index do |day, index| %>
+          <a href="#" class="tab" data-toggle-target="tab" data-action='click->toggle#toggle' data-day=<%=index+1%>>
+            Day <%= index + 1 %> (<%= day.first.start_time.strftime("%e %b %Y") %>)
+          </a>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+
+    <div class="days">
+      <% days = 0 %>
+      <% @days.each_with_index do |day, index| %>
+
+        <div class="day <%=index+1%>" data-toggle-target="day" data-day = "<%=index+1%>">
+          <h3>Events on <%= day.first.start_time.strftime("%e %b %Y") %></h3>
+
+          <div class="events">
+            <% day.each do |event| %>
+
+              <div class="event">
+                <p><strong><%= event.name %></strong></p>
+                <p><%= event.address %></p>
+                <div class="coordinates d-none">
+                  <p data-maps-target="latitude"><%= event.latitude%></p>
+                  <p data-maps-target="longitude"><%= event.longitude %></p>
+                </div>
+                <p>Start: <%= event.start_time.strftime("%I.%M%P") %> | End: <%= event.end_time.strftime("%I.%M%P") %></p>
+              </div>
+
+            <% end %>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div id="map" data-maps-target="map" data-action="google-maps-callback@window->maps#initMap"></div>
