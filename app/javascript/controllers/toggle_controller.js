@@ -2,20 +2,27 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="toggle"
 export default class extends Controller {
-  static targets = ["tab", "day"]
+  static targets = ["tab", "events"]
 
   connect() {
   }
 
   toggle() {
-    const day_clicked = event.target.dataset.day
-    this.dayTargets.forEach((day) => {
-      if (day.dataset.day === day_clicked) {
-        day.classList.remove("d-none")
-      } else {
-        day.classList.add("d-none")
-      }
-    })
+    console.log(event.target.dataset.toggleUrl)
+    this.request = new Request(event.target.dataset.toggleUrl);
+    this.fetchContent(this.request);
+  }
+
+  fetchContent(request) {
+    fetch(request)
+      .then((response) => {
+        if (response.status == 200) {
+          response.text().then((text) =>
+          this.eventsTarget.innerHTML = text);
+        } else {
+          console.log("Couldn't load data");
+        }
+      })
   }
 
 }
