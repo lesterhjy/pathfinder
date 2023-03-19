@@ -12,3 +12,6 @@ application.register("maps", MapsController)
 
 import NewEventsController from "./new_events_controller"
 application.register("new-events", NewEventsController)
+
+import ToggleController from "./toggle_controller"
+application.register("toggle", ToggleController)
