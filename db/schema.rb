@@ -10,32 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_18_042403) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_18_234847) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
     t.string "name"
+    t.string "source"
     t.string "source_id"
     t.string "lat"
     t.string "lng"
-    t.string "category"
     t.string "address"
+    t.string "category"
     t.string "website"
     t.string "phone"
-    t.string "email"
     t.string "photo"
     t.string "rating"
     t.string "review"
-    t.string "note"
-    t.string "start_date"
-    t.string "end_date"
-    t.string "start_time"
-    t.string "end_time"
-    t.bigint "trip_id", null: false
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["trip_id"], name: "index_events_on_trip_id"
   end
 
   create_table "flights", force: :cascade do |t|
@@ -69,18 +63,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_18_042403) do
 
   create_table "recommendations", force: :cascade do |t|
     t.string "name"
-    t.string "google_id"
+    t.string "source"
+    t.string "source_id"
     t.string "lat"
     t.string "lng"
     t.string "category"
     t.string "address"
-    t.string "description"
-    t.string "photo"
-    t.string "rating"
-    t.string "price"
     t.string "website"
     t.string "phone"
     t.string "email"
+    t.string "photo"
+    t.string "rating"
+    t.string "review"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -111,7 +106,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_18_042403) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "events", "trips"
   add_foreign_key "flights", "trips"
   add_foreign_key "hotels", "trips"
   add_foreign_key "user_trips", "trips"

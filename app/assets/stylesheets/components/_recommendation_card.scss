@@ -1,0 +1,80 @@
+.recommendation-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
+  margin-top: 20px;
+}
+
+.recommendation-card {
+  width: 300px;
+  overflow: hidden;
+  background: #393e41;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 10px;
+}
+
+.recommendation-card > img {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.recommendation-card h2 {
+  color: #F6F7EB;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.recommendation-card p {
+  color: #F6F7EB;
+  font-size: 14px;
+}
+
+
+.recommendation-card-infos {
+  text-align: justify;
+  padding: 15px;
+  position: relative;
+}
+
+.recommendation-description {
+  margin-bottom: 20px;
+}
+
+.recommendation-address {
+  font-size: 10px;
+  font-style: italic;
+}
+
+.btn-ghost {
+  color: #FFFFFF;
+  background-color: #393e41;
+  opacity: 80%;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  transition: 0.3s ease;
+  position: absolute;
+  right: 0px;
+  top: -35px;
+}
+
+.btn-ghost:hover {
+  opacity: 100%;
+}
+
+.btn-ghost {
+  color: #FFFFFF;
+  background-color: #393e41;
+  opacity: 80%;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  transition: 0.3s ease;
+  position: absolute;
+  right: 0px;
+  top: -35px;
+}
