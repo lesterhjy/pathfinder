@@ -4,16 +4,15 @@
     <div class="tab-bar">
       <div class="tabs">
         <% @days.each_with_index do |day, index| %>
-          <a href="#" class="tab" data-toggle-target="tab" data-action='click->toggle#toggle' data-toggle-url="<%= trip_path(@trip, day: index+1) %>" data-day=<%=index+1%>>
+          <p class="tab" data-toggle-target="tab" data-action='click->toggle#toggle' data-toggle-url="<%= trip_path(@trip, day: day[0].start_time.day) %>" data-day=<%=index+1%>>
             Day <%= index + 1 %> (<%= day.first.start_time.strftime("%e %b %Y") %>)
-          </a>
+          </p>
         <% end %>
       </div>
     </div>
 
-    <div class="events" data-toggle-target="events">
-      <%= render "events", events: @events %>
-    </div>
+    <%= render "events", events: @events %>
+
   </div>
 
   <div id="map" data-maps-target="map" data-action="google-maps-callback@window->maps#initMap"></div>

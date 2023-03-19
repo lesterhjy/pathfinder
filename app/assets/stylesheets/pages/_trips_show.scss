@@ -16,6 +16,16 @@
   margin: 0;
 }
 
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--black);
+  margin-bottom: 10px;
+}
+
+.tab {
+  margin: 5px;
+}
+
 #map {
   width: 50%;
   height: 100vh;

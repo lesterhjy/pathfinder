@@ -8,20 +8,11 @@ export default class extends Controller {
   }
 
   toggle() {
-    console.log(event.target.dataset.toggleUrl)
-    this.request = new Request(event.target.dataset.toggleUrl);
-    this.fetchContent(this.request);
-  }
-
-  fetchContent(request) {
-    fetch(request)
-      .then((response) => {
-        if (response.status == 200) {
-          response.text().then((text) =>
-          this.eventsTarget.innerHTML = text);
-        } else {
-          console.log("Couldn't load data");
-        }
+    const url = event.target.dataset.toggleUrl
+    fetch(url, {headers: {"Accept": "text/plain"}})
+      .then(response => response.text())
+      .then((data) => {
+        this.eventsTarget.outerHTML = data
       })
   }
 
