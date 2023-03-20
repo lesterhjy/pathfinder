@@ -45,6 +45,15 @@
   background-color: var(--red-light);
 }
 
+.event-directions {
+  display: flex;
+}
+
+.direction {
+  padding: 10px;
+  padding-top: 0px;
+}
+
 #map {
   height: 100vh;
   border: 1px solid black;
