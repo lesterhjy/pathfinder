@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :trips, only: [:show] do
     resources :events, only: [:new, :create]
+    resources :flights, only: %i[new create edit destroy]
   end
   resources :recommendations
 
