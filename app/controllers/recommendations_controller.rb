@@ -3,7 +3,9 @@ class RecommendationsController < ApplicationController
   require "open-uri"
 
   def index
+    @trip = Trip.find(params[:trip_id])
     @event = Event.new
+    @event.trip = @trip
     @recommendations = {}
     categories = ["bar", "cafe", "shopping_mall", "park", "tourist_attraction", "zoo", "museum"]
     categories.each do |category|
@@ -17,7 +19,7 @@ class RecommendationsController < ApplicationController
     location = '49.277812731849664%2C-123.13517911928503'
     radius = '30000'
 
-    nearby_search = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{location}&radius=#{radius}&type=#{category}&key=AIzaSyBRH3Ee4ygRxpfyyyZ3llE_nEmbhRJBxjM")
+    nearby_search = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{location}&radius=#{radius}&type=#{category}&key=#{ENV["GOOGLE_API_KEY"]}")
     nearby_search_results = JSON.parse(URI.open(nearby_search).read)
 
     recommendations_overview = []
@@ -29,7 +31,7 @@ class RecommendationsController < ApplicationController
   end
 
   def get_recommendation_details(recommendations_overview)
-    recommendations = []
+    recommendation_details = []
     recommendations_overview.first(3).each do |recommendation|
       place = {}
       place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
@@ -48,10 +50,10 @@ class RecommendationsController < ApplicationController
         place["rating"] = place_details["rating"]
         place["review"] = place_details["reviews"]
         place["description"] = place_details["editorial_summary"]["overview"].capitalize if place_details.key?("editorial_summary")
-        recommendations.append(place)
+        recommendation_details.append(place)
       end
     end
-    recommendations
+    recommendation_details
   end
 
 end
