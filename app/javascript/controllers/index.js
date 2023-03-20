@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AddEventController from "./add_event_controller"
+application.register("add-event", AddEventController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

@@ -1,0 +1,12 @@
+<div class="container">
+  <% @recommendations.each do |category, places| %>
+    <% if places != [] %>
+      <h1><%= category.gsub("_", " ").capitalize %></h1>
+      <div class="recommendation-container">
+        <% places.each do |place| %>
+          <%= render "recommendation_infos", place: place, event: @event %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
