@@ -21,6 +21,8 @@ export default class extends Controller {
       .then(response => response.text())
       .then((data) => {
         this.eventsTarget.outerHTML = data
+        const e = new CustomEvent("update-events");
+        window.dispatchEvent(e);
       })
   }
 

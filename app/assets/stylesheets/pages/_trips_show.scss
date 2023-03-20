@@ -6,10 +6,19 @@
   width: 50%;
 }
 
+.events {
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid var(--red-light);
+}
+
 .event {
   border: 1px solid black;
+  border-radius: 20px ;
   margin-bottom: 10px;
   padding: 10px;
+  background-color: var(--white);
 }
 
 .event p {
@@ -18,8 +27,6 @@
 
 .tabs {
   display: flex;
-  border-bottom: 1px solid var(--black);
-  margin-bottom: 10px;
 }
 
 .tab {
