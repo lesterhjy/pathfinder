@@ -10,11 +10,9 @@
     <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
 
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <% if false %>
     <script async defer data-turbolinks-eval="false"
         src=<%="https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&callback=initMap"%>>
     </script>
-    <% end %>
   </head>
 
   <body>
