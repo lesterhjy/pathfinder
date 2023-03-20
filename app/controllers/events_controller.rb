@@ -13,6 +13,10 @@ class EventsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+    respond_to do |format|
+      format.html
+      format.text { render partial: "recommendations/recommendation_added", formats: [:html] }
+    end
   end
 
   private
@@ -22,7 +26,19 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :address, :start_time, :end_time)
+    params.require(:event).permit(:name,
+                                  :source,
+                                  :source_id,
+                                  :lat,
+                                  :lng,
+                                  :address,
+                                  :category,
+                                  :website,
+                                  :phone,
+                                  :photo,
+                                  :rating,
+                                  :review,
+                                  :description)
   end
 
 end
