@@ -12,16 +12,18 @@
 
   <br><br>
 
-  <%# <input id="searchTextField" type="text" size="50" placeholder="Enter a location" autocomplete="on" runat="server" />
-  <input type="hidden" id="city2" name="city2" />
+  <input id="searchTextField" type="text" size="50" placeholder="Enter a location" autocomplete="on" runat="server" />
+  <%# <input type="hidden" id="city2" name="city2" />
   <input type="hidden" id="cityLat" name="cityLat" />
-  <input type="hidden" id="cityLng" name="cityLng" />
-  <%# <div class="trip-form">
+  <input type="hidden" id="cityLng" name="cityLng" /> %>
+  <div class="trip-form">
     <%= simple_form_for(@trip) do |f| %>
-      <%# <%= f.input :destination, id: "city2" %>
-      <%# <%= f.input :start_date, as: :date %>
-      <%# <%= f.input :end_date, as: :date %>
-      <%# <%= f.button :submit, class: "btn" %>
-    <%# <% end %>
-  <%# </div> %>
+      <%= f.input :destination %>
+      <%= f.input :latitude %>
+      <%= f.input :longitude %>
+      <%= f.input :start_date, as: :date %>
+      <%= f.input :end_date, as: :date %>
+      <%= f.button :submit, class: "btn" %>
+    <% end %>
+  </div>
 </div>
