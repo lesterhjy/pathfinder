@@ -1,9 +1,12 @@
 .trip-overview {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
 }
 
 .trip-content {
-  width: 50%;
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
 .events {
@@ -43,7 +46,6 @@
 }
 
 #map {
-  width: 50%;
   height: 100vh;
   border: 1px solid black;
 }
