@@ -1,20 +1,22 @@
-<div class="container mt-5 trip-overview" data-controller="maps toggle" data-action="update-events@window->maps#initMap">
-  <div class="trip-content">
+<div class="container mt-5">
+  <div class="trip-overview" data-controller="maps toggle" data-action="update-events@window->maps#initMap">
+    <div class="trip-content">
 
-    <div class="tab-bar">
-      <div class="tabs">
-        <% @events_by_day.each_with_index do |day, index| %>
-          <p class="tab <%= "tab-active" if index == 0 %>" data-toggle-target="tab" data-action='click->toggle#toggle' data-toggle-url="<%= trip_path(@trip, day: day[0].start_time.day) %>" data-index= "<%= index %>">
-            Day <%= index + 1 %> (<%= day.first.start_time.strftime("%e %b %Y") %>)
-          </p>
-        <% end %>
+      <div class="tab-bar">
+        <div class="tabs">
+          <% @events_by_day.each_with_index do |day, index| %>
+            <p class="tab <%= "tab-active" if index == 0 %>" data-toggle-target="tab" data-action='click->toggle#toggle' data-toggle-url="<%= trip_path(@trip, day: day[0].start_time.day) %>" data-index= "<%= index %>">
+              Day <%= index + 1 %> (<%= day.first.start_time.strftime("%e %b %Y") %>)
+            </p>
+          <% end %>
+        </div>
       </div>
+
+      <%= render "events", events: @first_day_events %>
+
     </div>
 
-    <%= render "events", events: @first_day_events %>
+    <div id="map" data-maps-target="map" data-action="google-maps-callback@window->maps#initMap"></div>
 
   </div>
-
-  <div id="map" data-maps-target="map" data-action="google-maps-callback@window->maps#initMap"></div>
-
 </div>

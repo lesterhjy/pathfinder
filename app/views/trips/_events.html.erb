@@ -1,4 +1,5 @@
-<div class="events" data-toggle-target="events" data-action="change->maps#updateMap">
+<div class="events" data-controller="directions" data-toggle-target="events">
+  <p data-action="click->directions#showDirections" >Show transit directions</p>
   <% events.each_with_index do |event, index| %>
     <%= render "event", event: event, index: index %>
   <% end %>
