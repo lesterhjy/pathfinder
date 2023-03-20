@@ -31,7 +31,6 @@ export default class extends Controller {
           let destination_latitude = parseFloat(eventTarget.parentElement.nextElementSibling.dataset.latitude)
           let destination_longitude = parseFloat(eventTarget.parentElement.nextElementSibling.dataset.longitude)
 
-          this.durations = {}
           const transport = ['DRIVING', 'TRANSIT', 'WALKING']
 
           var service = new google.maps.DistanceMatrixService();
