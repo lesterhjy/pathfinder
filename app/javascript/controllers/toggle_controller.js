@@ -8,6 +8,14 @@ export default class extends Controller {
   }
 
   toggle() {
+    this.tabTargets.forEach((tab, index) => {
+      if (index == event.target.dataset.index) {
+        tab.classList.add("tab-active")
+      } else {
+        tab.classList.remove("tab-active")
+      }
+    })
+
     const url = event.target.dataset.toggleUrl
     fetch(url, {headers: {"Accept": "text/plain"}})
       .then(response => response.text())

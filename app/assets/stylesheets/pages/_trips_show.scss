@@ -2,8 +2,8 @@
   display: flex;
 }
 
-.days {
-  width: 500px;
+.trip-content {
+  width: 50%;
 }
 
 .event {
@@ -23,7 +23,16 @@
 }
 
 .tab {
-  margin: 5px;
+  font-weight: bold;
+  padding: 10px;
+  margin-right: 10px;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid var(--red-light)
+}
+
+.tab-active {
+  background-color: var(--red-light);
 }
 
 #map {

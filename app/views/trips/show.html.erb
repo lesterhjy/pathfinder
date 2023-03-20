@@ -3,15 +3,15 @@
 
     <div class="tab-bar">
       <div class="tabs">
-        <% @days.each_with_index do |day, index| %>
-          <p class="tab" data-toggle-target="tab" data-action='click->toggle#toggle' data-toggle-url="<%= trip_path(@trip, day: day[0].start_time.day) %>" data-day=<%=index+1%>>
+        <% @events_by_day.each_with_index do |day, index| %>
+          <p class="tab <%= "tab-active" if index == 0 %>" data-toggle-target="tab" data-action='click->toggle#toggle' data-toggle-url="<%= trip_path(@trip, day: day[0].start_time.day) %>" data-index= "<%= index %>">
             Day <%= index + 1 %> (<%= day.first.start_time.strftime("%e %b %Y") %>)
           </p>
         <% end %>
       </div>
     </div>
 
-    <%= render "events", events: @events %>
+    <%= render "events", events: @first_day_events %>
 
   </div>
 
