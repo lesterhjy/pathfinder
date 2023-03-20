@@ -69,59 +69,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_18_082551) do
     t.string "source_id"
     t.string "lat"
     t.string "lng"
-    t.string "address"
-    t.string "category"
-    t.string "website"
-    t.string "phone"
-    t.string "photo"
-    t.string "rating"
-    t.string "review"
-    t.string "description"
-<<<<<<< HEAD
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "flights", force: :cascade do |t|
-    t.string "start_date"
-    t.string "start_time"
-    t.string "end_date"
-    t.string "end_time"
-    t.string "departure_city"
-    t.string "arrival_city"
-    t.string "flight_number"
-    t.string "note"
-    t.bigint "trip_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["trip_id"], name: "index_flights_on_trip_id"
-  end
-
-  create_table "hotels", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.string "start_date"
-    t.string "start_time"
-    t.string "end_date"
-    t.string "end_time"
-    t.string "note"
-    t.bigint "trip_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["trip_id"], name: "index_hotels_on_trip_id"
-  end
-
-  create_table "recommendations", force: :cascade do |t|
-    t.string "name"
-    t.string "source"
-    t.string "source_id"
-    t.string "lat"
-    t.string "lng"
     t.string "category"
     t.string "address"
     t.string "website"
     t.string "phone"
     t.string "email"
+    t.string "photo"
+    t.string "rating"
+    t.string "review"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -155,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_18_082551) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "events", "trips"
   add_foreign_key "flights", "trips"
   add_foreign_key "hotels", "trips"
   add_foreign_key "user_trips", "trips"
