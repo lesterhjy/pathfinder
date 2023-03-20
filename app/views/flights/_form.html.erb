@@ -1,0 +1,26 @@
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="fa-solid fa-plane"> Flight Details</i></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" data-controller="flight-form">
+        <%= simple_form_for [trip, flight], data: { controller: 'flatpickr', flight_form_target: "form",
+    action: "submit->flight-form#send" }, remote: true do |f| %>
+          <%= f.input :start_date, input_html: { data: { flatpickr_target: "startDate" } } %>
+          <%= f.input :start_time %>
+          <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endDate" }, id: 'end_date' } %>
+          <%= f.input :end_time %>
+          <%= f.input :departure_city %>
+          <%= f.input :arrival_city %>
+          <%= f.input :flight_number %>
+          <div class="modal-footer">
+            <%= f.button :submit, class: "btn" %>
+            <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

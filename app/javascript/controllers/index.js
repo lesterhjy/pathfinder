@@ -10,6 +10,9 @@ application.register("add-event", AddEventController)
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 
+import FlightFormController from "./flight_form_controller"
+application.register("flight-form", FlightFormController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

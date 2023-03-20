@@ -3,20 +3,12 @@
     <div class="col"></div>
 
     <div class="col-6">
-      <h1><i class="fa-solid fa-plane"> Flight Details</i></h1>
-
-      <div class="flight-form">
-        <%= simple_form_for [@trip, @flight], data: { controller: 'flatpickr' } do |f| %>
-          <%= f.input :start_date, input_html: { data: { flatpickr_target: "startDate" } } %>
-          <%= f.input :start_time %>
-          <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endDate" }, id: 'end_date' } %>
-          <%= f.input :end_time %>
-          <%= f.input :departure_city %>
-          <%= f.input :arrival_city %>
-          <%= f.input :flight_number %>
-          <%= f.button :submit, class: "btn" %>
-        <% end %>
-      </div>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Add Flight Details
+      </button>
+      <!-- Modal -->
+      <%= render "flights/form", trip: @trip, flight: @flight %>
     </div>
 
     <div class="col"></div>

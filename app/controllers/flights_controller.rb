@@ -8,11 +8,14 @@ class FlightsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @flight = Flight.new(flight_params)
     @flight.trip = @trip
-    raise
-    if @flight.save!
-      redirect_to @trip
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @flight.save
+        format.html { redirect_to @trip }
+        format.json # Follow the classic Rails flow and look for a create.json view
+      else
+        format.html { render "flights/form", status: :unprocessable_entity }
+        format.json { render "flights/create.json.jbuilder", status: :unprocessable_entity }
+      end
     end
   end
 
