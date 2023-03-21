@@ -6,7 +6,7 @@
   <div class="recommendation-card-infos">
     <p class="recommendation-description"><%= place["description"] %></p>
     <p class="recommendation-address"><%= place["address"] %></p>
-    <%= simple_form_for event,
+    <%= simple_form_for [trip, event],
       html: {
         data: {
           add_event_target: "form",

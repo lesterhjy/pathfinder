@@ -4,6 +4,10 @@
 
 import { application } from "./application"
 
+
+import DirectionsController from "./directions_controller"
+application.register("directions", DirectionsController)
+
 import AddEventController from "./add_event_controller"
 application.register("add-event", AddEventController)
 
@@ -21,3 +25,6 @@ application.register("maps", MapsController)
 
 import NewEventsController from "./new_events_controller"
 application.register("new-events", NewEventsController)
+
+import ToggleController from "./toggle_controller"
+application.register("toggle", ToggleController)
