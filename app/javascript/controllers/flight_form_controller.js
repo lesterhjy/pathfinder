@@ -10,19 +10,15 @@ export default class extends Controller {
   }
 
   send(event) {
-    event.preventDefault()
+    event.preventDefault();
     fetch(this.formTarget.action, {
       method: "POST",
-      headers: { "Accept": "application/json" },
-      body: new FormData(this.formTarget)
+      headers: { Accept: "text/plain" },
+      body: new FormData(this.formTarget),
     })
-      .then(response => {
-        console.log(response)
-        return response.json()
-      })
+      .then((response) => response.text())
       .then((data) => {
-        this.formTarget.outerHTML = data.form
-
-      })
+        this.formTarget.outerHTML = data;
+      });
   }
 }
