@@ -7,6 +7,7 @@
   >
 
   <div class="event-details" data-maps-target="event" data-directions-target="event" data-action="click->maps#singleEvent" data-index=<%= index %>>
+    <div class="position" style="text-align: right" data-sortable-target="position"><h3><%= index + 1 %></h3></div>
     <p style="font-weight: bold"><%= event.name %></p>
     <p><%= event.address %></p>
     <div class="coordinates d-none">

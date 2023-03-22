@@ -28,16 +28,34 @@ ul {
   padding: 0;
 }
 
+.position {
+  display: flex;
+  position: absolute;
+  left: -10px;
+  top: 10px;
+
+  h3 {
+    padding: 10px 15px;
+    border-radius: 50%;
+    background-color: var(--red);
+    color: var(--white);
+    border: 1px solid var(--white);
+}
+}
+
 .event-details {
   border: 1px solid black;
   border-radius: 20px;
+  margin-left: 10px;
   margin-bottom: 10px;
   padding: 10px;
+  padding-left: 30px;
   background-color: var(--white);
 }
 
 .event {
   cursor: pointer;
+  position: relative;
   margin-bottom: 5px;
   p {
     margin: 0;

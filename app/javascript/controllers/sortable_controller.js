@@ -2,8 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 import Sortable from 'stimulus-sortable'
 
 export default class extends Sortable {
+
+  static targets = ["position"]
+
   connect() {
     super.connect()
+    console.log(this.positionTargets)
 
     // The sortable.js instance.
     this.sortable
@@ -18,7 +22,6 @@ export default class extends Sortable {
   // You can override the `onUpdate` method here.
   onUpdate(event) {
     super.onUpdate(event)
-    console.log("updated!")
     const e = new CustomEvent("order-updated")
     window.dispatchEvent(e)
   }
