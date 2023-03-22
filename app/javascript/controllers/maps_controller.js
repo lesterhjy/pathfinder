@@ -33,7 +33,11 @@ export default class extends Controller {
   }
 
   singleEvent() {
-    let current_index = event.target.parentElement.dataset.index;
+
+    console.log(this.eventTargets)
+    console.log(this.eventTargets.indexOf(event.target.parentElement))
+
+    let current_index = this.eventTargets.indexOf(event.target.parentElement);
     let latitude = parseFloat(this.latitudeTargets[current_index].innerText)
     let longitude = parseFloat(this.longitudeTargets[current_index].innerText)
     this.map = new google.maps.Map(this.mapTarget, {

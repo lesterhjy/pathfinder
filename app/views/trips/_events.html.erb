@@ -1,4 +1,4 @@
-<div class="events" data-controller="directions" data-toggle-target="events" data-action="update-directions@window->directions#showDirections">
+<div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections order-updated@window->maps#initMap">
   <p data-action="click->directions#showDirections" style="text-align: right"><i class="fa-solid fa-van-shuttle"></i></p>
   <% events.each_with_index do |event, index| %>
     <%= render "event", event: event, index: index %>

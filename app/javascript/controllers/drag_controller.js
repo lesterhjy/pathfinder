@@ -53,7 +53,7 @@ export default class extends Controller {
       },
       body: data,
     }).then((data) => {
-      const e = new CustomEvent("update-directions")
+      const e = new CustomEvent("order-updated")
       window.dispatchEvent(e)}
     );
   }

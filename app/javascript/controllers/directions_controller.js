@@ -9,13 +9,13 @@ export default class extends Controller {
 
   showDirections() {
 
-    if (event.type === "update-directions" && this.directionsTarget.innerText === "") { return }
+    if (event.type === "order-updated" && this.directionsTarget.innerText === "") { return }
 
     // if there is already stuff loaded in the directions div i.e. google has already been called then hide it
     if (this.directionsTarget.innerText !== "" && event.type === "click") { this.wipe() }
 
     else {
-      if (event.type === "update-directions") { this.wipe() }
+      if (event.type === "order-updated") { this.wipe() }
 
       this.eventTargets.forEach((eventTarget, index) => {
 
