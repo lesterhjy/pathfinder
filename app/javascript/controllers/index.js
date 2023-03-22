@@ -4,12 +4,14 @@
 
 import { application } from "./application"
 
+import AddEventController from "./add_event_controller"
+application.register("add-event", AddEventController)
 
 import DirectionsController from "./directions_controller"
 application.register("directions", DirectionsController)
 
-import AddEventController from "./add_event_controller"
-application.register("add-event", AddEventController)
+import DragController from "./drag_controller"
+application.register("drag", DragController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)

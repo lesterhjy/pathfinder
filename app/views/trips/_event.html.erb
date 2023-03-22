@@ -1,21 +1,38 @@
-  <div class="event" data-index="<%= index %>" data-latitude=<%= event.latitude%> data-longitude=<%= event.longitude %>>
-    <div class="event-details" data-maps-target="event" data-directions-target="event" data-action="click->maps#singleEvent" data-index=<%= index %>>
-      <p><strong><%= event.name %></strong></p>
-      <p><%= event.address %></p>
-      <div class="coordinates d-none">
-        <p data-maps-target="latitude"><%= event.latitude%></p>
-        <p data-maps-target="longitude"><%= event.longitude %></p>
-      </div>
-      <p>Start: <%= event.start_time.strftime("%I.%M%P") %> | End: <%= event.end_time.strftime("%I.%M%P") %></p>
-      <div class="modify-event" style="text-align: right">
-        <%= link_to edit_trip_event_path(event.trip_id, event) do %>
-          <i class="fa-solid fa-pencil"></i>
-        <% end %> |
-        <%= link_to event_path(event), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-          <i class="fa-solid fa-trash-can"></i>
-        <% end %>
-      </div>
+<% dragActions = "dragstart->drag#dragStart
+                  dragover->drag#dragOver
+                  dragenter->drag#dragEnter
+                  drop->drag#drop
+                  dragend->drag#dragEnd"%>
+
+<div class="event draggable"
+  data-index="<%= index %>"
+  data-latitude=<%= event.latitude%>
+  data-longitude=<%= event.longitude %>
+  draggable="true"
+  data-controller="drag"
+  data-action="<%= dragActions %>"
+  data-resource-id="<%= event.id %>"
+  data-url="/drag/event"
+  data-parent="events"
+  >
+
+  <div class="event-details" data-maps-target="event" data-directions-target="event" data-action="click->maps#singleEvent" data-index=<%= index %>>
+    <p><strong><%= event.name %></strong></p>
+    <p><%= event.address %></p>
+    <div class="coordinates d-none">
+      <p data-maps-target="latitude"><%= event.latitude%></p>
+      <p data-maps-target="longitude"><%= event.longitude %></p>
     </div>
-    <div class="event-directions" data-directions-target="directions">
+    <p>Start: <%= event.start_time.strftime("%I.%M%P") %> | End: <%= event.end_time.strftime("%I.%M%P") %></p>
+    <div class="modify-event" style="text-align: right">
+      <%= link_to edit_trip_event_path(event.trip_id, event) do %>
+        <i class="fa-solid fa-pencil"></i>
+      <% end %> |
+      <%= link_to event_path(event), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>
     </div>
   </div>
+  <div class="event-directions" data-directions-target="directions">
+  </div>
+</div>

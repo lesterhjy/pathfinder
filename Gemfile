@@ -53,6 +53,7 @@ gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "geocoder"
+gem "acts_as_list"
 
 
 group :development, :test do
