@@ -27,8 +27,3 @@ application.register("autocomplete", AutocompleteController)
 
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
-
-import { Application } from '@hotwired/stimulus'
-import Notification from 'stimulus-notification'
-const app = Application.start()
-app.register('notification', Notification)
