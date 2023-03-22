@@ -44,7 +44,7 @@ export default class extends Controller {
 
               let icon;
 
-              this.arrowTargets[index].innerHTML = '<i class="fa-solid fa-arrow-down-long fa-xl"></i>'
+              this.arrowTargets[index].innerHTML = '<i class="fa-solid fa-angles-down fa-xl"></i>'
 
               if (mode === 'DRIVING') {
                 icon = '<i class="fa-solid fa-car-side"></i>'
