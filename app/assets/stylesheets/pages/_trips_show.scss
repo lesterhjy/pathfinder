@@ -17,6 +17,12 @@
   border: 2px solid var(--red-light);
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 .event-details {
   border: 1px solid black;
   border-radius: 20px;
@@ -25,8 +31,10 @@
   background-color: var(--white);
 }
 
-.event p {
-  margin: 0;
+.event {
+  p {
+    margin: 0;
+  }
 }
 
 .tabs {
