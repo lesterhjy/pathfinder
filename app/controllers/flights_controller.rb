@@ -11,7 +11,7 @@ class FlightsController < ApplicationController
     respond_to do |format|
       if @flight.save
         format.html { redirect_to @trip }
-        format.text { render nothing: true, status: :ok }
+        format.text { head :ok }
       else
         format.html
         format.text { render partial: "form", status: :unprocessable_entity, locals: { trip: @trip, flight: @flight }, formats: [:html] }
@@ -31,13 +31,12 @@ class FlightsController < ApplicationController
   private
 
   def flight_params
-    params.require(:flight).permit(:start_date,
-                                  :start_time,
-                                  :end_date,
-                                  :end_time,
-                                  :departure_city,
-                                  :arrival_city,
-                                  :flight_number,
-                                  :note)
+    params.require(:flight).permit(:start_time,
+                                   :end_time,
+                                   :departure_city,
+                                   :arrival_city,
+                                   :flight_number,
+                                   :note,
+                                   :trip_id)
   end
 end
