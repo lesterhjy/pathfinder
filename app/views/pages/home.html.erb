@@ -1,14 +1,23 @@
-<div class="container mt-5">
-  <div data-controller="autocomplete" data-action="google-maps-callback@window->autocomplete#initMap">
-    <%= simple_form_for(@trip) do |f| %>
-      <%= f.input :destination, input_html: {data: {autocomplete_target: "field", action: "keydown->autocomplete#keydown"}} %>
-      <%= f.input :latitude, :as => :hidden, input_html: {data: {autocomplete_target: "latitude"}} %>
-      <%= f.input :longitude, :as => :hidden, input_html: {data: {autocomplete_target: "longitude"}} %>
-      <%= f.input :start_date, as: :date %>
-      <%= f.input :end_date, as: :date %>
-      <%= f.button :submit, class: "btn" %>
-    <% end %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url(<%=@cover%>)">
+  <div class="container">
+    <h1 id="welcome"><span data-controller="typed-js"></span></h1>
+    <br>
+    <br>
+    <div class="form-container" data-controller="autocomplete flatpickr" data-action="google-maps-callback@window->autocomplete#initMap">
+      <%= simple_form_for(@trip) do |f| %>
+        <%= f.input :destination, label: false, input_html: {class: "form-control form-control-lg", data: {autocomplete_target: "field", action: "keydown->autocomplete#keydown"}} %>
+        <%= f.input :latitude, :as => :hidden, input_html: {data: {autocomplete_target: "latitude"}} %>
+        <%= f.input :longitude, :as => :hidden, input_html: {data: {autocomplete_target: "longitude"}} %>
+        <div class="row">
+          <div class="col">
+            <%= f.input :start_date, label: false, input_html: {placeholder: "Start date", class: "form-control form-control-sm", data: {flatpickr_target: "startDate"}}, as: :string %>
+          </div>
+          <div class ="col">
+            <%= f.input :end_date, label: false, input_html: {placeholder: "End date", class: "form-control form-control-sm", data: { flatpickr_target: "endDate"}, id: 'end_date' }, as: :string %>
+          </div>
+        <div>
+        <%= f.button :submit, class: "btn" %>
+      <% end %>
     <div data-autocomplete-target="map">
-    </div>
   </div>
 </div>

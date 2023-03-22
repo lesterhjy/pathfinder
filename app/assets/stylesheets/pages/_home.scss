@@ -1,1 +1,22 @@
 // Specific CSS for your home-page
+.banner {
+  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url("https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?crop=entropy&amp;cs=tinysrgb&amp;fm=jpg&amp;ixid=Mnw0MTI4NjN8MHwxfHNlYXJjaHw1fHx0cmF2ZWx8ZW58MHx8fHwxNjc5NDk0NjE2&amp;ixlib=rb-4.0.3&amp;q=8");
+  background-size: cover;
+  height: 100vh
+}
+
+.container {
+  padding-top: 100px;
+}
+
+.form-container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+#welcome {
+  font-family: 'Raleway', sans-serif;
+  font-size: 120px;
+  color: #ea523b;
+  text-align: center;
+}
