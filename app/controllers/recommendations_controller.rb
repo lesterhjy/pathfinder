@@ -4,8 +4,6 @@ class RecommendationsController < ApplicationController
 
   def index
     @trip = Trip.find(params[:trip_id])
-    @event = Event.new
-    @event.trip = @trip
     @recommendations = {}
     categories = ["bar", "cafe", "shopping_mall", "park", "tourist_attraction", "zoo", "museum"]
     categories.each do |category|
@@ -16,7 +14,7 @@ class RecommendationsController < ApplicationController
   private
 
   def get_nearby_recommendations(category)
-    location = '49.277812731849664%2C-123.13517911928503'
+    location = "#{@trip.latitude}%2C#{@trip.longitude}"
     radius = '30000'
 
     nearby_search = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{location}&radius=#{radius}&type=#{category}&key=#{ENV["GOOGLE_API_KEY"]}")
@@ -32,7 +30,7 @@ class RecommendationsController < ApplicationController
 
   def get_recommendation_details(recommendations_overview)
     recommendation_details = []
-    recommendations_overview.first(3).each do |recommendation|
+    recommendations_overview.first(2).each do |recommendation|
       place = {}
       place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
       place_details = JSON.parse(URI.open(place_details_search).read)["result"]
@@ -40,8 +38,8 @@ class RecommendationsController < ApplicationController
         place["name"] = place_details["name"]
         place["source"] = 'google'
         place["source_id"] = place_details["place_id"]
-        place["lat"] = place_details["geometry"]["location"]["lat"]
-        place["lng"] = place_details["geometry"]["location"]["lng"]
+        place["latitude"] = place_details["geometry"]["location"]["lat"]
+        place["longitude"] = place_details["geometry"]["location"]["lng"]
         place["address"] = place_details["formatted_address"]
         place["category"] = place_details["types"]
         place["website"] = place_details["website"] if place_details.key?("website")
@@ -50,7 +48,10 @@ class RecommendationsController < ApplicationController
         place["rating"] = place_details["rating"]
         place["review"] = place_details["reviews"]
         place["description"] = place_details["editorial_summary"]["overview"].capitalize if place_details.key?("editorial_summary")
-        recommendation_details.append(place)
+        event = Event.new(place)
+        event.trip = @trip
+        event.save!
+        recommendation_details.append(event)
       end
     end
     recommendation_details
