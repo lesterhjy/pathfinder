@@ -4,12 +4,14 @@
 
 import { application } from "./application"
 
+import AddEventController from "./add_event_controller"
+application.register("add-event", AddEventController)
 
 import DirectionsController from "./directions_controller"
 application.register("directions", DirectionsController)
 
-import AddEventController from "./add_event_controller"
-application.register("add-event", AddEventController)
+import DragController from "./drag_controller"
+application.register("drag", DragController)
 
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
@@ -25,6 +27,9 @@ application.register("maps", MapsController)
 
 import NewEventsController from "./new_events_controller"
 application.register("new-events", NewEventsController)
+
+import AutocompleteController from "./autocomplete_controller"
+application.register("autocomplete", AutocompleteController)
 
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)

@@ -13,20 +13,20 @@ class EventsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def update
+    @recommendations = Event.where(trip_id: params[:id])
+    @event = Event.find(params[:id])
+    @event.update(event_params)
     respond_to do |format|
-      format.html
-      format.text { render partial: "recommendations/recommendation_added", formats: [:html] }
+      format.html { redirect_to trip_path(@trip) }
+      format.text { render partial: "recommendations/recommendation_list", locals: { recommendations: @recommendations }, formats: [:html] }
     end
   end
 
   def edit
     @event = Event.find(params[:id])
-  end
-
-  def update
-    @event = Event.find(params[:id])
-    @event.update(event_params)
-    redirect_to trip_path(@trip)
   end
 
   private
@@ -49,6 +49,7 @@ class EventsController < ApplicationController
                                   :rating,
                                   :review,
                                   :description,
+                                  :selected,
                                   :start_time,
                                   :end_time)
   end
