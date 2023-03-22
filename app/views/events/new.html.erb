@@ -9,8 +9,8 @@
           <%= f.input :address, input_html: {data: {new_events_target: "address"}},
                                 wrapper_html: {data: {controller: "new-events",
                                                       new_events_api_key_value: ENV["GOOGLE_API_KEY"]}} %>
-          <%= f.input :start_time, as: :datetime %>
-          <%= f.input :end_time, as: :datetime %>
+          <%= f.input :start_time, as: :string, input_html: {class: "datetimepicker"} %>
+          <%= f.input :end_time, as: :string, input_html: {class: "datetimepicker"} %>
           <%= f.button :submit, class: "btn" %>
         <% end %>
       </div>

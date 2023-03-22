@@ -2,24 +2,20 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="directions"
 export default class extends Controller {
-  static targets = ["directions", "event"]
+  static targets = ["directions", "event", "driving", "walking", "transit"]
 
   connect() {
   }
 
   showDirections() {
 
-    if (this.directionsTarget.innerText !== "") {
-      if (this.directionsTarget.classList.contains("d-none")) {
-        this.directionsTargets.forEach((target) => {
-          target.classList.remove("d-none")
-        })
-      } else {
-        this.directionsTargets.forEach((target) => {
-          target.classList.add("d-none")
-        })
-      }
-    } else {
+    if (event.type === "order-updated" && this.directionsTarget.innerText === "") { return }
+
+    // if there is already stuff loaded in the directions div i.e. google has already been called then hide it
+    if (this.directionsTarget.innerText !== "" && event.type === "click") { this.wipe() }
+
+    else {
+      if (event.type === "order-updated") { this.wipe() }
 
       this.eventTargets.forEach((eventTarget, index) => {
 
@@ -50,20 +46,17 @@ export default class extends Controller {
 
               if (mode === 'DRIVING') {
                 icon = '<i class="fa-solid fa-car-side"></i>'
+                this.drivingTargets[index].innerHTML = `
+                <p class="direction"><small>${icon} ${duration}</small></p>`
               } else if (mode === 'TRANSIT') {
                 icon = '<i class="fa-solid fa-train-subway"></i>'
+                this.transitTargets[index].innerHTML = `
+                <p class="direction"><small>${icon} ${duration}</small></p>`
               } else if (mode === 'WALKING') {
                 icon = '<i class="fa-solid fa-person-hiking"></i>'
+                this.walkingTargets[index].innerHTML = `
+                <p class="direction"><small>${icon} ${duration}</small></p>`
               }
-
-
-              if (mode === "TRANSIT") {
-                mode = "public transport"
-              }
-
-              this.directionsTargets[index].innerHTML += `
-                <p class="direction"><small>${icon} ${duration}</small></p>
-              `
             });
           })
         }
@@ -72,6 +65,18 @@ export default class extends Controller {
 
     }
 
+  }
+
+  wipe() {
+    this.walkingTargets.forEach((target) => {
+      target.innerHTML = ""
+    })
+    this.drivingTargets.forEach((target) => {
+      target.innerHTML = ""
+    })
+    this.transitTargets.forEach((target) => {
+      target.innerHTML = ""
+    })
   }
 
 

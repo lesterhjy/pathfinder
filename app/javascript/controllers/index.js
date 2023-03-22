@@ -10,6 +10,9 @@ application.register("add-event", AddEventController)
 import DirectionsController from "./directions_controller"
 application.register("directions", DirectionsController)
 
+import DragController from "./drag_controller"
+application.register("drag", DragController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
@@ -24,8 +27,3 @@ application.register("autocomplete", AutocompleteController)
 
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
-
-import { Application } from '@hotwired/stimulus'
-import Notification from 'stimulus-notification'
-const app = Application.start()
-app.register('notification', Notification)

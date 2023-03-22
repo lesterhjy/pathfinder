@@ -20,19 +20,13 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.update(event_params)
     respond_to do |format|
-      format.html
+      format.html { redirect_to trip_path(@trip) }
       format.text { render partial: "recommendations/recommendation_list", locals: { recommendations: @recommendations }, formats: [:html] }
     end
   end
 
   def edit
     @event = Event.find(params[:id])
-  end
-
-  def update
-    @event = Event.find(params[:id])
-    @event.update(event_params)
-    redirect_to trip_path(@trip)
   end
 
   private
