@@ -11,7 +11,7 @@ class FlightsController < ApplicationController
     respond_to do |format|
       if @flight.save
         format.html { redirect_to @trip }
-        format.text { redirect_to @trip, status: :ok }
+        format.text { render nothing: true, status: :ok }
       else
         format.html
         format.text { render partial: "form", status: :unprocessable_entity, locals: { trip: @trip, flight: @flight }, formats: [:html] }
