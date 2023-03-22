@@ -11,10 +11,10 @@ class FlightsController < ApplicationController
     respond_to do |format|
       if @flight.save
         format.html { redirect_to @trip }
-        format.json # Follow the classic Rails flow and look for a create.json view
+        format.text { redirect_to @trip, status: :ok }
       else
-        format.html { render "flights/form", status: :unprocessable_entity }
-        format.json { render "flights/create.json.jbuilder", status: :unprocessable_entity }
+        format.html
+        format.text { render partial: "form", status: :unprocessable_entity, locals: { trip: @trip, flight: @flight }, formats: [:html] }
       end
     end
   end
