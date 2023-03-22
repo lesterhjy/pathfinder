@@ -19,6 +19,13 @@ export default class extends Sortable {
     this.defaultOptions
   }
 
+  updatePositions() {
+    this.positionTargets.forEach((positionTarget, index) => {
+      let newIndex = this.positionTargets.indexOf(positionTarget)
+      positionTarget.innerHTML = `<h3>${newIndex + 1}</h3>`;
+    })
+  }
+
   // You can override the `onUpdate` method here.
   onUpdate(event) {
     super.onUpdate(event)

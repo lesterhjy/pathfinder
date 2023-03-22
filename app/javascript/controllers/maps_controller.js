@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ["map", "event", "longitude", "latitude"];
 
   connect() {
-    this.labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    this.labels = "123456789";
     if (typeof(google) != "undefined") {
       this.initMap()
     }
