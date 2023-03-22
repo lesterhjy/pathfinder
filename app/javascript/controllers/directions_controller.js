@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="directions"
 export default class extends Controller {
-  static targets = ["directions", "event", "driving", "walking", "transit"]
+  static targets = ["directions", "event", "driving", "walking", "transit", "arrow"]
 
   connect() {
   }
@@ -44,6 +44,8 @@ export default class extends Controller {
 
               let icon;
 
+              this.arrowTargets[index].innerHTML = '<i class="fa-solid fa-arrow-down-long fa-xl"></i>'
+
               if (mode === 'DRIVING') {
                 icon = '<i class="fa-solid fa-car-side"></i>'
                 this.drivingTargets[index].innerHTML = `
@@ -75,6 +77,9 @@ export default class extends Controller {
       target.innerHTML = ""
     })
     this.transitTargets.forEach((target) => {
+      target.innerHTML = ""
+    })
+    this.arrowTargets.forEach((target) => {
       target.innerHTML = ""
     })
   }
