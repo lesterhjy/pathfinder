@@ -14,8 +14,9 @@
 .events {
   background-color: var(--green-light);
   padding: 20px;
-  border: 2px solid var(--green-light);
+  border: 2px solid var(--green);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  position: relative;
 }
 
 #transport i {
@@ -23,7 +24,10 @@
   background-color: var(--white);
   padding: 12px 10px;
   border-radius: 50%;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+position: absolute;
+  top: -20px;
+  right: 20px;
 }
 
 ul {
@@ -81,7 +85,7 @@ ul {
   margin: 0;
   margin-right: 5px;
   border-radius: 20px 20px 0 0;
-  border: 2px var(--green-light) solid;
+  border: 2px var(--green) solid;
   border-bottom: none;
   cursor: pointer;
 }
