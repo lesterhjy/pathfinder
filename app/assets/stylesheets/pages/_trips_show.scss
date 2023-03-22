@@ -12,9 +12,9 @@
 }
 
 .events {
-  background-color: white;
+  background-color: var(--green-light);
   padding: 20px;
-  border: 2px solid var(--red-light);
+  border: 2px solid var(--green-light);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
@@ -58,14 +58,14 @@ ul {
   margin: 0;
   margin-right: 5px;
   border-radius: 20px 20px 0 0;
-  border: 2px var(--red-light) solid;
+  border: 2px var(--green-light) solid;
   border-bottom: none;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   cursor: pointer;
 }
 
 .tab-active {
-  background-color: var(--red-light);
+  background-color: var(--green-light);
 }
 
 .event-directions {
