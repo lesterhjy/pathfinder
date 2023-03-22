@@ -20,9 +20,23 @@ class FlightsController < ApplicationController
   end
 
   def edit
+    @flight = Flight.find(params[:id])
+    @trip = Trip.find(params[:trip_id])
   end
 
   def update
+    @trip = Trip.find(params[:trip_id])
+    @flight = Flight.find(params[:id])
+    @flight.update(flight_params)
+    respond_to do |format|
+      if @flight.save
+        format.html { redirect_to @trip }
+        format.text { head :ok }
+      else
+        format.html
+        format.text { render partial: "form", status: :unprocessable_entity, locals: { trip: @trip, flight: @flight }, formats: [:html] }
+      end
+    end
   end
 
   def destroy
