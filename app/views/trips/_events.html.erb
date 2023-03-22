@@ -1,6 +1,8 @@
 <div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections order-updated@window->maps#updateMarkers">
-  <span title="See travel times" id="transport" data-action="click->directions#showDirections" style="text-align: right"><i class="fa-solid fa-van-shuttle"></i></span>
-
+  <div class="icons">
+    <span title="See travel times" class="icon" data-action="click->directions#showDirections" style="text-align: right"><i class="fa-solid fa-van-shuttle"></i></span>
+    <span title="See all days" class="icon" style="text-align: right"><i class="fa-solid fa-calendar-days"></i></span>
+  </div>
   <ul
     data-controller="sortable"
     data-sortable-resource-name-value="event"
