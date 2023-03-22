@@ -33,8 +33,21 @@ export default class extends Controller {
     })
   }
 
-  singleEvent() {
+  updateMarkers() {
+    this.labelIndex = 0;
+    this.latitudeTargets.forEach((latitude, index) => {
+      const longitude = this.longitudeTargets[index]
+      var marker = new google.maps.Marker({
+        map: this.map,
+        position: { lat: parseFloat(latitude.innerText), lng: parseFloat(longitude.innerText)},
+        label: this.labels[this.labelIndex++ % this.labels.length],
+      });
+      this.bounds.extend(marker.getPosition())
+      this.map.fitBounds(this.bounds)
+    })
+  }
 
+  singleEvent() {
     console.log(this.eventTargets)
     console.log(this.eventTargets.indexOf(event.target.parentElement))
 

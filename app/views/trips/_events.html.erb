@@ -1,5 +1,5 @@
-<div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections order-updated@window->maps#initMap">
-  <p data-action="click->directions#showDirections" style="text-align: right"><i class="fa-solid fa-van-shuttle"></i></p>
+<div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections order-updated@window->maps#updateMarkers">
+  <p id="transport" data-action="click->directions#showDirections" style="text-align: right"><i class="fa-solid fa-van-shuttle"></i></p>
   <ul
     data-controller="sortable"
     data-sortable-resource-name-value="event"
