@@ -4,7 +4,7 @@ class TripsController < ApplicationController
   def show
     @events = @trip.events.order(:position)
     @first_day_events = @trip.events.order(:position).group_by { |event| event.start_time.day }.values[0]
-    @events_by_day = @trip.events.order(:position).group_by { |event| event.start_time.day }.values
+    @events_by_day = @trip.events.order(:start_time, :position).group_by { |event| event.start_time.day }.values
     if params[:day].present?
       @events = @events.select { |event| event.start_time.day == params[:day].to_i }
     end
