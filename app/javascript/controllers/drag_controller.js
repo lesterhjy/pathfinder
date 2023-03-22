@@ -29,7 +29,6 @@ export default class extends Controller {
     }
     this.setNewPosition(dropTarget, draggedItem, event);
     newPosition = [...this.element.parentElement.children].indexOf(draggedItem);
-    console.log(newPosition)
 
     event.preventDefault();
   }
@@ -39,7 +38,6 @@ export default class extends Controller {
     if (resourceID === null || newPosition === null) {
       return;
     }
-    console.log(newPosition)
     let data = JSON.stringify({
       resource: {
         id: resourceID,
@@ -54,7 +52,10 @@ export default class extends Controller {
         "Content-Type": "application/json",
       },
       body: data,
-    });
+    }).then((data) => {
+      const e = new CustomEvent("update-directions")
+      window.dispatchEvent(e)}
+    );
   }
 
   dragOver(event) {

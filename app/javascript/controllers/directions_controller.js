@@ -9,18 +9,19 @@ export default class extends Controller {
 
   showDirections() {
 
-    if (this.directionsTarget.innerText !== "") {
-      if (this.directionsTarget.classList.contains("d-none")) {
+    if (event.type === "update-directions" && this.directionsTarget.innerText == "") { return }
+
+    // if there is already stuff loaded in the directions div i.e. google has already been called then hide it
+    if (this.directionsTarget.innerText !== "" && event.type === "click") {
+      this.directionsTargets.forEach((target) => {
+        target.innerHTML = ""
+      })
+    } else {
+      if (event.type === "update-directions") {
         this.directionsTargets.forEach((target) => {
-          target.classList.remove("d-none")
-        })
-      } else {
-        this.directionsTargets.forEach((target) => {
-          target.classList.add("d-none")
+          target.innerHTML = ""
         })
       }
-    } else {
-
       this.eventTargets.forEach((eventTarget, index) => {
 
         // console.log(eventTarget.dataset)
