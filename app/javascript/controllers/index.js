@@ -22,5 +22,13 @@ application.register("maps", MapsController)
 import NewEventsController from "./new_events_controller"
 application.register("new-events", NewEventsController)
 
+import AutocompleteController from "./autocomplete_controller"
+application.register("autocomplete", AutocompleteController)
+
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
+
+import { Application } from '@hotwired/stimulus'
+import Notification from 'stimulus-notification'
+const app = Application.start()
+app.register('notification', Notification)
