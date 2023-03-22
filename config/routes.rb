@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   resources :events, only: [:destroy]
 
-  patch 'drag/event'
+  patch '/trips/:trip_id/events/:id/update_position', to: 'events#update_position', as: 'update_position'
 
   # Defines the root path route ("/")
   # root "articles#index"

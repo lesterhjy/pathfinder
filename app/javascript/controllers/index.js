@@ -7,6 +7,9 @@ import { application } from "./application"
 import AddEventController from "./add_event_controller"
 application.register("add-event", AddEventController)
 
+import AutocompleteController from "./autocomplete_controller"
+application.register("autocomplete", AutocompleteController)
+
 import DirectionsController from "./directions_controller"
 application.register("directions", DirectionsController)
 
@@ -22,8 +25,8 @@ application.register("maps", MapsController)
 import NewEventsController from "./new_events_controller"
 application.register("new-events", NewEventsController)
 
-import AutocompleteController from "./autocomplete_controller"
-application.register("autocomplete", AutocompleteController)
+import SortableController from "./sortable_controller"
+application.register("sortable", SortableController)
 
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
