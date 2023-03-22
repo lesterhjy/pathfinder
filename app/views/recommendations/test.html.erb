@@ -1,0 +1,36 @@
+<% @recommendations.each do |category, places| %>
+    <% if places != [] %>
+      <h1><%= category.gsub("_", " ").capitalize %></h1>
+      <div class="recommendation-container">
+        <% places.each do |place| %>
+          <%= render "recommendation_infos", place: place %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+<%= simple_form_for [trip, event],
+      html: {
+        data: {
+          add_event_target: "form",
+          action: "submit->add-event#create"
+        }
+      } do |f|
+    %>
+      <%= f.input :name, :as => :hidden, input_html: { value: place["name"] } %>
+      <%= f.input :source, :as => :hidden, input_html: { value: place["source"] } %>
+      <%= f.input :source_id, :as => :hidden, input_html: { value: place["source_id"] } %>
+      <%= f.input :lat, :as => :hidden, input_html: { value: place["latitude"] } %>
+      <%= f.input :lng, :as => :hidden, input_html: { value: place["longitude"] } %>
+      <%= f.input :address, :as => :hidden, input_html: { value: place["address"] } %>
+      <%= f.input :category, :as => :hidden, input_html: { value: place["category"] } %>
+      <%= f.input :website, :as => :hidden, input_html: { value: place["website"] } %>
+      <%= f.input :phone, :as => :hidden, input_html: { value: place["phone"] } %>
+      <%= f.input :photo, :as => :hidden, input_html: { value: place["photo"] } %>
+      <%= f.input :rating, :as => :hidden, input_html: { value: place["rating"] } %>
+      <%= f.input :review, :as => :hidden, input_html: { value: place["review"] } %>
+      <%= f.input :description, :as => :hidden, input_html: { value: place["description"] } %>
+      <button type="submit" class="btn-ghost" data-add-event-target="add">
+        Add to list
+      </button>
+    <% end %>

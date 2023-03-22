@@ -1,11 +1,11 @@
-<div class="recommendation-card"  data-controller="add-event">
+<div class="recommendation-card"  data-controller="add-event" data-add-event-target="card">
   <div class="recommendation-card-infos">
-    <h2><%= place["name"] %></h2>
+    <h2><%= event["name"] %></h2>
   </div>
-  <img src="<%= place["photo"] %>" />
+  <img src="<%= event["photo"] %>" />
   <div class="recommendation-card-infos">
-    <p class="recommendation-description"><%= place["description"] %></p>
-    <p class="recommendation-address"><%= place["address"] %></p>
+    <p class="recommendation-description"><%= event["description"] %></p>
+    <p class="recommendation-address"><%= event["address"] %></p>
     <%= simple_form_for [trip, event],
       html: {
         data: {
@@ -14,22 +14,17 @@
         }
       } do |f|
     %>
-      <%= f.input :name, :as => :hidden, input_html: { value: place["name"] } %>
-      <%= f.input :source, :as => :hidden, input_html: { value: place["source"] } %>
-      <%= f.input :source_id, :as => :hidden, input_html: { value: place["source_id"] } %>
-      <%= f.input :lat, :as => :hidden, input_html: { value: place["lat"] } %>
-      <%= f.input :lng, :as => :hidden, input_html: { value: place["lng"] } %>
-      <%= f.input :address, :as => :hidden, input_html: { value: place["address"] } %>
-      <%= f.input :category, :as => :hidden, input_html: { value: place["category"] } %>
-      <%= f.input :website, :as => :hidden, input_html: { value: place["website"] } %>
-      <%= f.input :phone, :as => :hidden, input_html: { value: place["phone"] } %>
-      <%= f.input :photo, :as => :hidden, input_html: { value: place["photo"] } %>
-      <%= f.input :rating, :as => :hidden, input_html: { value: place["rating"] } %>
-      <%= f.input :review, :as => :hidden, input_html: { value: place["review"] } %>
-      <%= f.input :description, :as => :hidden, input_html: { value: place["description"] } %>
-      <button type="submit" class="btn-ghost" data-add-event-target="add">
-        Add to list
-      </button>
+      <% if event.selected %>
+        <%= f.input :selected, :as => :hidden, input_html: { value: nil } %>
+        <button type="submit" class="btn-ghost" data-add-event-target="add">
+          Remove
+        </button>
+      <% else %>
+        <%= f.input :selected, :as => :hidden, input_html: { value: true } %>
+        <button type="submit" class="btn-ghost" data-add-event-target="add">
+          Add
+        </button>
+      <% end %>
     <% end %>
   </div>
 </div>

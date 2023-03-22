@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_18_082551) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_21_012834) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,6 +36,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_18_082551) do
     t.float "longitude"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.boolean "selected"
+    t.string "description"
     t.index ["trip_id"], name: "index_events_on_trip_id"
   end
 
@@ -88,6 +90,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_18_082551) do
     t.string "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "user_trips", force: :cascade do |t|
