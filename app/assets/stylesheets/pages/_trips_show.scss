@@ -20,6 +20,10 @@
 
 #transport i {
   cursor: pointer;
+  background-color: var(--white);
+  padding: 12px 10px;
+  border-radius: 50%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 ul {
@@ -40,7 +44,8 @@ ul {
     background-color: var(--red);
     color: var(--white);
     border: 1px solid var(--white);
-}
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
 }
 
 .event-details {
@@ -78,7 +83,6 @@ ul {
   border-radius: 20px 20px 0 0;
   border: 2px var(--green-light) solid;
   border-bottom: none;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   cursor: pointer;
 }
 
