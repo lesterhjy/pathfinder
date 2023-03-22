@@ -36,6 +36,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_015728) do
     t.float "longitude"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.boolean "selected"
+    t.string "description"
     t.integer "position"
     t.index ["trip_id"], name: "index_events_on_trip_id"
   end
@@ -89,6 +91,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_015728) do
     t.string "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "user_trips", force: :cascade do |t|

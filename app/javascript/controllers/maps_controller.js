@@ -16,7 +16,8 @@ export default class extends Controller {
 
     this.map = new google.maps.Map(this.mapTarget, {
       center: {lat: parseFloat(this.latitudeTarget.innerText), lng: parseFloat(this.longitudeTarget.innerText) },
-      zoom: 15
+      zoom: 12,
+      mapId: 'ad11ac97853b71ad'
     });
     this.labelIndex = 0;
 
@@ -42,7 +43,8 @@ export default class extends Controller {
     let longitude = parseFloat(this.longitudeTargets[current_index].innerText)
     this.map = new google.maps.Map(this.mapTarget, {
       center: {lat: latitude, lng: longitude },
-      zoom: 18
+      zoom: 18,
+      mapId: 'ad11ac97853b71ad',
     });
     new google.maps.Marker({
       map: this.map,
