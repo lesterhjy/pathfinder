@@ -1,3 +1,4 @@
+
 .trip-overview {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -5,6 +6,7 @@
 }
 
 .trip-content {
+  margin-left: 30px;
   display: grid;
   grid-template-rows: auto 1fr;
 }
@@ -12,13 +14,12 @@
 .events {
   background-color: white;
   padding: 20px;
-  border-radius: 20px;
   border: 2px solid var(--red-light);
 }
 
 .event-details {
   border: 1px solid black;
-  border-radius: 20px ;
+  border-radius: 20px;
   margin-bottom: 10px;
   padding: 10px;
   background-color: var(--white);
@@ -33,19 +34,25 @@
 }
 
 .tab {
-  font-weight: bold;
   padding: 10px;
-  margin-right: 10px;
   background-color: white;
-  border-radius: 10px;
-  border: 2px solid var(--red-light)
+  // border: 2px solid var(--red-light);
+  margin: 0;
 }
 
 .tab-active {
   background-color: var(--red-light);
 }
 
+.event-directions {
+  display: flex;
+}
+
+.direction {
+  padding: 10px;
+  padding-top: 0px;
+}
+
 #map {
   height: 100vh;
-  border: 1px solid black;
 }

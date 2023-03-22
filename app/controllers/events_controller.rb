@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_trip, only: [:new, :create]
+  before_action :set_trip, only: [:new, :create, :edit, :update]
 
   def new
     @event = Event.new
@@ -25,6 +25,16 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    @event.update(event_params)
+    redirect_to trip_path(@trip)
+  end
+
   private
 
   def set_trip
@@ -45,7 +55,9 @@ class EventsController < ApplicationController
                                   :rating,
                                   :review,
                                   :description,
-                                  :selected)
+                                  :selected,
+                                  :start_time,
+                                  :end_time)
   end
 
 end
