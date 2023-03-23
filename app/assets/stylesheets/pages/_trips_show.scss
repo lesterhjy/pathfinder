@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+
 }
 
 .trip-content {
@@ -12,11 +13,14 @@
 }
 
 .events {
-  background-color: var(--green-light);
+  background-color: var(--blue-light);
   padding: 20px;
-  border: 2px solid var(--green);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   position: relative;
+  background-color: #ffffff;
+  opacity: 1;
+  background-image: radial-gradient(#175C1B 0.5px, #ffffff 0.5px);
+  background-size: 10px 10px;
 }
 
 .icons {
@@ -99,17 +103,20 @@ ul {
   font-weight: bold;
   text-align: center;
   padding: 10px;
-  background-color: white;
   margin: 0;
   margin-right: 5px;
   border-radius: 20px 20px 0 0;
-  border: 2px var(--green) solid;
+  border: 2px var(--white) solid;
+  background-color: var(--white);
   border-bottom: none;
   cursor: pointer;
 }
 
 .tab-active {
-  background-color: var(--green-light);
+  background-color: var(--white);
+  opacity: 1;
+  background-image: radial-gradient(#175C1B 0.5px, #ffffff 0.5px);
+  background-size: 10px 10px;
 }
 
 .info-toggle {
