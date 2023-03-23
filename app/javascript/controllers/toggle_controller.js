@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["tab", "events", "info", "event"]
 
   connect() {
-    console.log(this.infoTarget)
   }
 
   toggleTabs() {
