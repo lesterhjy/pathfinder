@@ -13,6 +13,15 @@ application.register("autocomplete", AutocompleteController)
 import DirectionsController from "./directions_controller"
 application.register("directions", DirectionsController)
 
+import DragController from "./drag_controller"
+application.register("drag", DragController)
+
+import FlatpickrController from "./flatpickr_controller"
+application.register("flatpickr", FlatpickrController)
+
+import FlightFormController from "./flight_form_controller"
+application.register("flight-form", FlightFormController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
@@ -27,3 +36,6 @@ application.register("sortable", SortableController)
 
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
+
+import TypedJsController from "./typed_js_controller"
+application.register("typed-js", TypedJsController)
