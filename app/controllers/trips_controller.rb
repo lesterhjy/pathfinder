@@ -21,6 +21,11 @@ class TripsController < ApplicationController
     end
   end
 
+  def overview
+    @trip = Trip.find(params[:trip_id])
+    @events_by_day = @trip.events.order(:start_time, :position).group_by { |event| event.start_time.day }.values
+  end
+
   private
 
   def set_trip

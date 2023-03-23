@@ -105,6 +105,11 @@ ul {
 
 .event-directions {
   display: flex;
+
+  .arrow {
+    margin-left: 30px;
+    margin-right: 10px
+  }
 }
 
 .direction {

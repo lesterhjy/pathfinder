@@ -14,7 +14,6 @@
       <p data-maps-target="latitude"><%= event.latitude%></p>
       <p data-maps-target="longitude"><%= event.longitude %></p>
     </div>
-    <p>Start: <%= event.start_time.strftime("%I.%M%P") %> | End: <%= event.end_time.strftime("%I.%M%P") %></p>
     <div class="modify-event" style="text-align: right">
       <%= link_to edit_trip_event_path(event.trip_id, event) do %>
         <i class="fa-solid fa-pencil"></i>
@@ -26,7 +25,7 @@
   </div>
 
   <div class="event-directions" data-directions-target="directions">
-    <div data-directions-target="arrow" style="margin-left: 30px; margin-right: 10px"></div>
+    <div class="arrow" data-directions-target="arrow"></div>
     <div data-directions-target="driving"></div>
     <div data-directions-target="transit"></div>
     <div data-directions-target="walking"></div>
