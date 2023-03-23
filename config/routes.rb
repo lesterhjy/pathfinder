@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :events, only: [:destroy]
 
   patch '/trips/:trip_id/events/:id/update_position', to: 'events#update_position', as: 'update_position'
+  get '/trips/:trip_id/overview', to: 'trips#overview', as: 'trip_overview'
 
   # Defines the root path route ("/")
   # root "articles#index"
