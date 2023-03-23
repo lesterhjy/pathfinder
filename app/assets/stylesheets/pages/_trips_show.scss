@@ -91,6 +91,9 @@ ul {
   p {
     margin: 0;
   }
+  a, a:hover {
+    color: var(--green)
+  }
 }
 
 .tabs {
