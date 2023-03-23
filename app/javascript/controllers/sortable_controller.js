@@ -8,7 +8,8 @@ export default class extends Sortable {
   connect() {
     super.connect()
     // The sortable.js instance.
-    this.sortable
+    this.sortable.options.group.name = "lists"
+    console.log(this.sortable)
 
     // Your options
     this.options
@@ -18,6 +19,7 @@ export default class extends Sortable {
   }
 
   updatePositions() {
+    console.log("updatePositions")
     this.positionTargets.forEach((positionTarget, index) => {
       let newIndex = this.positionTargets.indexOf(positionTarget)
       positionTarget.innerHTML = `<h3>${newIndex + 1}</h3>`;
@@ -25,7 +27,19 @@ export default class extends Sortable {
   }
 
   // You can override the `onUpdate` method here.
+
+  onMove(event) {
+    super.onMove(event)
+    console.log("onMove")
+  }
+
+  onStart(event) {
+    super.onStart(event)
+    console.log("onStart")
+  }
+
   onUpdate(event) {
+    console.log("onUpdate")
     super.onUpdate(event)
     const e = new CustomEvent("order-updated")
     window.dispatchEvent(e)
