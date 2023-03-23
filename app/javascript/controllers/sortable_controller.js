@@ -7,8 +7,6 @@ export default class extends Sortable {
 
   connect() {
     super.connect()
-    console.log(this.positionTargets)
-
     // The sortable.js instance.
     this.sortable
 

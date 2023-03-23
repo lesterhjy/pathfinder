@@ -48,8 +48,6 @@ export default class extends Controller {
   }
 
   singleEvent() {
-    console.log(this.eventTargets)
-    console.log(this.eventTargets.indexOf(event.target.parentElement))
 
     let current_index = this.eventTargets.indexOf(event.target.parentElement);
     let latitude = parseFloat(this.latitudeTargets[current_index].innerText)

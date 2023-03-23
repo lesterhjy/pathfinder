@@ -6,21 +6,29 @@
   data-sortable-update-url="<%= update_position_path(event.trip_id, event) %>"
   >
 
-  <div class="event-details" data-maps-target="event" data-directions-target="event" data-action="click->maps#singleEvent" data-index=<%= index %>>
+  <div class="event-details" data-maps-target="event" data-directions-target="event" data-toggle-target="event" data-action="click->maps#singleEvent" data-index=<%= index %>>
     <div class="position" style="text-align: right" data-sortable-target="position"><h3><%= index + 1 %></h3></div>
-    <p style="font-weight: bold"><%= event.name %></p>
-    <p><%= event.address %></p>
+    <div class="basic-details">
+      <div class="name-address">
+        <p style="font-weight: bold"><%= event.name %></p>
+        <p><%= event.address %></p>
+      </div>
+      <p class="info-toggle" data-action="click->toggle#toggleInfo">+</p>
+    </div>
     <div class="coordinates d-none">
       <p data-maps-target="latitude"><%= event.latitude%></p>
       <p data-maps-target="longitude"><%= event.longitude %></p>
     </div>
-    <div class="modify-event" style="text-align: right">
-      <%= link_to edit_trip_event_path(event.trip_id, event) do %>
-        <i class="fa-solid fa-pencil"></i>
-      <% end %> |
-      <%= link_to event_path(event), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-        <i class="fa-solid fa-trash-can"></i>
-      <% end %>
+    <div class="more-info d-none" data-toggle-target="info">
+      <div class="more-event-details">Anything else about the event can put here.</div>
+      <div class="modify-event" style="text-align: right">
+        <%= link_to edit_trip_event_path(event.trip_id, event) do %>
+          <i class="fa-solid fa-pencil"></i>
+        <% end %> |
+        <%= link_to event_path(event), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+      </div>
     </div>
   </div>
 

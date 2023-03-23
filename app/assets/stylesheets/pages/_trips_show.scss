@@ -24,6 +24,10 @@
   position: absolute;
   top: -20px;
   right: 0px;
+
+  a {
+    opacity: 1;
+  }
 }
 
 .icon {
@@ -72,6 +76,11 @@ ul {
   cursor: pointer;
 }
 
+.basic-details {
+  display: flex;
+  justify-content: space-between;
+}
+
 .event {
   position: relative;
   margin-bottom: 5px;
@@ -101,6 +110,13 @@ ul {
 
 .tab-active {
   background-color: var(--green-light);
+}
+
+.info-toggle {
+  text-align: right;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .event-directions {
