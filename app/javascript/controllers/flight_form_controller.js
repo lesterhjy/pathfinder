@@ -18,7 +18,11 @@ export default class extends Controller {
     })
       .then((response) => response.text())
       .then((data) => {
-        this.formTarget.outerHTML = data;
+        if (data) {
+          this.formTarget.outerHTML = data;
+        } else {
+          window.location.reload();
+        }
       });
   }
 }
