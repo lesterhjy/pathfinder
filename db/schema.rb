@@ -64,8 +64,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_162614) do
     t.bigint "trip_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "start"
-    t.datetime "end"
     t.index ["trip_id"], name: "index_hotels_on_trip_id"
   end
 
