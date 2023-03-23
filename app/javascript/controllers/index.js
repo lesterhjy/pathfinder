@@ -13,9 +13,6 @@ application.register("autocomplete", AutocompleteController)
 import DirectionsController from "./directions_controller"
 application.register("directions", DirectionsController)
 
-import DragController from "./drag_controller"
-application.register("drag", DragController)
-
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 
