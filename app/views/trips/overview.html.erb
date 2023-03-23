@@ -1,5 +1,7 @@
 <div class="container-fluid mt-3">
   <h3>Your <%= pluralize(@events_by_day.length, "days") %> in <%= @trip.destination %></h3>
+  <%= link_to "See day-by-day view", trip_path(@trip) %>
+  <br><br>
   <div class="all-events">
     <% @events_by_day.each_with_index do |events, index| %>
       <div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections">
