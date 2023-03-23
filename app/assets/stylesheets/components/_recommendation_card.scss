@@ -8,9 +8,30 @@
 .recommendation-card {
   width: 300px;
   overflow: hidden;
-  background: #393e41;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 10px;
+}
+
+.recommendation-card-food {
+  background-color: #e8e8e8;
+  opacity: 1;
+  background-size: 6px 6px;
+  background-image: repeating-linear-gradient(45deg, #ecd4cb 0, #ecd4cb 0.6000000000000001px, #e8e8e8 0, #e8e8e8 50%);
+}
+
+.recommendation-card-shopping {
+  background-color: #e8e8e8;
+  opacity: 1;
+  background-image:  linear-gradient(135deg, #cae2c9 25%, transparent 25%), linear-gradient(225deg, #cae2c9 25%, transparent 25%), linear-gradient(45deg, #cae2c9 25%, transparent 25%), linear-gradient(315deg, #cae2c9 25%, #e8e8e8 25%);
+  background-position:  6px 0, 6px 0, 0 0, 0 0;
+  background-size: 12px 12px;
+  background-repeat: repeat;
+}
+
+.recommendation-card-attraction {
+  background-color: #e8e8e8;
+  opacity: 1;
+  background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #e8e8e8 6px ), repeating-linear-gradient( #c6def555, #c6def5 );
 }
 
 .recommendation-card > img {
@@ -20,14 +41,15 @@
 }
 
 .recommendation-card h2 {
-  color: #F6F7EB;
+  font-family: 'Raleway', sans-serif;
+  color: darkslategrey;
   font-size: 16px;
   font-weight: bold;
   margin: 0;
 }
 
 .recommendation-card p {
-  color: #F6F7EB;
+  color: darkslategrey;
   font-size: 14px;
 }
 

@@ -1,4 +1,10 @@
-<div class="recommendation-card"  data-controller="add-event" data-add-event-target="card">
+<% if categories[:shopping].any? { |type| event["category"].include?(type)} %>
+  <div class="recommendation-card recommendation-card-shopping" data-controller="add-event" data-add-event-target="card">
+<% elsif categories[:food].any? { |type| event["category"].include?(type)} %>
+  <div class="recommendation-card recommendation-card-food" data-controller="add-event" data-add-event-target="card">
+<% else %>
+  <div class="recommendation-card recommendation-card-attraction" data-controller="add-event" data-add-event-target="card">
+<% end %>
   <div class="recommendation-card-infos">
     <h2><%= event["name"] %></h2>
   </div>
