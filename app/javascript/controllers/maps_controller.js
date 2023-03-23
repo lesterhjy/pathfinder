@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ["map", "event", "longitude", "latitude"];
 
   connect() {
-    this.labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    this.labels = "123456789";
     if (typeof(google) != "undefined") {
       this.initMap()
     }
@@ -33,10 +33,21 @@ export default class extends Controller {
     })
   }
 
-  singleEvent() {
+  updateMarkers() {
+    this.labelIndex = 0;
+    this.latitudeTargets.forEach((latitude, index) => {
+      const longitude = this.longitudeTargets[index]
+      var marker = new google.maps.Marker({
+        map: this.map,
+        position: { lat: parseFloat(latitude.innerText), lng: parseFloat(longitude.innerText)},
+        label: this.labels[this.labelIndex++ % this.labels.length],
+      });
+      this.bounds.extend(marker.getPosition())
+      this.map.fitBounds(this.bounds)
+    })
+  }
 
-    console.log(this.eventTargets)
-    console.log(this.eventTargets.indexOf(event.target.parentElement))
+  singleEvent() {
 
     let current_index = this.eventTargets.indexOf(event.target.parentElement);
     let latitude = parseFloat(this.latitudeTargets[current_index].innerText)

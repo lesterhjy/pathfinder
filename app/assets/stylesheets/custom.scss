@@ -1,10 +1,9 @@
 :root {
-  --white: #F6F7EB;
-  --black: #393E41;
-  --red: #E94F37;
-  --red-light: #da9e96;
-  --blue: #3F88C5;
-  --green: #44BBA4;
+  --white: #fff0db;
+  --black: #1C3334;
+  --red: #D9534F;
+  --blue: #4E6E81;
+  --green: #1b4748;
 }
 
 h1 {
@@ -13,7 +12,7 @@ h1 {
 }
 
 h2 {
-  color: var(--blue);
+  color: var(--white);
   font-size: 25px;
 }
 
@@ -23,19 +22,21 @@ h3 {
 }
 
 p {
-  color: var(--black)
+  color: var(--black);
+  font-size: 15px;
 }
 
 body {
-  background-color: var(--white);
+  background-color: var(--blue);
 }
 
 a {
   text-decoration: none;
-  color: var(--blue);
+  color: var(--white);
   opacity: 0.8;
 }
 
 a:hover {
+  color: var(--white);
   opacity: 1;
 }

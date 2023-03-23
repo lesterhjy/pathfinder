@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+
 }
 
 .trip-content {
@@ -12,51 +13,138 @@
 }
 
 .events {
-  background-color: white;
+  background-color: var(--blue-light);
   padding: 20px;
-  border: 2px solid var(--red-light);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  position: relative;
+  background-color: #ffffff;
+  opacity: 1;
+  background-image: radial-gradient(#175C1B 0.5px, #ffffff 0.5px);
+  background-size: 10px 10px;
+}
+
+.icons {
+  display: flex;
+  position: absolute;
+  top: -20px;
+  right: 0px;
+
+  a {
+    opacity: 1;
+  }
+}
+
+.icon {
+  cursor: pointer;
+  background-color: var(--white);
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.position {
+  display: flex;
+  position: absolute;
+  left: -10px;
+  top: 10px;
+
+  h3 {
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 50%;
+    background-color: var(--red);
+    color: var(--white);
+    border: 1px solid var(--white);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
 }
 
 .event-details {
   border: 1px solid black;
   border-radius: 20px;
-  margin-bottom: 10px;
+  margin: 10px;
   padding: 10px;
+  padding-left: 30px;
   background-color: var(--white);
+  cursor: pointer;
 }
 
-.event p {
-  margin: 0;
+.basic-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.event {
+  position: relative;
+  margin-bottom: 5px;
+  p {
+    margin: 0;
+  }
+  a, a:hover {
+    color: var(--green)
+  }
 }
 
 .tabs {
+  margin-top: 20px;
   display: flex;
 }
 
 .tab {
   font-size: small;
+  font-weight: bold;
   text-align: center;
   padding: 10px;
-  background-color: white;
   margin: 0;
+  margin-right: 5px;
   border-radius: 20px 20px 0 0;
-  border: 1px var(--red-light) dashed;
+  border: 2px var(--white) solid;
+  background-color: var(--white);
   border-bottom: none;
+  cursor: pointer;
 }
 
 .tab-active {
-  background-color: var(--red-light);
+  background-color: var(--white);
+  opacity: 1;
+  background-image: radial-gradient(#175C1B 0.5px, #ffffff 0.5px);
+  background-size: 10px 10px;
+}
+
+.info-toggle {
+  text-align: right;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .event-directions {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto auto auto 1fr;
+
+  .arrow {
+    margin-left: 30px;
+    margin-right: 10px
+  }
 }
 
 .direction {
-  padding: 10px;
-  padding-top: 0px;
+  padding: 0 10px;
 }
 
 #map {
   height: 100vh;
+  position: sticky;
+  top: 0;
 }

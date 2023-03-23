@@ -2,12 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="toggle"
 export default class extends Controller {
-  static targets = ["tab", "events"]
+  static targets = ["tab", "events", "info", "event"]
 
   connect() {
   }
 
-  toggle() {
+  toggleTabs() {
     this.tabTargets.forEach((tab, index) => {
       if (index == event.target.dataset.index) {
         tab.classList.add("tab-active")
@@ -20,11 +20,23 @@ export default class extends Controller {
     fetch(url, {headers: {"Accept": "text/plain"}})
       .then(response => response.text())
       .then((data) => {
-        console.log(data)
         this.eventsTarget.outerHTML = data
         const e = new CustomEvent("update-events");
         window.dispatchEvent(e);
       })
+  }
+
+  toggleInfo() {
+    let current_event = event.target.parentElement.parentElement;
+    let current_index = this.eventTargets.indexOf(current_event);
+    let current_info_target = this.infoTargets[current_index]
+    if (current_info_target.classList.contains("d-none")) {
+      current_info_target.classList.remove("d-none")
+      event.target.innerText = "–"
+    } else {
+      current_info_target.classList.add("d-none")
+      event.target.innerText = "+"
+    }
   }
 
 }

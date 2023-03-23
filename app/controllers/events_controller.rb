@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_trip, only: [:new, :create, :edit, :update]
+  before_action :set_trip, only: [:new, :create, :edit, :update, :update_position]
 
   def new
     @event = Event.new
@@ -29,6 +29,17 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def update_position
+    @event = Event.find(params[:id])
+    @events = @trip.events
+    @events_that_day = @events.order(:position).select { |event| event.start_time.day == @event.start_time.day }
+    old_index = @events_that_day.index(@event)
+    old_position = @event.position
+    new_index = event_params[:position].to_i - 1
+    new_position = old_position + (new_index - old_index)
+    @event.insert_at(new_position)
+  end
+
   private
 
   def set_trip
@@ -51,7 +62,8 @@ class EventsController < ApplicationController
                                   :description,
                                   :selected,
                                   :start_time,
-                                  :end_time)
+                                  :end_time,
+                                  :position)
   end
 
 end

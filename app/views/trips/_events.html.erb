@@ -1,6 +1,17 @@
-<div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections order-updated@window->maps#initMap">
-  <p data-action="click->directions#showDirections" style="text-align: right"><i class="fa-solid fa-van-shuttle"></i></p>
+<div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections order-updated@window->maps#updateMarkers">
+  <div class="icons">
+    <p class="icon" data-action="click->directions#showDirections"><i class="fa-solid fa-van-shuttle"></i></p>
+    <%= link_to trip_overview_path(events[0].trip) do %>
+      <p class="icon"><i class="fa-solid fa-calendar-days"></i></p>
+    <% end %>
+  </div>
+  <ul
+    data-controller="sortable"
+    data-sortable-resource-name-value="event"
+    data-sortable-handle-value=".handle"
+    data-action="order-updated@window->sortable#updatePositions">
   <% events.each_with_index do |event, index| %>
     <%= render "event", event: event, index: index %>
   <% end %>
+  </ul>
 </div>
