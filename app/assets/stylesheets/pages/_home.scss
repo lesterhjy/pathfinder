@@ -1,5 +1,14 @@
 // Specific CSS for your home-page
 .banner {
+  height: 100vh;
+  background-size: cover;
+  background-color: #e8e8e8;
+  opacity: 1;
+  background-image: radial-gradient(#EF7462 0.55px, #e8e8e8 0.55px);
+  background-size: 11px 11px;
+}
+
+#banner {
   background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url("https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?crop=entropy&amp;cs=tinysrgb&amp;fm=jpg&amp;ixid=Mnw0MTI4NjN8MHwxfHNlYXJjaHw1fHx0cmF2ZWx8ZW58MHx8fHwxNjc5NDk0NjE2&amp;ixlib=rb-4.0.3&amp;q=8");
   background-size: cover;
   height: 100vh
