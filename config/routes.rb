@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :flights, only: %i[new create edit update destroy]
     resources :recommendations, only: [:index]
     resources :events, only: %i[new create edit update]
+    resources :hotels, only: %i[new create edit update destroy]
   end
   resources :events, only: [:destroy]
 
