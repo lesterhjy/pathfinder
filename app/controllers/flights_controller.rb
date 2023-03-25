@@ -1,22 +1,9 @@
 class FlightsController < ApplicationController
-  def new
-    @trip = Trip.find(params[:trip_id])
-    @flight = Flight.new
-  end
-
   def create
     @trip = Trip.find(params[:trip_id])
     @flight = Flight.new(flight_params)
     @flight.trip = @trip
-    respond_to do |format|
-      if @flight.save
-        format.html { redirect_to @trip }
-        format.text { head :ok }
-      else
-        format.html
-        format.text { render partial: "form", status: :unprocessable_entity, locals: { trip: @trip, flight: @flight }, formats: [:html] }
-      end
-    end
+    flight_save
   end
 
   def edit
@@ -28,6 +15,15 @@ class FlightsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @flight = Flight.find(params[:id])
     @flight.update(flight_params)
+    flight_save
+  end
+
+  def destroy
+  end
+
+  private
+
+  def flight_save
     respond_to do |format|
       if @flight.save
         format.html { redirect_to @trip }
@@ -38,11 +34,6 @@ class FlightsController < ApplicationController
       end
     end
   end
-
-  def destroy
-  end
-
-  private
 
   def flight_params
     params.require(:flight).permit(:start_time,
