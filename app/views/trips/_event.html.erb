@@ -3,7 +3,9 @@
   data-index="<%= index %>"
   data-latitude=<%= event.latitude%>
   data-longitude=<%= event.longitude %>
+  data-position=<%= event.position %>
   data-sortable-update-url="<%= update_position_path(event.trip_id, event) %>"
+  data-sortable-move-url="<%= move_lists_path(event.trip_id, event) %>"
   >
 
   <div class="event-details" data-maps-target="event" data-directions-target="event" data-toggle-target="event" data-action="click->maps#singleEvent" data-index=<%= index %>>
@@ -24,8 +26,7 @@
     </div>
     <div class="more-info d-none" data-toggle-target="info">
       <div class="more-event-details">
-        <p style="margin-right: 30px"><%= event.description %></p>
-        <br>
+        <p style="margin-right: 30px; margin-bottom: 10px;"><%= event.description %></p>
         <p><strong><a href="<%= event.website %>" target="_blank">Website</a></strong> | <strong>Phone:</strong> <%= event.phone %> </p>
       </div>
       <div class="modify-event" style="text-align: right">

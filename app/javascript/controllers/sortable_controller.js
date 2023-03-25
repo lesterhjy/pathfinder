@@ -3,13 +3,13 @@ import Sortable from 'stimulus-sortable'
 
 export default class extends Sortable {
 
-  static targets = ["position"]
+  static targets = ["position", "form"]
 
   connect() {
     super.connect()
     // The sortable.js instance.
     this.sortable.options.group.name = "lists"
-    console.log(this.sortable)
+    this.sortable.options.onRemove = this.remove
 
     // Your options
     this.options
@@ -28,14 +28,26 @@ export default class extends Sortable {
 
   // You can override the `onUpdate` method here.
 
-  onMove(event) {
-    super.onMove(event)
-    console.log("onMove")
-  }
-
-  onStart(event) {
-    super.onStart(event)
-    console.log("onStart")
+  remove(event) {
+    const newDate = event.to.dataset.date
+    const url = event.item.dataset.sortableMoveUrl
+    const oldPosition = event.item.dataset.position
+    const newPosition = event.item.nextElementSibling.dataset.position
+    console.log(oldPosition, newPosition)
+    fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document.head.children["csrf-token"]["content"],
+      },
+      body: JSON.stringify({
+        start_time: newDate,
+        position: newPosition
+      })
+    }).then(response => {
+      const e = new CustomEvent("order-updated")
+      window.dispatchEvent(e)
+    })
   }
 
   onUpdate(event) {
@@ -45,10 +57,12 @@ export default class extends Sortable {
     window.dispatchEvent(e)
   }
 
+
   // You can set default options in this getter for all sortable elements.
   get defaultOptions() {
     return {
       animation: 500,
     }
   }
+
 }
