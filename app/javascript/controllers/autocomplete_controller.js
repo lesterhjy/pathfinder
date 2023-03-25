@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = [ "field", "latitude", "longitude" ]
 
   connect() {
-    console.log("connected")
+    console.log("autocomplete connected")
   }
 
   initMap() {

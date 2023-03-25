@@ -7,7 +7,7 @@ export default class extends Controller {
   static targets = [ "startDate", "endDate" ]
 
   connect() {
-    console.log("connected")
+    console.log("flatpickr connected")
     flatpickr(this.startDateTarget, {
       minDate: "today",
       // Provide an id for the plugin to work
