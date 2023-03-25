@@ -80,6 +80,11 @@ ul {
   cursor: pointer;
 }
 
+.event-photo-details {
+  display: flex;
+  justify-content: left;
+}
+
 .basic-details {
   display: flex;
   justify-content: space-between;
