@@ -51,7 +51,6 @@ export default class extends Sortable {
   }
 
   onUpdate(event) {
-    console.log("onUpdate")
     super.onUpdate(event)
     const e = new CustomEvent("order-updated")
     window.dispatchEvent(e)
