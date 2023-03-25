@@ -23,7 +23,11 @@
       </div>
     </div>
     <div class="more-info d-none" data-toggle-target="info">
-      <div class="more-event-details">Anything else about the event can put here.</div>
+      <div class="more-event-details">
+        <p style="margin-right: 30px"><%= event.description %></p>
+        <br>
+        <p><strong><a href="<%= event.website %>" target="_blank">Website</a></strong> | <strong>Phone:</strong> <%= event.phone %> </p>
+      </div>
       <div class="modify-event" style="text-align: right">
         <%= link_to edit_trip_event_path(event.trip_id, event) do %>
           <i class="fa-solid fa-pencil"></i>
