@@ -9,7 +9,7 @@ class TripsController < ApplicationController
 
   def show
     # pick the trip's events, order by position, and select only those that the user has selected
-    @events = @trip.events.order(:position).select { |event| event.selected == true }
+    @events = @trip.events.order(:start_time, :position).select { |event| event.selected == true }
     # events for the first day - will show as default on the trip show page
     @first_day_events = @events.group_by { |event| event.start_time.day }.values[0]
     # all events - this is used for the tab info only for now
