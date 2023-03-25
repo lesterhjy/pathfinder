@@ -1,0 +1,12 @@
+<%= simple_form_for [trip, hotel], data: { hotel_form_target: "form",
+action: "submit->hotel-form#send" } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :address %>
+  <%= f.input :start_time, as: :string, input_html: {class: "datetimepicker"} %>
+  <%= f.input :end_time, as: :string, input_html: {class: "datetimepicker"} %>
+  <%= f.input :note %>
+  <div class="modal-footer">
+    <%= f.button :submit, class: "btn" %>
+    <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+  </div>
+<% end %>
