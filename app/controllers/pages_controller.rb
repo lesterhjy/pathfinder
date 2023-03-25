@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[home]
   require "json"
   require "open-uri"
-  skip_before_action :authenticate_user!, only: [ :home ]
 
   def home
     @trip = Trip.new

@@ -1,4 +1,5 @@
 class RecommendationsController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[index]
   require "json"
   require "open-uri"
 

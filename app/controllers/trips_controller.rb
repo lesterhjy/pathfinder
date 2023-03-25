@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[create]
   before_action :set_trip, only: [:show]
 
   def create
