@@ -21,7 +21,9 @@
             <div id="map" data-maps-target="map" data-action="google-maps-callback@window->maps#initMap"></div>
         </div><input type="radio" name="name" />
         <div class="content">
-            <div class="title">Pure CSS Color Tabs 2</div>
+            <div class="recommendation-container">
+              <%= render "recommendations/recommendation_list", recommendations: @recommendations %>
+            </div>
         </div><input type="radio" name="name" />
         <div class="content">
             <div class="title">Pure CSS Color Tabs 3</div>
