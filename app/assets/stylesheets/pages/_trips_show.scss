@@ -80,8 +80,22 @@ ul {
   cursor: pointer;
 }
 
+.event-photo-and-details {
+  display: flex;
+  justify-content: left;
+}
+
+.event-photo {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-size: cover;
+  margin-right: 10px;
+}
+
 .basic-details {
   display: flex;
+  flex-grow: 1;
   justify-content: space-between;
 }
 
@@ -94,6 +108,10 @@ ul {
   a, a:hover {
     color: var(--green)
   }
+}
+
+.more-info {
+  margin-top: 10px;
 }
 
 .tabs {

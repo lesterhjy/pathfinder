@@ -27,7 +27,7 @@ export default class extends Controller {
   }
 
   toggleInfo() {
-    let current_event = event.target.parentElement.parentElement;
+    let current_event = event.target.parentElement.parentElement.parentElement;
     let current_index = this.eventTargets.indexOf(current_event);
     let current_info_target = this.infoTargets[current_index]
     if (current_info_target.classList.contains("d-none")) {
