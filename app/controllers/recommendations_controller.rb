@@ -5,11 +5,11 @@ class RecommendationsController < ApplicationController
   def index
     @trip = Trip.find(params[:trip_id])
     @categories = search_categories
-    @categories.each_value do |categories|
-      categories.each do |category|
-        get_recommendation_details(get_nearby_recommendations(category))
-      end
-    end
+    # @categories.each_value do |categories|
+    #   categories.each do |category|
+    #     get_recommendation_details(get_nearby_recommendations(category))
+    #   end
+    # end
     @recommendations = Event.where(trip_id: params[:trip_id])
   end
 
@@ -57,7 +57,7 @@ class RecommendationsController < ApplicationController
   end
 
   def get_recommendation_details(recommendations_overview)
-    recommendations_overview.first(2).each do |recommendation|
+    recommendations_overview.first(3).each do |recommendation|
       place = {}
       place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
       place_details = JSON.parse(URI.open(place_details_search).read)["result"]
