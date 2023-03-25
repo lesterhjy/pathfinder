@@ -8,9 +8,10 @@ class TripsController < ApplicationController
   end
 
   def show
-    @events = @trip.events.order(:position)
-    @first_day_events = @trip.events.order(:position).group_by { |event| event.start_time.day }.values[0]
-    @events_by_day = @trip.events.order(:start_time, :position).group_by { |event| event.start_time.day }.values
+    @events = @trip.events.order(:position).select { |event| event.selected == true }
+    @first_day_events = @events.group_by { |event| event.start_time.day }.values[0]
+    @events_by_day = @events.sort_by { |e| [e.start_time, e.position] }
+                            .group_by { |event| event.start_time.day }.values
     if params[:day].present?
       @events = @events.select { |event| event.start_time.day == params[:day].to_i }
     end
@@ -23,7 +24,9 @@ class TripsController < ApplicationController
 
   def overview
     @trip = Trip.find(params[:trip_id])
-    @events_by_day = @trip.events.order(:start_time, :position).group_by { |event| event.start_time.day }.values
+    @events = @trip.events.order(:position).select { |event| event.selected == true }
+    @events_by_day = @events.sort_by { |e| [e.start_time, e.position] }
+                            .group_by { |event| event.start_time.day }.values
   end
 
   private
