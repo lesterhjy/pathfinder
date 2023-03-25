@@ -4,13 +4,15 @@ class RecommendationsController < ApplicationController
   require "open-uri"
 
   def index
+    @flight = Flight.new
+    @hotel = Hotel.new
     @trip = Trip.find(params[:trip_id])
     @categories = search_categories
-    @categories.each_value do |categories|
-      categories.each do |category|
-        get_recommendation_details(get_nearby_recommendations(category))
-      end
-    end
+    # @categories.each_value do |categories|
+    #   categories.each do |category|
+    #     get_recommendation_details(get_nearby_recommendations(category))
+    #   end
+    # end
     @recommendations = Event.where(trip_id: params[:trip_id])
   end
 
