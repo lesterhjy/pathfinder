@@ -5,8 +5,7 @@ export default class extends Controller {
   static targets = ["form"]
 
   connect() {
-    console.log(this.element)
-    console.log(this.formTarget)
+    console.log('flight-form connected')
   }
 
   send(event) {

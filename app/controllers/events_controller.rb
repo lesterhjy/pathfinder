@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_trip, only: [:new, :create, :edit, :update, :update_position]
+  before_action :set_trip, only: [:new, :create, :edit, :update, :update_position, :move_lists]
 
   def new
     @event = Event.new
@@ -40,10 +40,21 @@ class EventsController < ApplicationController
     @event.insert_at(new_position)
   end
 
+  def move_lists
+    @event = Event.find(params[:id])
+    @event.start_time = event_params[:start_time]
+    @event.save
+    @event.insert_at(event_params[:position].to_i)
+  end
+
   private
 
   def set_trip
     @trip = Trip.find(params[:trip_id])
+  end
+
+  def move_params
+
   end
 
   def event_params

@@ -1,15 +1,20 @@
 class RecommendationsController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[index]
   require "json"
   require "open-uri"
 
   def index
+    @flight = Flight.new
+    @hotel = Hotel.new
     @trip = Trip.find(params[:trip_id])
     @categories = search_categories
-    # @categories.each_value do |categories|
-    #   categories.each do |category|
-    #     get_recommendation_details(get_nearby_recommendations(category))
-    #   end
-    # end
+    if @trip.events.empty?
+      @categories.each_value do |categories|
+        categories.each do |category|
+          get_recommendation_details(get_nearby_recommendations(category))
+        end
+      end
+    end
     @recommendations = Event.where(trip_id: params[:trip_id])
   end
 
@@ -76,6 +81,7 @@ class RecommendationsController < ApplicationController
           event.photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{place_details["photos"][0]["photo_reference"]}&key=#{ENV["GOOGLE_API_KEY"]}"
           event.rating = place_details["rating"]
           event.review = place_details["reviews"]
+          event.start_time = @trip.start_date #to delete later
           event.description = place_details["editorial_summary"]["overview"].capitalize if place_details.key?("editorial_summary")
         end
       end

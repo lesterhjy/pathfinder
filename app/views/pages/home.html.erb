@@ -1,10 +1,14 @@
 <div class="banner">
-  <div class="container">
+  <div id="load" class="d-none">
+    <h1 class="container d-flex align-items-center justify-content-center">Loading all the best recommendations for you...</h1>
+    <div class="loader"></div>
+  </div>
+  <div id="search" class="container">
     <h1 id="welcome"><span data-controller="typed-js"></span></h1>
     <br>
     <br>
-    <div class="form-container" data-controller="autocomplete flatpickr" data-action="google-maps-callback@window->autocomplete#initMap">
-      <%= simple_form_for(@trip) do |f| %>
+    <div class="form-container" data-controller="autocomplete flatpickr trip-form" data-action="google-maps-callback@window->autocomplete#initMap">
+      <%= simple_form_for @trip, data: { trip_form_target: "form", action: "submit->trip-form#send" } do |f| %>
         <%= f.input :destination, label: false, input_html: {class: "form-control form-control-lg", data: {autocomplete_target: "field", action: "keydown->autocomplete#keydown"}} %>
         <%= f.input :latitude, :as => :hidden, input_html: {data: {autocomplete_target: "latitude"}} %>
         <%= f.input :longitude, :as => :hidden, input_html: {data: {autocomplete_target: "longitude"}} %>

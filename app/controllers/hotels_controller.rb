@@ -1,22 +1,9 @@
 class HotelsController < ApplicationController
-  def new
-    @trip = Trip.find(params[:trip_id])
-    @hotel = Hotel.new
-  end
-
   def create
     @trip = Trip.find(params[:trip_id])
     @hotel = Hotel.new(hotel_params)
     @hotel.trip = @trip
-    respond_to do |format|
-      if @hotel.save
-        format.html { redirect_to @trip }
-        format.text { head :ok }
-      else
-        format.html
-        format.text { render partial: "form", status: :unprocessable_entity, locals: { trip: @trip, hotel: @hotel }, formats: [:html] }
-      end
-    end
+    hotel_save
   end
 
   def edit
@@ -28,6 +15,16 @@ class HotelsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @hotel = Hotel.find(params[:id])
     @hotel.update(hotel_params)
+    hotel_save
+  end
+
+  def destroy
+  end
+
+
+  private
+
+  def hotel_save
     respond_to do |format|
       if @hotel.save
         format.html { redirect_to @trip }
@@ -38,12 +35,6 @@ class HotelsController < ApplicationController
       end
     end
   end
-
-  def destroy
-  end
-
-
-  private
 
   def hotel_params
     params.require(:hotel).permit(:name,
