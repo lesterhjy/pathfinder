@@ -11,6 +11,7 @@ class TripsController < ApplicationController
   def show
     @events = @trip.events.order(:position)
     @clusters = events_clustering(@events)
+    @days = ((@trip.end_date.to_datetime.to_i - @trip.start_date.to_datetime.to_i)/86400)+1
     raise
     @first_day_events = @trip.events.order(:position).group_by { |event| event.start_time.day }.values[0]
     @events_by_day = @trip.events.order(:start_time, :position).group_by { |event| event.start_time.day }.values
@@ -44,9 +45,9 @@ class TripsController < ApplicationController
     clustered_events = []
     events.each do |event|
       coords.append([event.latitude, event.longitude])
-      clustered_events.append(event.id)
+      clustered_events.append(event.name)
     end
-    k = 5 # Number of clusters
+    k = 4 # Number of clusters
     kmeans = KMeansClusterer.run k, coords, labels: clustered_events, runs: 3
     clusters = []
     kmeans.clusters.each do |cluster|
@@ -55,8 +56,8 @@ class TripsController < ApplicationController
     clusters
   end
 
-  def trip_creation(clusters)
-    clusters.each do |cluster|
-    end
+  def trip_creation(number_of_days)
+    trip = []
+    selected_events = Events.where(trip_id: @trip.id AND selected: true)
   end
 end
