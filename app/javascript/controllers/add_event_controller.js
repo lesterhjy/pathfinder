@@ -18,6 +18,6 @@ export default class extends Controller {
       .then(response => response.text())
       .then((data) => {
       })
-    this.addTarget.outerHTML = "<p class='btn-ghost'>Added!</p>"
+    this.addTarget.outerHTML = "<button class='btn-ghost'>Added!</button>"
   }
 }

@@ -1,19 +1,26 @@
-<div class="container">
-  <div>
-    <h1>Hello explorer! Choose some recommendations to get started.</h1>
-    <p>If you're new to this city, there's a good chance that you aren't familiar with its attractions. So we've gone ahead and picked out a few places that most people are interested in. Select as many or as little as you like, and we'll populate the rest of your trip for you.</p>
-  </div>
-  <div>
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdropFlight">
-      Add Flight Details
-    </button>
-    <%= render "flights/modal", trip: @trip, flight: @flight %>
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdropHotel">
-      Add Hotel Details
-    </button>
-    <%= render "hotels/modal", trip: @trip, flight: @hotel %>
-  </div>
-  <div class="recommendation-container">
-    <%= render "recommendation_list", recommendations: @recommendations %>
+<div class="background">
+  <div class="container">
+    <div>
+      <h1>Hello explorer! Choose some recommendations to get started.</h1>
+      <p>If you're new to this city, there's a good chance that you aren't familiar with its attractions. So we've gone ahead and picked out a few places that most people are interested in. Select as many or as little as you like, and we'll populate the rest of your trip for you.</p>
+    </div>
+    <div>
+      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdropFlight">
+        Add Flight Details
+      </button>
+      <%= render "flights/modal", trip: @trip, flight: @flight %>
+      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdropHotel">
+        Add Hotel Details
+      </button>
+      <%= render "hotels/modal", trip: @trip, flight: @hotel %>
+      <%= link_to trip_path(params[:trip_id]) do %>
+        <button type="button" class="btn">
+        Generate Trip!
+        </button>
+      <% end %>
+    </div>
+    <div class="recommendation-container">
+      <%= render "recommendation_list", recommendations: @recommendations %>
+    </div>
   </div>
 </div>

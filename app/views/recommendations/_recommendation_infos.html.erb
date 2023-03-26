@@ -1,13 +1,19 @@
 <% if categories[:shopping].any? { |type| event["category"].include?(type)} %>
   <div class="recommendation-card recommendation-card-shopping" data-controller="add-event" data-add-event-target="card">
+    <div class="recommendation-card-infos">
+      <h2><i class="fa-solid fa-store"></i><%= event["name"] %></h2>
+    </div>
 <% elsif categories[:food].any? { |type| event["category"].include?(type)} %>
   <div class="recommendation-card recommendation-card-food" data-controller="add-event" data-add-event-target="card">
+    <div class="recommendation-card-infos">
+      <h2><i class="fa-solid fa-utensils"></i><%= event["name"] %></h2>
+    </div>
 <% else %>
   <div class="recommendation-card recommendation-card-attraction" data-controller="add-event" data-add-event-target="card">
+    <div class="recommendation-card-infos">
+      <h2><i class="fa-solid fa-mountain-city"></i><%= event["name"] %></h2>
+    </div>
 <% end %>
-  <div class="recommendation-card-infos">
-    <h2><%= event["name"] %></h2>
-  </div>
   <img src="<%= event["photo"] %>" />
   <div class="recommendation-card-infos">
     <p class="recommendation-description"><%= event["description"] %></p>
