@@ -1,8 +1,8 @@
 .recommendation-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 16px;
-  margin-top: 20px;
+  grid-gap: 40px;
+  margin-top: 40px;
 }
 
 .recommendation-card {
@@ -10,6 +10,11 @@
   overflow: hidden;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 10px;
+  transition: all ease 0.5s;
+}
+
+.recommendation-card:hover {
+  transform: scale(1.05);
 }
 
 .recommendation-card-food {
@@ -58,6 +63,10 @@
   text-align: justify;
   padding: 15px;
   position: relative;
+}
+
+.recommendation-card-infos i {
+  margin-right: 10px
 }
 
 .recommendation-description {
