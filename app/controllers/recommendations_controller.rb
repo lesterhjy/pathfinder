@@ -21,12 +21,7 @@ class RecommendationsController < ApplicationController
   private
 
   def search_categories
-    { food: ["bar",
-             "cafe",
-             "bakery",
-             "restaurant",
-             "night_club"],
-      shopping: ["book_store",
+    { shopping: ["book_store",
                  "electronics_store",
                  "clothing_store",
                  "shoe_store",
@@ -43,12 +38,17 @@ class RecommendationsController < ApplicationController
                    "zoo",
                    "park",
                    "art_gallery",
-                   "tourist_attraction"] }
+                   "tourist_attraction"],
+      food: ["bar",
+             "cafe",
+             "bakery",
+             "restaurant",
+             "night_club"], }
   end
 
   def get_nearby_recommendations(category)
     location = "#{@trip.latitude}%2C#{@trip.longitude}"
-    radius = '30000'
+    radius = '50000'
 
     nearby_search = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{location}&radius=#{radius}&type=#{category}&key=#{ENV["GOOGLE_API_KEY"]}")
     nearby_search_results = JSON.parse(URI.open(nearby_search).read)
@@ -62,12 +62,11 @@ class RecommendationsController < ApplicationController
   end
 
   def get_recommendation_details(recommendations_overview)
-    recommendations_overview.first(3).each do |recommendation|
-      place = {}
-      place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
-      place_details = JSON.parse(URI.open(place_details_search).read)["result"]
-      if place_details.key?("photos")
-        Event.find_or_create_by(source_id: place_details["place_id"]) do |event|
+    recommendations_overview.first(8).each do |recommendation|
+      Event.find_or_create_by(source_id: recommendation) do |event|
+        place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
+        place_details = JSON.parse(URI.open(place_details_search).read)["result"]
+        if place_details.key?("photos")
           event.trip = @trip
           event.name = place_details["name"]
           event.source = 'google'

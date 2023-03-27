@@ -10,10 +10,12 @@ class TripsController < ApplicationController
   end
 
   def show
+    # filtering all events associated with the trip
+    @events = @trip.events.order(:start_time, :position)
+    # geoclustering events
     @clusters = events_clustering(@events)
-    @days = ((@trip.end_date.to_datetime.to_i - @trip.start_date.to_datetime.to_i)/86400)+1
-    # pick the trip's events, order by position, and select only those that the user has selected
-    @events = @trip.events.order(:start_time, :position).select { |event| (event.selected == true) and event.start_time }
+    # generating itinerary - flag is turned to "false" by default but will flip to "true" when event_generation is called once
+    event_generation
     # events for the first day - will show as default on the trip show page
     @first_day_events = @events.group_by { |event| event.start_time.day }.values[0]
     # all events - this is used for the tab info only for now
@@ -54,19 +56,33 @@ class TripsController < ApplicationController
     clustered_events = []
     events.each do |event|
       coords.append([event.latitude, event.longitude])
-      clustered_events.append(event.name)
+      clustered_events.append(event.id)
     end
-    k = 4 # Number of clusters
+    k = 5 # Number of clusters
     kmeans = KMeansClusterer.run k, coords, labels: clustered_events, runs: 3
     clusters = []
     kmeans.clusters.each do |cluster|
-      clusters.append(cluster.points.map(&:label).join(", "))
+      clusters.append(cluster.points.map(&:label))
     end
     clusters
   end
 
-  def trip_creation(number_of_days)
-    trip = []
-    selected_events = Events.where(trip_id: @trip.id AND selected: true)
+  def event_generation
+    selected_events = @events.where(selected: true).pluck(:id)
+
+    cluster_number = 0
+    date = @trip.start_date.to_datetime
+    while cluster_number < @clusters.length
+      cluster = @clusters[cluster_number]
+      if cluster.intersection(selected_events)
+        clustered_selected_events = cluster.intersection(selected_events)
+        clustered_selected_events.each do |event_id|
+          event = Event.find(event_id)
+          event.update(start_time: date)
+        end
+      end
+      date += 1
+      cluster_number += 1
+    end
   end
 end
