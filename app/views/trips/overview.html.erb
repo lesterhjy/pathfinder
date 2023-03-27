@@ -20,6 +20,7 @@
           data-sortable-resource-name-value="event"
           data-date="<%= events[0].start_time %>"
           data-sortable-handle-value=".handle"
+          data-highest-position="<%= @highest_position %>"
           data-action="order-updated@window->sortable#updatePositions">
         <% events.each_with_index do |event, index| %>
           <%= render "event", event: event, index: index %>
