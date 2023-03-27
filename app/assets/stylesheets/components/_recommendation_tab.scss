@@ -1,7 +1,7 @@
 .slidetab-content {
   // margin-left: 30px;
-  display: grid;
-  grid-template-rows: auto 1fr;
+  // display: grid;
+  // grid-template-rows: auto 1fr;
   overflow: auto;
 }
 
@@ -15,4 +15,20 @@
   cursor: pointer;
   width: 500px;
   height: 80px;
+}
+
+.slidetab-details-basic {
+  display: flex;
+  // flex-grow: 1;
+  justify-content: space-between;
+}
+
+.slidetab-container {
+  --bs-gutter-x: 6rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-right: auto;
+  margin-left: auto;
 }

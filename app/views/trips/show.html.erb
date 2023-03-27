@@ -16,48 +16,44 @@
 
     </div>
 
-    <div class="slides"><input type="radio" name="name" checked="checked" />
+    <div class="slides">
+      <input type="radio" name="name" checked="checked" />
         <div class="">
             <div id="map" data-maps-target="map" data-action="google-maps-callback@window->maps#initMap"></div>
-        </div><input type="radio" name="name" />
-        <div class="content slidetab-content">
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-          <div class="slidetab-details">
-          </div>
-        </div><input type="radio" name="name" />
-        <div class="content">
-            <div class="title">Pure CSS Color Tabs 3</div>
-        </div><input type="radio" name="name" />
-        <div class="content">
-            <div class="title">Pure CSS Color Tabs 4</div>
         </div>
+
+      <input type="radio" name="name" />
+      <div class="content slidetab-content">
+        <% @testEvents.each do |te| %>
+          <div class="slidetab-details">
+            <div class="slidetab-details-basic">
+                <p style="font-weight: bold"><%= te.name %></p>
+                <%= te.address %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <input type="radio" name="name" />
+      <div class="content">
+          <div class="title">Pure CSS Color Tabs 3</div>
+      </div>
+
+      <input type="radio" name="name" />
+      <div class="content">
+        <div class="slidetab-container">
+          <%= simple_form_for([@trip, @event]) do |f| %>
+            <%= f.input :name %>
+            <%= f.input :address, input_html: {data: {new_events_target: "address"}},
+                                  wrapper_html: {data: {controller: "new-events",
+                                                        new_events_api_key_value: ENV["GOOGLE_API_KEY"]}} %>
+            <%= f.input :start_time, as: :string, input_html: {class: "datetimepicker"} %>
+            <%= f.input :end_time, as: :string, input_html: {class: "datetimepicker"} %>
+            <%= f.input :note, as: :hidden, input_html: { value: "self-created" } %>
+            <%= f.button :submit, class: "btn" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -9,6 +9,8 @@ class TripsController < ApplicationController
   end
 
   def show
+    @testEvents = Event.where(trip: @trip, note: 'self-created')
+    @event = Event.new
     # @categories = search_categories
     # @categories.each_value do |categories|
     #   categories.each do |category|
