@@ -16,6 +16,8 @@
       <div class="more-event-details">
         <p style="margin-right: 30px; margin-bottom: 10px;"><%= event.description %></p>
         <p><strong><a href="<%= event.website %>" target="_blank">Website</a></strong> | <strong>Phone:</strong> <%= event.phone %> </p>
+        <br>
+        <p><%= event.note if event.note %></p>
       </div>
       <div class="modify-event" style="text-align: right">
         <i class="fa-solid fa-pencil" data-action="click->edit-event#displayForm"></i>
@@ -28,9 +30,10 @@
     <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
       <%= f.input :name %>
       <%= f.input :address %>
-      <%= f.input :description %>
+      <%= f.input :description, as: :text %>
       <%= f.input :website %>
       <%= f.input :phone %>
+      <%= f.input :note, as: :text %>
       <%= f.button :submit, class: "btn" %>
     <% end %>
   </div>
