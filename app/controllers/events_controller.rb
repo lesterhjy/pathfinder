@@ -74,6 +74,7 @@ class EventsController < ApplicationController
                                   :selected,
                                   :start_time,
                                   :end_time,
+                                  :note,
                                   :position)
   end
 

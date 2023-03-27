@@ -36,8 +36,16 @@
       </div>
 
       <input type="radio" name="name" />
-      <div class="content">
-          <div class="title">Pure CSS Color Tabs 3</div>
+      <div class="content slidetab-content">
+        <% @self_created.each do |sc| %>
+          <div class="slidetab-details">
+            <div class="slidetab-details-basic">
+                <p style="font-weight: bold; padding:0; margin:0;"><%= sc.name %></p>
+                <%= sc.address %>
+                <p><em><%= sc.description %></em></p>
+            </div>
+          </div>
+        <% end %>
       </div>
 
       <input type="radio" name="name" />
