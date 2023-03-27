@@ -21,12 +21,7 @@ class RecommendationsController < ApplicationController
   private
 
   def search_categories
-    { food: ["bar",
-             "cafe",
-             "bakery",
-             "restaurant",
-             "night_club"],
-      shopping: ["book_store",
+    { shopping: ["book_store",
                  "electronics_store",
                  "clothing_store",
                  "shoe_store",
@@ -43,12 +38,17 @@ class RecommendationsController < ApplicationController
                    "zoo",
                    "park",
                    "art_gallery",
-                   "tourist_attraction"] }
+                   "tourist_attraction"],
+      food: ["bar",
+             "cafe",
+             "bakery",
+             "restaurant",
+             "night_club"], }
   end
 
   def get_nearby_recommendations(category)
     location = "#{@trip.latitude}%2C#{@trip.longitude}"
-    radius = '30000'
+    radius = '50000'
 
     nearby_search = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{location}&radius=#{radius}&type=#{category}&key=#{ENV["GOOGLE_API_KEY"]}")
     nearby_search_results = JSON.parse(URI.open(nearby_search).read)
