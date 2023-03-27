@@ -58,7 +58,7 @@
                                                         new_events_api_key_value: ENV["GOOGLE_API_KEY"]}} %>
             <%= f.input :start_time, as: :string, input_html: {class: "datetimepicker"} %>
             <%= f.input :end_time, as: :string, input_html: {class: "datetimepicker"} %>
-            <%= f.input :note, as: :hidden, input_html: { value: "self-created" } %>
+            <%= f.input :source, as: :hidden, input_html: { value: "self" } %>
             <%= f.button :submit, class: "btn" %>
           <% end %>
         </div>
