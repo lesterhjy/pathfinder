@@ -26,8 +26,6 @@ export default class extends Sortable {
     })
   }
 
-  // You can override the `onUpdate` method here.
-
   remove(event) {
     const newDate = event.to.dataset.date
     const url = event.item.dataset.sortableMoveUrl
