@@ -29,13 +29,18 @@ export default class extends Sortable {
   remove(event) {
     const newDate = event.to.dataset.date
     const url = event.item.dataset.sortableMoveUrl
-    const oldPosition = event.item.dataset.position
+    const oldPosition = parseInt(event.item.dataset.position, 10)
     let newPosition
 
     if (event.item.nextElementSibling) { // there is something under the item that was moved, so take ref from that
       newPosition = parseInt(event.item.nextElementSibling.dataset.position, 10)
+      console.log(newPosition)
     } else { // there is nothing under the item that was moved, so take ref from the item above
       newPosition = parseInt(event.item.previousElementSibling.dataset.position, 10) + 1
+    }
+
+    if (newPosition > oldPosition) {
+      newPosition -= 1;
     }
 
     fetch(url, {
@@ -52,25 +57,6 @@ export default class extends Sortable {
       const e = new CustomEvent("order-updated")
       window.dispatchEvent(e)
     })
-
-    // if it was the last thing that was swapped out, do another patch
-    if (newPosition == event.item.parentElement.dataset.highestPosition) {
-      console.log("made it here")
-      fetch(url, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-Token": document.head.children["csrf-token"]["content"],
-        },
-        body: JSON.stringify({
-          start_time: newDate,
-          position: newPosition - 1
-        })
-      }).then(response => {
-        const e = new CustomEvent("order-updated")
-        window.dispatchEvent(e)
-      })
-    }
 
   }
 
