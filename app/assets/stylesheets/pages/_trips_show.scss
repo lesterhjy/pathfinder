@@ -161,6 +161,16 @@ ul {
   padding: 0 10px;
 }
 
+.inline-edit {
+  border-radius: 20px;
+  font-size: 13px;
+  width: 100%;
+}
+
+.address:hover {
+  text-decoration: underline;
+}
+
 #map {
   height: 100vh;
   position: sticky;

@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="maps"
 export default class extends Controller {
-  static targets = ["map", "event", "longitude", "latitude"];
+  static targets = ["map", "event", "longitude", "latitude", "address"];
 
   connect() {
     this.labels = "123456789";
@@ -48,8 +48,7 @@ export default class extends Controller {
   }
 
   singleEvent() {
-
-    let current_index = this.eventTargets.indexOf(event.target.parentElement);
+    let current_index = this.addressTargets.indexOf(event.target);
     let latitude = parseFloat(this.latitudeTargets[current_index].innerText)
     let longitude = parseFloat(this.longitudeTargets[current_index].innerText)
     this.map = new google.maps.Map(this.mapTarget, {

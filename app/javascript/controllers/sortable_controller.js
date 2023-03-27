@@ -26,14 +26,23 @@ export default class extends Sortable {
     })
   }
 
-  // You can override the `onUpdate` method here.
-
   remove(event) {
     const newDate = event.to.dataset.date
     const url = event.item.dataset.sortableMoveUrl
-    const oldPosition = event.item.dataset.position
-    const newPosition = event.item.nextElementSibling.dataset.position
-    console.log(oldPosition, newPosition)
+    const oldPosition = parseInt(event.item.dataset.position, 10)
+    let newPosition
+
+    if (event.item.nextElementSibling) { // there is something under the item that was moved, so take ref from that
+      newPosition = parseInt(event.item.nextElementSibling.dataset.position, 10)
+      console.log(newPosition)
+    } else { // there is nothing under the item that was moved, so take ref from the item above
+      newPosition = parseInt(event.item.previousElementSibling.dataset.position, 10) + 1
+    }
+
+    if (newPosition > oldPosition) {
+      newPosition -= 1;
+    }
+
     fetch(url, {
       method: "PATCH",
       headers: {
@@ -48,6 +57,7 @@ export default class extends Sortable {
       const e = new CustomEvent("order-updated")
       window.dispatchEvent(e)
     })
+
   }
 
   onUpdate(event) {

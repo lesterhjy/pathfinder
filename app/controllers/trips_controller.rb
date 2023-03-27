@@ -1,6 +1,7 @@
 class TripsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[create]
   before_action :set_trip, only: [:show]
+  require "kmeans-clusterer"
 
   def create
     @trip = Trip.new(trip_params)
@@ -22,7 +23,13 @@ class TripsController < ApplicationController
     @recommendations = Event.where(trip: @trip, note: [nil, ""], selected: nil)
     @self_created = Event.where(trip: @trip, note: 'self-created')
     # pick the trip's events, order by position, and select only those that the user has selected
-    @events = @trip.events.order(:start_time, :position).select { |event| (event.selected == true) and event.start_time }
+    # @events = @trip.events.order(:start_time, :position).select { |event| (event.selected == true) and event.start_time }
+    # filtering all events associated with the trip
+    @events = @trip.events.order(:start_time, :position)
+    # geoclustering events
+    @clusters = events_clustering(@events)
+    # generating itinerary - flag is turned to "false" by default but will flip to "true" when event_generation is called once
+    event_generation
     # events for the first day - will show as default on the trip show page
     @first_day_events = @events.group_by { |event| event.start_time.day }.values[0]
     # all events - this is used for the tab info only for now
@@ -46,6 +53,7 @@ class TripsController < ApplicationController
     @events = @trip.events.order(:position).select { |event| event.selected == true }
     @events_by_day = @events.sort_by { |e| [e.start_time, e.position] }
                             .group_by { |event| event.start_time.day }.values
+    @highest_position = @events.last.position
   end
 
   private
@@ -124,6 +132,41 @@ class TripsController < ApplicationController
           event.save
         end
       end
+    end
+  end
+
+  def events_clustering(events)
+    coords = []
+    clustered_events = []
+    events.each do |event|
+      coords.append([event.latitude, event.longitude])
+      clustered_events.append(event.id)
+    end
+    k = 5 # Number of clusters
+    kmeans = KMeansClusterer.run k, coords, labels: clustered_events, runs: 3
+    clusters = []
+    kmeans.clusters.each do |cluster|
+      clusters.append(cluster.points.map(&:label))
+    end
+    clusters
+  end
+
+  def event_generation
+    selected_events = @events.where(selected: true).pluck(:id)
+
+    cluster_number = 0
+    date = @trip.start_date.to_datetime
+    while cluster_number < @clusters.length
+      cluster = @clusters[cluster_number]
+      if cluster.intersection(selected_events)
+        clustered_selected_events = cluster.intersection(selected_events)
+        clustered_selected_events.each do |event_id|
+          event = Event.find(event_id)
+          event.update(start_time: date)
+        end
+      end
+      date += 1
+      cluster_number += 1
     end
   end
 end
