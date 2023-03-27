@@ -5,7 +5,7 @@ $tab-color4: #80d6ff;
 $tab-width: 24px;
 
 .slides {
-  height: 100vh;
+  // height: 100%;
   position: relative;
   overflow: hidden;
 }
@@ -39,7 +39,7 @@ input[type="radio"] {
 
 .content {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   flex-flow: column;
   position: absolute;

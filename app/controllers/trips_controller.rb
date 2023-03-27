@@ -9,7 +9,7 @@ class TripsController < ApplicationController
   end
 
   def show
-    @testEvents = Event.where(trip: @trip, note: 'self-created')
+    # @testEvents = Event.where(trip: @trip, note: 'self-created')
     @event = Event.new
     # @categories = search_categories
     # @categories.each_value do |categories|
@@ -17,7 +17,7 @@ class TripsController < ApplicationController
     #     get_recommendation_details(get_nearby_recommendations(category))
     #   end
     # end
-    # @recommendations = Event.where(trip: @trip)
+    @recommendations = Event.where(trip: @trip, note: [nil, ""])
     # pick the trip's events, order by position, and select only those that the user has selected
     @events = @trip.events.order(:start_time, :position).select { |event| (event.selected == true) and event.start_time }
     # events for the first day - will show as default on the trip show page
