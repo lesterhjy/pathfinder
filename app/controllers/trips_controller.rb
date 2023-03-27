@@ -12,12 +12,14 @@ class TripsController < ApplicationController
     # @testEvents = Event.where(trip: @trip, note: 'self-created')
     @event = Event.new
     # @categories = search_categories
-    # @categories.each_value do |categories|
-    #   categories.each do |category|
-    #     get_recommendation_details(get_nearby_recommendations(category))
+    # if @trip
+    #   @categories.each_value do |categories|
+    #     categories.each do |category|
+    #       get_recommendation_details(get_nearby_recommendations(category))
+    #     end
     #   end
     # end
-    @recommendations = Event.where(trip: @trip, note: [nil, ""])
+    @recommendations = Event.where(trip: @trip, note: [nil, ""], selected: nil)
     # pick the trip's events, order by position, and select only those that the user has selected
     @events = @trip.events.order(:start_time, :position).select { |event| (event.selected == true) and event.start_time }
     # events for the first day - will show as default on the trip show page
@@ -98,11 +100,11 @@ class TripsController < ApplicationController
 
   def get_recommendation_details(recommendations_overview)
     recommendations_overview.first(2).each do |recommendation|
-      place = {}
-      place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
-      place_details = JSON.parse(URI.open(place_details_search).read)["result"]
-      if place_details.key?("photos")
-        Event.find_or_create_by(source_id: place_details["place_id"]) do |event|
+      if Event.where(trip_id: @trip.id, source_id: recommendation).empty?
+        place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
+        place_details = JSON.parse(URI.open(place_details_search).read)["result"]
+        if place_details.key?("photos")
+          event = Event.new
           event.trip = @trip
           event.name = place_details["name"]
           event.source = 'google'
@@ -118,10 +120,9 @@ class TripsController < ApplicationController
           event.review = place_details["reviews"]
           event.start_time = @trip.start_date #to delete later
           event.description = place_details["editorial_summary"]["overview"].capitalize if place_details.key?("editorial_summary")
+          event.save
         end
       end
     end
   end
-
-
 end
