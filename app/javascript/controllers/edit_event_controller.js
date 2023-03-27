@@ -28,9 +28,13 @@ export default class extends Controller {
     })
     .then(response => response.text())
     .then((data) => {
+      let display = this.infoTarget.classList.contains('d-none')
+      console.log(display)
       this.cardTarget.innerHTML = data;
-      this.infoTarget.classList.remove('d-none');
-      this.signTarget.innerText = '–'
+      if (display == false) {
+        this.infoTarget.classList.remove('d-none');
+        this.signTarget.innerText = '–'
+      }
     })
   }
 }

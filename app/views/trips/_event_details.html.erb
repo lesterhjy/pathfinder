@@ -11,11 +11,11 @@
             <%= f.input :name, input_html: {class: "inline-edit"} %>
           <% end %>
 
-          <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
+          <p class="address" data-action="dblclick->edit-event#displayForm click->maps#singleEvent" data-edit-event-target="field" data-maps-target="address">
             <%= event.address %>
           </p>
           <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-            <%= f.input :address %>
+            <%= f.input :address, input_html: {class: "inline-edit"} %>
           <% end %>
 
         </div>
@@ -36,19 +36,19 @@
           <%= event.description %>
         </p>
         <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-          <%= f.input :description %>
+          <%= f.input :description, input_html: {class: "inline-edit"} %>
         <% end %>
 
         <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field"><strong><a href="<%= event.website %>" target="_blank">Website</a></strong></p>
         <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-          <%= f.input :website %>
+          <%= f.input :website, input_html: {class: "inline-edit"} %>
         <% end %>
 
         <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
           <strong>Phone:</strong> <%= event.phone %>
         </p>
         <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-          <%= f.input :phone  %>
+          <%= f.input :phone, input_html: {class: "inline-edit"}  %>
         <% end %>
 
         <br>
@@ -60,7 +60,7 @@
           <% end %>
         </p>
         <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-          <%= f.input :note %>
+          <%= f.input :note, input_html: {class: "inline-edit"} %>
         <% end %>
 
       </div>

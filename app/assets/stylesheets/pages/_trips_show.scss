@@ -163,6 +163,12 @@ ul {
 
 .inline-edit {
   border-radius: 20px;
+  font-size: 13px;
+  width: 100%;
+}
+
+.address:hover {
+  text-decoration: underline;
 }
 
 #map {
