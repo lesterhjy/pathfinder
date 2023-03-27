@@ -8,37 +8,11 @@
   data-sortable-move-url="<%= move_lists_path(event.trip_id, event) %>"
   >
 
-  <div class="event-details" data-maps-target="event" data-directions-target="event" data-toggle-target="event" data-action="click->maps#singleEvent" data-index=<%= index %>>
+  <div class="event-details" data-controller="edit-event" data-maps-target="event" data-directions-target="event" data-toggle-target="event" data-index=<%= index %>>
     <div class="position" style="text-align: right" data-sortable-target="position"><h3><%= index + 1 %></h3></div>
-    <div class="event-photo-and-details">
-      <div class="event-photo" style="background-image: url('<%= event.photo %>')"></div>
-      <div class="basic-details">
-        <div class="name-address">
-          <p style="font-weight: bold"><%= event.name %></p>
-          <p><%= event.address %></p>
-        </div>
-        <p class="info-toggle" data-action="click->toggle#toggleInfo">+</p>
-      </div>
-      <div class="coordinates d-none">
-        <p data-maps-target="latitude"><%= event.latitude%></p>
-        <p data-maps-target="longitude"><%= event.longitude %></p>
-      </div>
+    <div class="event-inner-card" data-edit-event-target="card">
+      <%= render "event_details", event: event %>
     </div>
-    <div class="more-info d-none" data-toggle-target="info">
-      <div class="more-event-details">
-        <p style="margin-right: 30px; margin-bottom: 10px;"><%= event.description %></p>
-        <p><strong><a href="<%= event.website %>" target="_blank">Website</a></strong> | <strong>Phone:</strong> <%= event.phone %> </p>
-      </div>
-      <div class="modify-event" style="text-align: right">
-        <%= link_to edit_trip_event_path(event.trip_id, event) do %>
-          <i class="fa-solid fa-pencil"></i>
-        <% end %> |
-        <%= link_to event_path(event), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-          <i class="fa-solid fa-trash-can"></i>
-        <% end %>
-      </div>
-    </div>
-  </div>
 
   <div class="event-directions" data-directions-target="directions">
     <div class="arrow" data-directions-target="arrow"></div>

@@ -39,6 +39,7 @@ class TripsController < ApplicationController
     @events = @trip.events.order(:position).select { |event| event.selected == true }
     @events_by_day = @events.sort_by { |e| [e.start_time, e.position] }
                             .group_by { |event| event.start_time.day }.values
+    @highest_position = @events.last.position
   end
 
   private
