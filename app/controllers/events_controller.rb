@@ -21,7 +21,7 @@ class EventsController < ApplicationController
     @event.update(event_params)
     respond_to do |format|
       format.html { redirect_to trip_path(@trip) }
-      format.text { render partial: "recommendations/recommendation_list", locals: { recommendations: @recommendations }, formats: [:html] }
+      format.text { render partial: "trips/event_details", locals: { event: @event }, formats: [:html] }
     end
   end
 

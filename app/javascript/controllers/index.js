@@ -13,6 +13,9 @@ application.register("autocomplete", AutocompleteController)
 import DirectionsController from "./directions_controller"
 application.register("directions", DirectionsController)
 
+import EditEventController from "./edit_event_controller"
+application.register("edit-event", EditEventController)
+
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 
