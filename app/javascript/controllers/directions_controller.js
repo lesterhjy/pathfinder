@@ -37,8 +37,9 @@ export default class extends Controller {
 
             service.getDistanceMatrix(
             {
-              origins: [{'placeId': origin_placeId}],
-              destinations: [{'placeId': destination_placeId}],
+              // alternative: {'placeId': origin_placeId}
+              origins: [{lat: origin_latitude, lng: origin_longitude}],
+              destinations: [{lat: destination_latitude, lng: destination_longitude}],
               travelMode: mode,
             },
 
@@ -69,6 +70,7 @@ export default class extends Controller {
                   </a>`
               } else if (mode === 'WALKING') {
                 icon = '<i class="fa-solid fa-person-hiking"></i>'
+                console.log(origin_placeId, destination_placeId)
                 this.walkingTargets[index].innerHTML =
                   `<a href="https://www.google.com/maps/dir/?api=1&origin=origin&origin_place_id=${origin_placeId}&destination=destination&destination_place_id=${destination_placeId}&&travelmode=walking" target="_blank">
                     <p class="direction">
