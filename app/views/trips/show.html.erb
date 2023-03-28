@@ -24,12 +24,12 @@
 
       <input type="radio" name="name" />
       <div class="content slidetab-content">
-        <% @recommendations.each do |te| %>
+        <% @recommendations.each do |recommendation| %>
           <div class="slidetab-details">
             <div class="slidetab-details-basic">
-                <p style="font-weight: bold; padding:0; margin:0;"><%= te.name %></p>
-                <%= te.address %>
-                <p><em><%= te.description %></em></p>
+                <p style="font-weight: bold; padding:0; margin:0;"><%= recommendation.name %></p>
+                <%= recommendation.address %>
+                <p><em><%= recommendation.description %></em></p>
             </div>
           </div>
         <% end %>
