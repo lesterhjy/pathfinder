@@ -1,6 +1,6 @@
 <div class="banner">
   <div id="load" class="d-none">
-    <h1 class="container d-flex align-items-center justify-content-center">Loading all the best recommendations for you...</h1>
+    <h1 class="container d-flex align-items-center justify-content-center"><span data-controller="loading-controller"></span></h1>
     <div class="loader"></div>
   </div>
   <div id="search" class="container">
@@ -9,15 +9,15 @@
     <br>
     <div class="form-container" data-controller="autocomplete flatpickr trip-form" data-action="google-maps-callback@window->autocomplete#initMap">
       <%= simple_form_for @trip, data: { trip_form_target: "form", action: "submit->trip-form#send" } do |f| %>
-        <%= f.input :destination, label: false, input_html: {class: "form-control form-control-lg", data: {autocomplete_target: "field", action: "keydown->autocomplete#keydown"}} %>
+        <%= f.input :destination, label: "Which city would you like to explore?", input_html: {class: "form-control form-control-lg", data: {autocomplete_target: "field", action: "keydown->autocomplete#keydown"}} %>
         <%= f.input :latitude, :as => :hidden, input_html: {data: {autocomplete_target: "latitude"}} %>
         <%= f.input :longitude, :as => :hidden, input_html: {data: {autocomplete_target: "longitude"}} %>
         <div class="row">
           <div class="col">
-            <%= f.input :start_date, label: false, input_html: {placeholder: "Start date", class: "form-control form-control-sm", data: {flatpickr_target: "startDate"}}, as: :string %>
+            <%= f.input :start_date, label:  "Start date", input_html: {class: "form-control form-control-sm", data: {flatpickr_target: "startDate"}}, as: :string %>
           </div>
           <div class ="col">
-            <%= f.input :end_date, label: false, input_html: {placeholder: "End date", class: "form-control form-control-sm", data: { flatpickr_target: "endDate"}, id: 'end_date' }, as: :string %>
+            <%= f.input :end_date, label: "End date", input_html: {class: "form-control form-control-sm", data: { flatpickr_target: "endDate"}, id: 'end_date' }, as: :string %>
           </div>
         <div>
         <%= f.button :submit, class: "btn" %>

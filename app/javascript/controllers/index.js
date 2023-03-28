@@ -28,6 +28,9 @@ application.register("hello", HelloController)
 import HotelFormController from "./hotel_form_controller"
 application.register("hotel-form", HotelFormController)
 
+import LoadingController from "./loading_controller"
+application.register("loading", LoadingController)
+
 import MapsController from "./maps_controller"
 application.register("maps", MapsController)
 
