@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="maps"
 export default class extends Controller {
-  static targets = ["map", "event", "longitude", "latitude", "address"];
+  static targets = ["map", "event", "longitude", "latitude", "address", "placeId"];
 
   connect() {
     this.labels = "123456789";
@@ -49,17 +49,26 @@ export default class extends Controller {
 
   singleEvent() {
     let current_index = this.addressTargets.indexOf(event.target);
-    let latitude = parseFloat(this.latitudeTargets[current_index].innerText)
-    let longitude = parseFloat(this.longitudeTargets[current_index].innerText)
-    this.map = new google.maps.Map(this.mapTarget, {
-      center: {lat: latitude, lng: longitude },
-      zoom: 18,
-      mapId: 'ad11ac97853b71ad',
-    });
-    new google.maps.Marker({
-      map: this.map,
-      position: {lat: latitude, lng: longitude },
-    });
+    new google.maps.Geocoder()
+    .geocode({ placeId: this.placeIdTargets[current_index].innerText })
+    .then(({ results }) => {
+      if (results[0]) {
+        this.map = new google.maps.Map(this.mapTarget, {
+          center: results[0].geometry.location,
+          zoom: 18,
+          mapId: 'ad11ac97853b71ad',
+        });
+        const marker = new google.maps.Marker({
+          map: this.map,
+          position: results[0].geometry.location,
+        });
+        const infowindow = new google.maps.InfoWindow()
+        console.log(results[0])
+        infowindow.setContent(results[0].formatted_address);
+        infowindow.open(this.map, marker);
+      }
+    })
   }
+
 
 }
