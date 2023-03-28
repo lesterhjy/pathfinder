@@ -24,8 +24,13 @@ export default class extends Controller {
 
           let origin_latitude = parseFloat(eventTarget.parentElement.dataset.latitude)
           let origin_longitude = parseFloat(eventTarget.parentElement.dataset.longitude)
+          let origin_placeId = eventTarget.parentElement.dataset.placeId
+
+          console.log(eventTarget.parentElement.nextElementSibling.dataset.placeId)
+
           let destination_latitude = parseFloat(eventTarget.parentElement.nextElementSibling.dataset.latitude)
           let destination_longitude = parseFloat(eventTarget.parentElement.nextElementSibling.dataset.longitude)
+          let destination_placeId = eventTarget.parentElement.nextElementSibling.dataset.placeId
 
           const transport = ['DRIVING', 'TRANSIT', 'WALKING']
 
@@ -48,16 +53,32 @@ export default class extends Controller {
 
               if (mode === 'DRIVING') {
                 icon = '<i class="fa-solid fa-car-side"></i>'
-                this.drivingTargets[index].innerHTML = `
-                <p class="direction"><small>${icon} ${duration}</small></p>`
+                this.drivingTargets[index].innerHTML =
+                    `<a href="https://www.google.com/maps/dir/?api=1&origin=origin&origin_place_id=${origin_placeId}&destination=destination&destination_place_id=${destination_placeId}&&travelmode=driving" target="_blank">
+                      <p class="direction">
+                        <small>${icon} ${duration}
+                        </small>
+                      </p>
+                    </a>`
               } else if (mode === 'TRANSIT') {
                 icon = '<i class="fa-solid fa-train-subway"></i>'
-                this.transitTargets[index].innerHTML = `
-                <p class="direction"><small>${icon} ${duration}</small></p>`
+                this.transitTargets[index].innerHTML =
+                  `<a href="https://www.google.com/maps/dir/?api=1&origin=origin&origin_place_id=${origin_placeId}&destination=destination&destination_place_id=${destination_placeId}&&travelmode=transit" target="_blank">
+                    <p class="direction">
+                      <small>${icon} ${duration}
+                      </small>
+                    </p>
+                  </a>`
               } else if (mode === 'WALKING') {
                 icon = '<i class="fa-solid fa-person-hiking"></i>'
-                this.walkingTargets[index].innerHTML = `
-                <p class="direction"><small>${icon} ${duration}</small></p>`
+                console.log(origin_placeId, destination_placeId)
+                this.walkingTargets[index].innerHTML =
+                  `<a href="https://www.google.com/maps/dir/?api=1&origin=origin&origin_place_id=${origin_placeId}&destination=destination&destination_place_id=${destination_placeId}&&travelmode=walking" target="_blank">
+                    <p class="direction">
+                      <small>${icon} ${duration}
+                      </small>
+                    </p>
+                  </a>`
               }
             });
           })
