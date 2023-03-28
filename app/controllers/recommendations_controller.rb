@@ -62,7 +62,7 @@ class RecommendationsController < ApplicationController
   end
 
   def get_recommendation_details(recommendations_overview)
-    recommendations_overview.first(2).each do |recommendation|
+    recommendations_overview.first(1).each do |recommendation|
       if Event.where(trip_id: @trip.id, source_id: recommendation).empty?
         place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
         place_details = JSON.parse(URI.open(place_details_search).read)["result"]

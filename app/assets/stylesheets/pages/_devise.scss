@@ -1,6 +1,6 @@
-// Specific CSS for your home-page
-.banner {
+.background-devise {
   height: 100vh;
+  padding-bottom: 50px;
   background-size: cover;
   background-color: #e8e8e8;
   opacity: 1;
@@ -8,18 +8,16 @@
   background-size: 11px 11px;
 }
 
-.container {
-  padding-top: 30px;
-}
-
-.form-container {
+.devise-form {
   width: 600px;
   margin: 0 auto;
+  font-family: 'Raleway', sans-serif;
 }
 
-#welcome {
-  font-family: 'Raleway', sans-serif;
-  font-size: 110px;
-  color: #ea523b;
-  text-align: center;
+.devise-links a {
+  color: $gray;
+}
+
+.devise-links a:hover {
+  color: $red;
 }
