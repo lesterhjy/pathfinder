@@ -26,8 +26,6 @@ export default class extends Controller {
           let origin_longitude = parseFloat(eventTarget.parentElement.dataset.longitude)
           let origin_placeId = eventTarget.parentElement.dataset.placeId
 
-          console.log(eventTarget.parentElement.nextElementSibling.dataset.placeId)
-
           let destination_latitude = parseFloat(eventTarget.parentElement.nextElementSibling.dataset.latitude)
           let destination_longitude = parseFloat(eventTarget.parentElement.nextElementSibling.dataset.longitude)
           let destination_placeId = eventTarget.parentElement.nextElementSibling.dataset.placeId
@@ -39,8 +37,8 @@ export default class extends Controller {
 
             service.getDistanceMatrix(
             {
-              origins: [{lat: origin_latitude, lng: origin_longitude}],
-              destinations: [{lat: destination_latitude, lng: destination_longitude}],
+              origins: [{'placeId': origin_placeId}],
+              destinations: [{'placeId': destination_placeId}],
               travelMode: mode,
             },
 
@@ -71,7 +69,6 @@ export default class extends Controller {
                   </a>`
               } else if (mode === 'WALKING') {
                 icon = '<i class="fa-solid fa-person-hiking"></i>'
-                console.log(origin_placeId, destination_placeId)
                 this.walkingTargets[index].innerHTML =
                   `<a href="https://www.google.com/maps/dir/?api=1&origin=origin&origin_place_id=${origin_placeId}&destination=destination&destination_place_id=${destination_placeId}&&travelmode=walking" target="_blank">
                     <p class="direction">
