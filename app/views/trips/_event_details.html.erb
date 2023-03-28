@@ -52,8 +52,9 @@
         <% end %>
 
         <br>
-        <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
-          <% if event.note %>
+
+        <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field" class="note">
+          <% if event.note && event.note != "" %>
             <strong>Note:</strong> <%= event.note %>
           <% else %>
             Double click to add a note
