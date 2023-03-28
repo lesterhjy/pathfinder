@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="maps"
 export default class extends Controller {
-  static targets = ["map", "event", "longitude", "latitude", "address"];
+  static targets = ["map", "event", "longitude", "latitude", "address", "placeId"];
 
   connect() {
     this.labels = "123456789";
