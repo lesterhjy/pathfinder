@@ -20,7 +20,7 @@ class TripsController < ApplicationController
     #     end
     #   end
     # end
-    @recommendations = Event.where(trip: @trip, source: [nil, "self"], selected: nil)
+    @recommendations = Event.where(trip: @trip, source: 'google', selected: nil)
     @self_created = Event.where(trip: @trip, source: 'self')
     # pick the trip's events, order by position, and select only those that the user has selected
     # @events = @trip.events.order(:start_time, :position).select { |event| (event.selected == true) and event.start_time }
