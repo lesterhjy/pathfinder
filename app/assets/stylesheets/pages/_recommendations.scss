@@ -7,3 +7,9 @@
   background-image: radial-gradient(#EF7462 0.55px, #e8e8e8 0.55px);
   background-size: 11px 11px;
 }
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}

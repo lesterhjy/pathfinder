@@ -26,6 +26,7 @@
       <div class="coordinates d-none">
         <p data-maps-target="latitude"><%= event.latitude%></p>
         <p data-maps-target="longitude"><%= event.longitude %></p>
+        <p data-maps-target="placeId"><%= event.source_id %></p>
       </div>
     </div>
     <div class="more-info d-none" data-toggle-target="info" data-edit-event-target="info">
@@ -52,8 +53,9 @@
         <% end %>
 
         <br>
-        <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
-          <% if event.note %>
+
+        <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field" class="note">
+          <% if event.note && event.note != "" %>
             <strong>Note:</strong> <%= event.note %>
           <% else %>
             Double click to add a note

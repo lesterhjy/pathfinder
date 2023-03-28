@@ -43,7 +43,7 @@ class TripsController < ApplicationController
     respond_to do |format|
       format.html
       # this renders the tab info when you click on a specific day
-      format.text { render partial: 'trips/events', locals: { events: @events }, formats: [:html] }
+      format.text { render partial: 'trips/events', locals: { events: @events, trip: @trip }, formats: [:html] }
     end
   end
 

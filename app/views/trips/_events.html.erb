@@ -1,7 +1,7 @@
 <div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections order-updated@window->maps#updateMarkers">
   <div class="icons">
     <p class="icon" data-action="click->directions#showDirections"><i class="fa-solid fa-van-shuttle"></i></p>
-    <%= link_to trip_overview_path(events[0].trip) do %>
+    <%= link_to trip_overview_path(@trip) do %>
       <p class="icon"><i class="fa-solid fa-calendar-days"></i></p>
     <% end %>
   </div>
