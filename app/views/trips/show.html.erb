@@ -38,13 +38,15 @@
       </div>
 
       <input type="radio" name="name" />
-      <div class="trip-tab-content slidetab-content">
+      <div class="trip-tab-content trip-recommendation">
         <% @self_created.each do |sc| %>
-          <div class="slidetab-details">
-            <div class="slidetab-details-basic">
-                <p style="font-weight: bold; padding:0; margin:0;"><%= sc.name %></p>
-                <%= sc.address %>
-                <p><em><%= sc.description %></em></p>
+          <div class="trip-recommendation-card">
+            <div class="trip-recommendation-card-photo-and-details">
+              <div class="trip-recommendation-card-photo" style="background-image: url('https://images.unsplash.com/photo-1510936994138-07e06c7c5add?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80')"></div>
+              <div class="trip-recommendation-card-details">
+                  <p style="font-weight: bold; padding:0; margin:0;"><%= sc.name %></p>
+                  <p style="font-weight: light; padding:0; margin:0;"><%= sc.address %></p>
+              </div>
             </div>
           </div>
         <% end %>
