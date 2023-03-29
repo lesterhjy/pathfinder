@@ -4,8 +4,7 @@ $tab-color3: #D9534F;
 $tab-color4: #edf798;
 $tab-width: 24px;
 
-.slides {
-  // height: 100%;
+.trip-tab {
   position: relative;
   overflow: hidden;
 }
@@ -30,16 +29,15 @@ input[type="radio"] {
 
   &:checked {
 
-    + .content {
+    + .trip-tab-content {
       transform: translateX(0%);
       transition: transform 0.2s ease 0.2s;
     }
   }
 }
 
-.content {
+.trip-tab-content {
   display: flex;
-  // justify-content: center;
   align-items: center;
   flex-flow: column;
   position: absolute;
@@ -56,8 +54,11 @@ input[type="radio"] {
   &:nth-of-type(4) { background-color: $tab-color4;}
 }
 
-.title {
-  font-size: 5vw;
-  font-weight: bold;
-  color: #fff;
+.trip-tab-recommendation-container {
+  --bs-gutter-x: 6rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin: 30px auto;
 }

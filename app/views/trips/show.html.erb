@@ -16,27 +16,30 @@
 
     </div>
 
-    <div class="slides">
+    <div class="trip-tab">
       <input type="radio" name="name" checked="checked" />
         <div class="">
             <div id="map" data-maps-target="map" data-action="google-maps-callback@window->maps#initMap"></div>
         </div>
 
       <input type="radio" name="name" />
-      <div class="content slidetab-content">
+      <div class="trip-tab-content trip-recommendation">
         <% @recommendations.each do |recommendation| %>
-          <div class="slidetab-details">
-            <div class="slidetab-details-basic">
-                <p style="font-weight: bold; padding:0; margin:0;"><%= recommendation.name %></p>
-                <%= recommendation.address %>
-                <p><em><%= recommendation.description %></em></p>
+          <div class="trip-recommendation-card">
+            <div class="trip-recommendation-card-photo-and-details">
+              <div class="trip-recommendation-card-photo" style="background-image: url('<%= recommendation.photo %>')"></div>
+              <div class="trip-recommendation-card-details">
+                  <p style="font-weight: bold; padding:0; margin:0;"><%= recommendation.name %></p>
+                  <%= recommendation.address %>
+
+              </div>
             </div>
           </div>
         <% end %>
       </div>
 
       <input type="radio" name="name" />
-      <div class="content slidetab-content">
+      <div class="trip-tab-content slidetab-content">
         <% @self_created.each do |sc| %>
           <div class="slidetab-details">
             <div class="slidetab-details-basic">
@@ -49,8 +52,8 @@
       </div>
 
       <input type="radio" name="name" />
-      <div class="content">
-        <div class="slidetab-container">
+      <div class="trip-tab-content">
+        <div class="trip-tab-recommendation-container">
           <%= simple_form_for([@trip, @event]) do |f| %>
             <%= f.input :name %>
             <%= f.input :address, input_html: {data: {new_events_target: "address"}},
