@@ -35,7 +35,7 @@ export default class extends Sortable {
     if (event.item.nextElementSibling) { // there is something under the item that was moved, so take ref from that
       newPosition = parseInt(event.item.nextElementSibling.dataset.position, 10)
       console.log(newPosition)
-    } else { // there is nothing under the item that was moved, so take ref from the item above
+    } else if (event.item.previousElementSibling) { // there is nothing under the item that was moved, so take ref from the item above
       newPosition = parseInt(event.item.previousElementSibling.dataset.position, 10) + 1
     }
 

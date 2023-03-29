@@ -4,10 +4,10 @@
 
       <div class="tab-bar">
         <div class="tabs">
-          <% @events_by_day.each_with_index do |day, index| %>
-            <p class="tab <%= "tab-active" if index == 0 %>" data-toggle-target="tab" data-action='click->toggle#toggleTabs' data-toggle-url="<%= trip_path(@trip, day: day[0].start_time.day) %>" data-index= "<%= index %>">
+          <% @events_by_day.each_with_index do |date, index| %>
+            <p class="tab <%= "tab-active" if index == 0 %>" data-toggle-target="tab" data-action='click->toggle#toggleTabs' data-toggle-url="<%= trip_path(@trip, day: @all_dates[index].day) %>" data-index= "<%= index %>">
               Day <%= index + 1 %> |
-              <%= day.first.start_time.strftime("%e %b") %>
+              <%= @all_dates[index].strftime("%e %b") %>
             </p>
           <% end %>
         </div>
