@@ -27,7 +27,7 @@ class TripsController < ApplicationController
     # filtering all events associated with the trip
     @events = @trip.events.where(selected: true).order(:start_time, :position)
     if @events.empty?
-      @events = @events.order(:start_time, :position)
+      @events = @trip.events.order(:start_time, :position)
     end
     # geoclustering events
     @clusters = events_clustering(@events)
@@ -60,7 +60,7 @@ class TripsController < ApplicationController
     # select the events selected by user
     @events = @trip.events.where(selected: true).order(:start_time, :position)
     if @events.empty?
-      @events = @events.order(:start_time, :position)
+      @events = @trip.events.order(:start_time, :position)
     end
     @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
     @events_by_day = {}
