@@ -25,19 +25,24 @@ class TripsController < ApplicationController
     # pick the trip's events, order by position, and select only those that the user has selected
     # @events = @trip.events.order(:start_time, :position).select { |event| (event.selected == true) and event.start_time }
     # filtering all events associated with the trip
-    @events = @trip.events.order(:start_time, :position)
+    @events = @trip.events.where(selected: true).order(:start_time, :position)
     # geoclustering events
     @clusters = events_clustering(@events)
     # generating itinerary - flag is turned to "false" by default but will flip to "true" when event_generation is called once
     event_generation
+
+    @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
+    @events_by_day = {}
+    @all_dates.each do |date|
+      events_that_day = @events.select { |e| e.start_time.day == date.day }
+      @events_by_day[date.day] = events_that_day
+    end
     # events for the first day - will show as default on the trip show page
-    @first_day_events = @events.group_by { |event| event.start_time.day }.values[0]
-    # all events - this is used for the tab info only for now
-    @events_by_day = @events.sort_by { |e| [e.start_time, e.position] }
-                            .group_by { |event| event.start_time.day }.values
+    @first_day_events = @events_by_day[@all_dates.first.day]
+
     # when a tab is clicked, it will send a request to get the day's events
     if params[:day].present?
-      @events = @events.select { |event| event.start_time.day == params[:day].to_i }
+      @events = @events_by_day[params[:day].to_i]
     end
 
     respond_to do |format|

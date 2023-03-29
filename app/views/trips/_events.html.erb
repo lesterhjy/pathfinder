@@ -10,8 +10,10 @@
     data-sortable-resource-name-value="event"
     data-sortable-handle-value=".handle"
     data-action="order-updated@window->sortable#updatePositions">
-  <% events.each_with_index do |event, index| %>
-    <%= render "event", event: event, index: index %>
+  <% if events %>
+    <% events.each_with_index do |event, index| %>
+      <%= render "event", event: event, index: index %>
+    <% end %>
   <% end %>
   </ul>
 </div>
