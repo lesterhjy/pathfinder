@@ -4,12 +4,12 @@
     <%= link_to "See day-by-day view", trip_path(@trip) %>
   </div>
   <div class="all-events">
-    <% @events_by_day.each_with_index do |events, index| %>
+    <% @events_by_day.values.each_with_index do |events, index| %>
       <div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections">
         <div class="date">
           <h3>
           <strong>Day <%= index + 1 %></strong> |
-          <small><%= events.first.start_time.strftime("%e %b") %></small>
+          <small><%= @all_dates[index].strftime("%e %b") %></small>
           </h3>
         </div>
         <div class="icons">
@@ -18,12 +18,12 @@
         <ul
           data-controller="sortable toggle"
           data-sortable-resource-name-value="event"
-          data-date="<%= events[0].start_time %>"
+          data-date="<%= @all_dates[index] %>"
           data-sortable-handle-value=".handle"
           data-highest-position="<%= @highest_position %>"
           data-action="order-updated@window->sortable#updatePositions">
         <% events.each_with_index do |event, index| %>
-          <%= render "event", event: event, index: index %>
+          <%= render "event", event: event, index: index, trip: @trip %>
         <% end %>
         </ul>
       </div>

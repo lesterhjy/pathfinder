@@ -26,6 +26,9 @@ class TripsController < ApplicationController
     # @events = @trip.events.order(:start_time, :position).select { |event| (event.selected == true) and event.start_time }
     # filtering all events associated with the trip
     @events = @trip.events.where(selected: true).order(:start_time, :position)
+    if @events.empty?
+      @events = @events.order(:start_time, :position)
+    end
     # geoclustering events
     @clusters = events_clustering(@events)
     # generating itinerary - flag is turned to "false" by default but will flip to "true" when event_generation is called once
@@ -55,9 +58,16 @@ class TripsController < ApplicationController
   def overview
     @trip = Trip.find(params[:trip_id])
     # select the events selected by user
-    @events = @trip.events.order(:position).select { |event| event.selected == true }
-    @events_by_day = @events.sort_by { |e| [e.start_time, e.position] }
-                            .group_by { |event| event.start_time.day }.values
+    @events = @trip.events.where(selected: true).order(:start_time, :position)
+    if @events.empty?
+      @events = @events.order(:start_time, :position)
+    end
+    @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
+    @events_by_day = {}
+    @all_dates.each do |date|
+      events_that_day = @events.select { |e| e.start_time.day == date.day }
+      @events_by_day[date.day] = events_that_day
+    end
     @highest_position = @events.last.position
   end
 
