@@ -4,6 +4,8 @@
   padding: 5px 10px;
   color: var(--green);
   opacity: 0.8;
+  transition: 0.3s;
+  margin: 5px;
 }
 
 .btn:hover, .button:hover {
@@ -11,5 +13,21 @@
   border-radius: 18px;
   padding: 5px 10px;
   color: var(--green);
+  opacity: 1;
+}
+
+.solid-btn {
+  border: 3px solid var(--white);
+  background-color: var(--green);
+  border-radius: 18px;
+  padding: 10px 20px;
+  color: var(--white);
+}
+
+.plan-trip a {
+  opacity: 0.9;
+}
+
+.solid-btn:hover {
   opacity: 1;
 }
