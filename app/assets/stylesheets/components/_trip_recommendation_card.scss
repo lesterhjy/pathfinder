@@ -1,0 +1,42 @@
+.trip-recommendation {
+  overflow: auto;
+  align-items: normal;
+  padding-bottom: 20px;
+}
+
+.trip-recommendation-card {
+  border: 1px solid black;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 10px;
+  padding-left: 30px;
+  background-color: var(--white);
+  cursor: pointer;
+  transition: all ease 0.5s;
+}
+
+.trip-recommendation-card:hover {
+  transform: scale(1.03);
+}
+
+.trip-recommendation-card-photo-and-details {
+  display: flex;
+  justify-content: left;
+}
+
+.trip-recommendation-card-photo {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-size: cover;
+  margin-right: 10px;
+}
+
+.trip-recommendation-card-details {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  flex-direction: column;
+}
