@@ -1,0 +1,42 @@
+<% if categories[:shopping].any? { |type| event["category"].include?(type)} %>
+  <div class="recommendation-card recommendation-card-shopping" data-controller="add-event" data-add-event-target="card">
+    <div class="recommendation-card-infos">
+      <h2><i class="fa-solid fa-store"></i><%= event["name"] %></h2>
+    </div>
+<% elsif categories[:food].any? { |type| event["category"].include?(type)} %>
+  <div class="recommendation-card recommendation-card-food" data-controller="add-event" data-add-event-target="card">
+    <div class="recommendation-card-infos">
+      <h2><i class="fa-solid fa-utensils"></i><%= event["name"] %></h2>
+    </div>
+<% else %>
+  <div class="recommendation-card recommendation-card-attraction" data-controller="add-event" data-add-event-target="card">
+    <div class="recommendation-card-infos">
+      <h2><i class="fa-solid fa-mountain-city"></i><%= event["name"] %></h2>
+    </div>
+<% end %>
+  <img src="<%= event["photo"] %>" />
+  <div class="recommendation-card-infos">
+    <p class="recommendation-description"><%= event["description"] %></p>
+    <p class="recommendation-address"><%= event["address"] %></p>
+    <%= simple_form_for [trip, event],
+      html: {
+        data: {
+          add_event_target: "form",
+          action: "submit->add-event#create"
+        }
+      } do |f|
+    %>
+      <% if event.selected %>
+        <%= f.input :selected, :as => :hidden, input_html: { value: nil } %>
+        <button type="submit" class="btn-ghost" data-add-event-target="add">
+          Remove
+        </button>
+      <% else %>
+        <%= f.input :selected, :as => :hidden, input_html: { value: true } %>
+        <button type="submit" class="btn-ghost" data-add-event-target="add">
+          Add
+        </button>
+      <% end %>
+    <% end %>
+  </div>
+</div>

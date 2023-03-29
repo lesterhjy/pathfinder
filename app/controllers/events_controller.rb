@@ -77,5 +77,4 @@ class EventsController < ApplicationController
                                   :position,
                                   :note)
   end
-
 end

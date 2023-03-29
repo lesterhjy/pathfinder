@@ -1,0 +1,37 @@
+.slidetab-content {
+  // margin-left: 30px;
+  // display: grid;
+  // grid-template-rows: auto 1fr;
+  overflow: auto;
+  // padding-top: 120px;
+}
+
+.slidetab-details {
+  border: 1px solid black;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 10px;
+  padding-left: 30px;
+  background-color: var(--white);
+  cursor: pointer;
+  width: 600px;
+  // height: 80px;
+}
+
+.slidetab-details-basic {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.slidetab-container {
+  --bs-gutter-x: 6rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  // margin-right: auto;
+  // margin-left: auto;
+  margin: 30px auto;
+}
