@@ -29,7 +29,7 @@ class TripsController < ApplicationController
     # geoclustering events
     @clusters = events_clustering(@events)
     # generating itinerary - flag is turned to "false" by default but will flip to "true" when event_generation is called once
-    event_generation
+    event_generation if @trip.generated != true
 
     @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
     @events_by_day = {}
@@ -173,5 +173,7 @@ class TripsController < ApplicationController
       date += 1
       cluster_number += 1
     end
+
+    @trip.update(generated: true)
   end
 end
