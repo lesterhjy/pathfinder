@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_trip, only: [:new, :create, :edit, :update, :update_position, :move_lists]
+  before_action :set_trip, only: [:new, :create, :edit, :update, :destroy, :update_position, :move_lists]
 
   def new
     @event = Event.new
@@ -21,12 +21,18 @@ class EventsController < ApplicationController
     @event.update(event_params)
     respond_to do |format|
       format.html { redirect_to trip_path(@trip) }
-      format.text { render partial: "trips/event_details", locals: { event: @event }, formats: [:html] }
+      format.text { render partial: "trips/event_details", locals: { event: @event, trip: @trip }, formats: [:html] }
     end
   end
 
   def edit
     @event = Event.find(params[:id])
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to @trip
   end
 
   def update_position

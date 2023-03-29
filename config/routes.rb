@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   resources :trips do
     resources :flights, only: %i[new create edit update destroy]
     resources :recommendations, only: [:index]
-    resources :events, only: %i[new create edit update]
+    resources :events, only: %i[new create edit update destroy]
     resources :hotels, only: %i[new create edit update destroy]
   end
-  resources :events, only: [:destroy]
+  # resources :events, only: [:destroy]
 
   patch '/trips/:trip_id/events/:id/update_position', to: 'events#update_position', as: 'update_position'
   patch '/trips/:trip_id/events/:id/move_lists', to: 'events#move_lists', as: 'move_lists'
