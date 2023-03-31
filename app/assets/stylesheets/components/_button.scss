@@ -16,18 +16,37 @@
   opacity: 1;
 }
 
-.solid-btn {
-  border: 3px solid var(--white);
-  background-color: var(--green);
-  border-radius: 18px;
-  padding: 10px 20px;
-  color: var(--white);
-}
-
 .plan-trip a {
   opacity: 0.9;
 }
 
+.solid-btn {
+  background-color: white;
+  border: 1px solid var(--green);
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: var(--green);
+  opacity: 0.8;
+  transition: 0.3s;
+  margin: 5px;
+}
+
 .solid-btn:hover {
-  opacity: 1;
+  opacity: 0.9;
+}
+
+.fat-btn {
+  font-weight: bold;
+  padding: 10px 40px;
+  background-color: white;
+  border: 2px solid var(--green);
+  border-radius: 20px;
+  color: var(--green);
+  opacity: 0.8;
+  transition: 0.3s;
+  margin: 10px;
+}
+
+.fat-btn:hover {
+  background-color: #dc1a1a52;
 }

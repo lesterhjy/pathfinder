@@ -1,20 +1,22 @@
 .recommendation-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 40px;
-  margin-top: 40px;
+  grid-gap: 15px;
+  margin-bottom: 40px;
+  padding: 0;
 }
 
 .recommendation-card {
-  width: 300px;
+  width: 270px;
   overflow: hidden;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   border-radius: 10px;
   transition: all ease 0.5s;
+  margin-bottom: 20px;
 }
 
 .recommendation-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .recommendation-card-food {

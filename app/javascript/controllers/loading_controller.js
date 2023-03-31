@@ -13,7 +13,7 @@ export default class extends Controller {
       smartBackspace: true,
       backSpeed: 30,
       typeSpeed: 70,
-      showCursor: false,
+      showCursor: true,
       loop: true
     })
   }

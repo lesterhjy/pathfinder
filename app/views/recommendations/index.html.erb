@@ -1,33 +1,47 @@
 <div class="background">
   <div class="container">
-    <div class="intro">
+    <div class="content-box">
+      <h1><i class="fa-solid fa-cart-flatbed-suitcase"></i></h1>
+      <h1 style="font-weight: bold">Let's get started.</h1>
       <h2 style="color: var(--green)">Your <%= pluralize(@days, "days") %> in <strong><%= @trip.destination %></strong> from <%= @trip.start_date.to_datetime.strftime("%e %b") %> to <%= @trip.end_date.to_datetime.strftime("%e %b") %></h2>
     </div>
-    <div>
-      <h1>Hello there! Choose some recommendations to get started.</h1>
-      <p>If you're new to this city, there's a good chance that you aren't familiar with its attractions. So we've gone ahead and picked out a few places that most people are interested in. Select as many or as little as you like, and we'll populate the rest of your trip for you.</p>
-    </div>
-    <div class="options">
-      <div class="flights-hotels">
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdropFlight">
-          <i class="fa-solid fa-plane-departure"></i> Add flights
-        </button>
-        <%= render "flights/modal", trip: @trip, flight: @flight %>
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdropHotel">
-          <i class="fa-solid fa-hotel"></i> Add hotels
-        </button>
-        <%= render "hotels/modal", trip: @trip, flight: @hotel %>
+    <div class="content-box">
+      <h1>1. Add any flights and hotels you've booked.</h1>
+      <h3>This is so that we can add it to your trip. If you haven't booked anything, fret not - you can add these in at any time.</h3>
+      <div class="options">
+        <div class="flights-hotels">
+          <button type="button" class="fat-btn" data-bs-toggle="modal" data-bs-target="#staticBackdropFlight">
+            <p><i class="fa-solid fa-plane-departure"></i> Add flights</p>
+          </button>
+          <%= render "flights/modal", trip: @trip, flight: @flight %>
+          <button type="button" class="fat-btn" data-bs-toggle="modal" data-bs-target="#staticBackdropHotel">
+            <p><i class="fa-solid fa-hotel"></i> Add hotels</p>
+          </button>
+          <%= render "hotels/modal", trip: @trip, flight: @hotel %>
+        </div>
       </div>
-      <div class="plan-trip">
+    </div>
+
+    <div class="recommendation-wrapper content-box">
+      <div>
+        <h1>2. Pick anything that interests you, and we'll fill up the rest.</h1>
+        <h3 style="width: 80%; margin: auto">If you're new to this city, there's a good chance that you aren't familiar with its attractions. So we've picked out a few places that most people are interested in. Select as many or as little as you like, and we'll fill out the rest of your trip for you.</h3>
+      </div>
+      <div class="plan-trip content-box">
         <%= link_to trip_path(params[:trip_id]) do %>
-          <button type="button" class="solid-btn">
-          Plan my trip!
+          <button type="button" class="fat-btn">
+            I'm ready, plan my trip for me!
+        </button>
+        <% end %>
+        <%= link_to trip_path(params[:trip_id]) do %>
+          <button type="button" class="fat-btn">
+            Skip - I want to plan my own trip
         </button>
         <% end %>
       </div>
-    </div>
-    <div class="recommendation-container">
-      <%= render "recommendation_list", recommendations: @recommendations %>
+      <div class="recommendation-container content-box">
+        <%= render "recommendation_list", recommendations: @recommendations %>
+      </div>
     </div>
   </div>
 </div>
