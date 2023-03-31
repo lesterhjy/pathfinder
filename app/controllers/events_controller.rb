@@ -42,7 +42,7 @@ class EventsController < ApplicationController
     old_index = @events_that_day.index(@event)
     old_position = @event.position
     new_index = event_params[:position].to_i - 1
-    new_position = old_position + (new_index - old_index)
+    new_position = @events_that_day[new_index].position
     @event.insert_at(new_position)
   end
 
