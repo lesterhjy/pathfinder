@@ -15,18 +15,19 @@ class TripsController < ApplicationController
     @recommendations = Event.where(trip: @trip, source: 'google', selected: nil)
     @self_created = Event.where(trip: @trip, source: 'self')
     # filtering all events associated with the trip
-    @events = @trip.events
-    # geoclustering events and generating events for trip
-    if @trip.generated != true
-      @clusters = events_clustering(@events)
-      generate_event_start_time(event_generation)
+    @events = @trip.events.where(selected: true).order(:start_time, :position)
+    if @events.empty?
+      @events = @trip.events.order(:start_time, :position)
     end
-    # events for the first day - will show as default on the trip show page
-    @trip_events = @events.where.not(start_time: nil).order(:start_time, :position)
+    # geoclustering events
+    @clusters = events_clustering(@events)
+    # generating itinerary - flag is turned to "false" by default but will flip to "true" when event_generation is called once
+    event_generation if @trip.generated != true
+
     @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
     @events_by_day = {}
     @all_dates.each do |date|
-      events_that_day = @trip_events.select { |e| e.start_time.day == date.day }
+      events_that_day = @events.select { |e| e.start_time.day == date.day }
       @events_by_day[date.day] = events_that_day
     end
     # events for the first day - will show as default on the trip show page
@@ -34,7 +35,7 @@ class TripsController < ApplicationController
 
     # when a tab is clicked, it will send a request to get the day's events
     if params[:day].present?
-      @trip_events = @events_by_day[params[:day].to_i]
+      @events = @events_by_day[params[:day].to_i]
     end
 
     respond_to do |format|
@@ -47,9 +48,16 @@ class TripsController < ApplicationController
   def overview
     @trip = Trip.find(params[:trip_id])
     # select the events selected by user
-    @events = @trip.events.order(:position).select { |event| event.selected == true }
-    @events_by_day = @events.sort_by { |e| [e.start_time, e.position] }
-                            .group_by { |event| event.start_time.day }.values
+    @events = @trip.events.where(selected: true).order(:start_time, :position)
+    if @events.empty?
+      @events = @trip.events.order(:start_time, :position)
+    end
+    @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
+    @events_by_day = {}
+    @all_dates.each do |date|
+      events_that_day = @events.select { |e| e.start_time.day == date.day }
+      @events_by_day[date.day] = events_that_day
+    end
     @highest_position = @events.last.position
   end
 
