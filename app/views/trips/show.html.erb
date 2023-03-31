@@ -23,15 +23,22 @@
         </div>
 
       <input type="radio" name="name" />
-      <div class="trip-tab-content trip-recommendation">
+      <div class="trip-tab-content trip-recommendation" data-controller="trip-form">
         <% @recommendations.each do |recommendation| %>
-          <div class="trip-recommendation-card">
+          <div class="trip-recommendation-card" data-trip-form-target="form", data-action="click->trip-form#toggle">
             <div class="trip-recommendation-card-photo-and-details">
               <div class="trip-recommendation-card-photo" style="background-image: url('<%= recommendation.photo %>')"></div>
               <div class="trip-recommendation-card-details">
                   <p style="font-weight: bold; padding:0; margin:0;"><%= recommendation.name %></p>
                   <p style="font-weight: light; padding:0; margin:0;"><%= recommendation.address %></p>
               </div>
+            </div>
+            <div class="mt-2 d-none" data-trip-form-target="hidden">
+              <%= simple_form_for [recommendation.trip, recommendation] do |f| %>
+                <%= f.input :start_time, as: :string, input_html: {class: "inline-edit trip-recommendation-datetimepicker"} %>
+                <%= f.input :end_time, as: :string, input_html: {class: "inline-edit trip-recommendation-datetimepicker"} %>
+                <%= f.button :submit, class: "btn" %>
+              <% end %>
             </div>
           </div>
         <% end %>
@@ -60,8 +67,8 @@
             <%= f.input :address, input_html: {data: {new_events_target: "address"}},
                                   wrapper_html: {data: {controller: "new-events",
                                                         new_events_api_key_value: ENV["GOOGLE_API_KEY"]}} %>
-            <%= f.input :start_time, as: :string, input_html: {class: "datetimepicker"} %>
-            <%= f.input :end_time, as: :string, input_html: {class: "datetimepicker"} %>
+            <%= f.input :start_time, as: :string, input_html: {class: "trip-recommendation-datetimepicker"} %>
+            <%= f.input :end_time, as: :string, input_html: {class: "trip-recommendation-datetimepicker"} %>
             <%= f.input :source, as: :hidden, input_html: { value: "self" } %>
             <%= f.button :submit, class: "btn" %>
           <% end %>
