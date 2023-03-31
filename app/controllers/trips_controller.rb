@@ -16,26 +16,32 @@ class TripsController < ApplicationController
     @self_created = Event.where(trip: @trip, source: 'self')
     # filtering all events associated with the trip
     @events = @trip.events
-    # geoclustering events
-    @clusters = events_clustering(@events)
-    # generating itinerary - flag is turned to "false" by default but will flip to "true" when event_generation is called once
-    event_generation
+    # geoclustering events and generating events for trip
+    if @trip.generated != true
+      @clusters = events_clustering(@events)
+      generate_event_start_time(event_generation)
+    end
     # events for the first day - will show as default on the trip show page
-    @trip_events = @events.where.not(start_time: nil)
-    @first_day_events = @trip_events.group_by { |event| event.start_time.day }.values[0]
-    # all events - this is used for the tab info only for now
-    @events_by_day = @trip_events.sort_by { |e| [e.start_time, e.position] }
-                            .group_by { |event| event.start_time.day }.values
+    @trip_events = @events.where.not(start_time: nil).order(:start_time, :position)
+    @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
+    @events_by_day = {}
+    @all_dates.each do |date|
+      events_that_day = @trip_events.select { |e| e.start_time.day == date.day }
+      @events_by_day[date.day] = events_that_day
+    end
+    # events for the first day - will show as default on the trip show page
+    @first_day_events = @events_by_day[@all_dates.first.day]
+
     # when a tab is clicked, it will send a request to get the day's events
     if params[:day].present?
-      @trip_events = @trip_events.select { |event| event.start_time.day == params[:day].to_i }
+      @trip_events = @events_by_day[params[:day].to_i]
     end
+
     respond_to do |format|
       format.html
       # this renders the tab info when you click on a specific day
       format.text { render partial: 'trips/events', locals: { events: @trip_events, trip: @trip }, formats: [:html] }
     end
-    # raise
   end
 
   def overview
@@ -71,53 +77,35 @@ class TripsController < ApplicationController
   end
 
   def event_generation
-    all_events = @events.pluck(:id)
+    @week_events = []
     selected_events = @events.where(selected: true).pluck(:id)
     unselected_events = @events.where(selected: nil).pluck(:id)
-
-    @week_events = []
-
     cluster_number = 0
-    date = @trip.start_date.to_datetime
     while cluster_number < @clusters.length
       @day_events = []
       cluster = @clusters[cluster_number]
-      if cluster.intersection(selected_events)
-        clustered_selected_events = cluster.intersection(selected_events)
-        clustered_selected_events.each do |event_id|
-          if @day_events.length < 8
-            event = Event.find(event_id)
-            event.update(start_time: date)
-            @day_events.append(event_id)
-            clustered_selected_events.delete(event)
-          end
-        end
-        clustered_unselected_events = cluster.intersection(unselected_events)
-        clustered_unselected_events.each do |event_id|
-          if @day_events.length < 8
-            event = Event.find(event_id)
-            event.update(start_time: date)
-            @day_events.append(event_id)
-            clustered_unselected_events.delete(event)
-          end
-        end
-        @week_events.append(@day_events)
-      else
-        clustered_unselected_events = cluster.intersection(unselected_events)
-        clustered_unselected_events.each do |event_id|
-          if @day_events.length < 8
-            event = Event.find(event_id)
-            event.update(start_time: date)
-            @day_events.append(event_id)
-            clustered_unselected_events.delete(event)
-          end
-        end
-        @week_events.append(@day_events)
+      if cluster.intersection(selected_events) # If user has selected any event belonging to the cluster.
+        cluster.intersection(selected_events).each { |event_id| @day_events.append(event_id) if @day_events.length < 8 } # Inserting events selected by user first
       end
-      date += 1
+      cluster.intersection(unselected_events).each { |event_id| @day_events.append(event_id) if @day_events.length < 8 } # Filling up the gaps with events that were not selected.
+      @week_events.append(@day_events) # Append the day's events to the week.
       cluster_number += 1
     end
-
     @trip.update(generated: true)
+    @week_events
+  end
+
+  def generate_event_start_time(week_events)
+    # Clearing dates for any stray events.
+    @trip.events.each { |event| event.update(start_time: nil) }
+    # Inserting dates for each day's events.
+    date = @trip.start_date.to_datetime
+    week_events.each do |day|
+      day.each do |event_id|
+        event = Event.find(event_id)
+        event.update(start_time: date)
+      end
+      date += 1
+    end
   end
 end
