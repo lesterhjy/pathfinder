@@ -15,15 +15,13 @@ class TripsController < ApplicationController
     @recommendations = Event.where(trip: @trip, source: 'google', selected: nil)
     @self_created = Event.where(trip: @trip, source: 'self')
     # filtering all events associated with the trip
-    @events = @trip.events.where(selected: true).order(:start_time, :position)
-    if @events.empty?
-      @events = @trip.events.order(:start_time, :position)
+    @events = @trip.events
+    # geoclustering events and populating trip
+    unless @trip.generated == true
+      @clusters = events_clustering(@events)
+      generate_event_start_time(event_generation)
     end
-    # geoclustering events
-    @clusters = events_clustering(@events)
-    # generating itinerary - flag is turned to "false" by default but will flip to "true" when event_generation is called once
-    event_generation if @trip.generated != true
-
+    @events = @events.where.not(start_time: nil).order(:start_time, :position)
     @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
     @events_by_day = {}
     @all_dates.each do |date|
@@ -41,7 +39,7 @@ class TripsController < ApplicationController
     respond_to do |format|
       format.html
       # this renders the tab info when you click on a specific day
-      format.text { render partial: 'trips/events', locals: { events: @trip_events, trip: @trip }, formats: [:html] }
+      format.text { render partial: 'trips/events', locals: { events: @events, trip: @trip }, formats: [:html] }
     end
   end
 
