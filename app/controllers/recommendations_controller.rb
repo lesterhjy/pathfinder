@@ -62,7 +62,7 @@ class RecommendationsController < ApplicationController
   end
 
   def get_recommendation_details(recommendations_overview)
-    recommendations_overview.first(1).each do |recommendation|
+    recommendations_overview.first(3).each do |recommendation|
       if Event.where(trip_id: @trip.id, source_id: recommendation).empty?
         place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
         place_details = JSON.parse(URI.open(place_details_search).read)["result"]
@@ -81,7 +81,6 @@ class RecommendationsController < ApplicationController
           event.photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{place_details["photos"][0]["photo_reference"]}&key=#{ENV["GOOGLE_API_KEY"]}"
           event.rating = place_details["rating"]
           event.review = place_details["reviews"]
-          event.start_time = @trip.start_date #to delete later
           event.description = place_details["editorial_summary"]["overview"].capitalize if place_details.key?("editorial_summary")
           event.save
         end

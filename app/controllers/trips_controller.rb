@@ -1,6 +1,5 @@
 class TripsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[create]
-  before_action :set_trip, only: [:show]
   require "kmeans-clusterer"
 
   def create
@@ -10,20 +9,19 @@ class TripsController < ApplicationController
   end
 
   def show
+    @trip = Trip.find(params[:id])
     @event = Event.new
     # get events for different sources
     @recommendations = Event.where(trip: @trip, source: 'google', selected: nil)
     @self_created = Event.where(trip: @trip, source: 'self')
     # filtering all events associated with the trip
-    @events = @trip.events.where(selected: true).order(:start_time, :position)
-    if @events.empty?
-      @events = @trip.events.order(:start_time, :position)
+    @events = @trip.events
+    # geoclustering events and populating trip
+    unless @trip.generated == true
+      @clusters = events_clustering(@events)
+      generate_event_start_time(event_generation)
     end
-    # geoclustering events
-    @clusters = events_clustering(@events)
-    # generating itinerary - flag is turned to "false" by default but will flip to "true" when event_generation is called once
-    event_generation if @trip.generated != true
-
+    @events = @events.where.not(start_time: nil).order(:start_time, :position)
     @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
     @events_by_day = {}
     @all_dates.each do |date|
@@ -63,10 +61,6 @@ class TripsController < ApplicationController
 
   private
 
-  def set_trip
-    @trip = Trip.find(params[:id])
-  end
-
   def trip_params
     params.require(:trip).permit(:destination, :start_date, :end_date, :latitude, :longitude)
   end
@@ -78,7 +72,8 @@ class TripsController < ApplicationController
       coords.append([event.latitude, event.longitude])
       clustered_events.append(event.id)
     end
-    k = 5 # Number of clusters
+    # k represents the number of clusters, and is based on the length of the trip
+    k = (@trip.end_date.to_datetime.to_i - @trip.start_date.to_datetime.to_i + 86_400) / 86_400
     kmeans = KMeansClusterer.run k, coords, labels: clustered_events, runs: 3
     clusters = []
     kmeans.clusters.each do |cluster|
@@ -88,23 +83,35 @@ class TripsController < ApplicationController
   end
 
   def event_generation
+    @week_events = []
     selected_events = @events.where(selected: true).pluck(:id)
-
+    unselected_events = @events.where(selected: nil).pluck(:id)
     cluster_number = 0
-    date = @trip.start_date.to_datetime
     while cluster_number < @clusters.length
+      @day_events = []
       cluster = @clusters[cluster_number]
-      if cluster.intersection(selected_events)
-        clustered_selected_events = cluster.intersection(selected_events)
-        clustered_selected_events.each do |event_id|
-          event = Event.find(event_id)
-          event.update(start_time: date)
-        end
+      if cluster.intersection(selected_events) # If user has selected any event belonging to the cluster.
+        cluster.intersection(selected_events).each { |event_id| @day_events.append(event_id) if @day_events.length < 8 } # Inserting events selected by user first
       end
-      date += 1
+      cluster.intersection(unselected_events).each { |event_id| @day_events.append(event_id) if @day_events.length < 8 } # Filling up the gaps with events that were not selected.
+      @week_events.append(@day_events) # Append the day's events to the week.
       cluster_number += 1
     end
-
     @trip.update(generated: true)
+    @week_events
+  end
+
+  def generate_event_start_time(week_events)
+    # Clearing dates for any stray events.
+    @trip.events.each { |event| event.update(start_time: nil) }
+    # Inserting dates for each day's events.
+    date = @trip.start_date.to_datetime
+    week_events.each do |day|
+      day.each do |event_id|
+        event = Event.find(event_id)
+        event.update(start_time: date)
+      end
+      date += 1
+    end
   end
 end
