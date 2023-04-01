@@ -15,7 +15,7 @@ class TripsController < ApplicationController
     @hotel = Hotel.new
     # get events for different sources
     @recommendations = Event.where(trip: @trip, source: 'google', selected: nil, start_time: nil)
-    @self_created = Event.where(trip: @trip, source: 'self')
+    @self_created = Event.where(trip: @trip, source: 'self', start_time: nil)
     # filtering all events associated with the trip
     @events = @trip.events
     # geoclustering events and populating trip
