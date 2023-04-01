@@ -4,6 +4,12 @@
     <%= link_to trip_overview_path(@trip) do %>
       <p class="icon"><i class="fa-solid fa-calendar-days"></i></p>
     <% end %>
+    <p class="icon" data-bs-toggle="modal" data-bs-target="#staticBackdropFlight"><i class="fa-solid fa-plane-departure"></i>
+      <%= render "flights/modal", trip: @trip, flight: @flight %>
+    </p>
+    <p class="icon" data-bs-toggle="modal" data-bs-target="#staticBackdropHotel"><i class="fa-solid fa-hotel"></i>
+      <%= render "hotels/modal", trip: @trip, flight: @hotel %>
+    </p>
   </div>
   <ul
     data-controller="sortable"
