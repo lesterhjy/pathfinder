@@ -58,9 +58,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_092448) do
   create_table "hotels", force: :cascade do |t|
     t.string "name"
     t.string "address"
-    t.time "start_time"
-    t.time "end_time"
-    t.string "note"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.text "note"
     t.bigint "trip_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -88,8 +88,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_092448) do
 
   create_table "trips", force: :cascade do |t|
     t.string "destination"
-    t.string "start_date"
-    t.string "end_date"
+    t.date "start_date"
+    t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "latitude"
