@@ -32,7 +32,7 @@
 
       <input type="radio" name="name" />
       <div class="trip-tab-content trip-recommendation other-activities">
-        <h3 style="font-weight: bold">Check out these other activities</h3>
+        <h3 style="font-weight: bold; text-align: center">Check out these other activities</h3>
         <ul
           data-controller="sortable"
           data-sortable-resource-name-value="event"
@@ -66,9 +66,7 @@
       </div>
 
       <input type="radio" name="name" />
-
-
-      <div class="trip-tab-content trip-recommendation">
+      <div class="trip-tab-content trip-recommendation list-own-activities">
         <ul
           data-controller="sortable"
           data-sortable-resource-name-value="event"
@@ -103,7 +101,7 @@
 
 
       <input type="radio" name="name" />
-      <div class="trip-tab-content">
+      <div class="trip-tab-content create-own-activities">
         <h3 style="font-weight: bold">Create your own activities</h3>
         <div class="trip-tab-recommendation-container">
           <%= simple_form_for([@trip, @event]) do |f| %>
@@ -118,6 +116,7 @@
           <% end %>
         </div>
       </div>
+
     </div>
   </div>
 </div>

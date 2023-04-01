@@ -1,13 +1,13 @@
 <div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections order-updated@window->maps#updateMarkers">
   <div class="icons">
-    <p class="icon" data-action="click->directions#showDirections"><i class="fa-solid fa-van-shuttle"></i></p>
     <%= link_to trip_overview_path(@trip) do %>
-      <p class="icon"><i class="fa-solid fa-calendar-days"></i></p>
+      <p class="icon" title="See all days"><i class="fa-solid fa-calendar-days"></i></p>
     <% end %>
-    <p class="icon" data-bs-toggle="modal" data-bs-target="#staticBackdropFlight"><i class="fa-solid fa-plane-departure"></i>
+    <p class="icon" data-action="click->directions#showDirections" title="See transport times"><i class="fa-solid fa-van-shuttle"></i></p>
+    <p class="icon" data-bs-toggle="modal" data-bs-target="#staticBackdropFlight" title="Add flights"><i class="fa-solid fa-plane-departure"></i>
       <%= render "flights/modal", trip: @trip, flight: @flight %>
     </p>
-    <p class="icon" data-bs-toggle="modal" data-bs-target="#staticBackdropHotel"><i class="fa-solid fa-hotel"></i>
+    <p class="icon" data-bs-toggle="modal" data-bs-target="#staticBackdropHotel" title="Add hotels"><i class="fa-solid fa-hotel"></i>
       <%= render "hotels/modal", trip: @trip, flight: @hotel %>
     </p>
   </div>
