@@ -8,16 +8,24 @@ class TripsController < ApplicationController
     redirect_to trip_recommendations_path(@trip)
   end
 
+  def index
+    @trips = current_user.trips
+  end
+
   def show
     @trip = Trip.find(params[:id])
     @flights = @trip.flights
     @hotels = @trip.hotels
+    # creating association with trip and user
+    unless UserTrip.where(user_id: current_user.id, trip_id: @trip.id).exists?
+      UserTrip.create(user_id: current_user.id, trip_id: @trip.id)
+    end
     @event = Event.new
     @flight = Flight.new
     @hotel = Hotel.new
     # get events for different sources
     @recommendations = Event.where(trip: @trip, source: 'google', selected: nil, start_time: nil)
-    @self_created = Event.where(trip: @trip, source: 'self')
+    @self_created = Event.where(trip: @trip, source: 'self', start_time: nil)
     # filtering all events associated with the trip
     @events = @trip.events
     # geoclustering events and populating trip
