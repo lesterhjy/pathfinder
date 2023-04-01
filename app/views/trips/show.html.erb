@@ -108,8 +108,8 @@
             <%= f.input :address, input_html: {data: {new_events_target: "address"}},
                                   wrapper_html: {data: {controller: "new-events",
                                                         new_events_api_key_value: ENV["GOOGLE_API_KEY"]}} %>
-            <%= f.input :start_time, as: :string, input_html: {class: "datetimepicker"} %>
-            <%= f.input :end_time, as: :string, input_html: {class: "datetimepicker"} %>
+            <%= f.input :start_time, as: :string, label: "Date", input_html: {class: "trip-recommendation-datetimepicker"} %>
+            <%= f.input :photo, as: :hidden, input_html: { value: "https://images.unsplash.com/photo-1485550409059-9afb054cada4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1065&q=80" } %>
             <%= f.input :source, as: :hidden, input_html: { value: "self" } %>
             <%= f.button :submit, class: "btn" %>
           <% end %>
