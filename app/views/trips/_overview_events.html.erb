@@ -17,8 +17,22 @@
           data-sortable-handle-value=".handle"
           data-highest-position="<%= highest_position %>"
           data-action="order-updated@window->sortable#updatePositions">
-        <% events.each_with_index do |event, index| %>
-          <%= render "trips/event", event: event, index: index, trip: trip %>
+          <% if flights %>
+            <% flights.each do |flight| %>
+              <% if flight.start_time.day == events[0].start_time.day and flight.start_time.day == trip.start_date.to_datetime.day %>
+                <%= render "trips/flight", flight: flight %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <% events.each_with_index do |event, index| %>
+            <%= render "trips/event", event: event, index: index, trip: trip %>
+        <% end %>
+        <% if flights %>
+          <% flights.each do |flight| %>
+            <% if flight.start_time.day == events[0].start_time.day and flight.start_time.day == trip.end_date.to_datetime.day %>
+              <%= render "trips/flight", flight: flight %>
+            <% end %>
+          <% end %>
         <% end %>
         </ul>
       </div>

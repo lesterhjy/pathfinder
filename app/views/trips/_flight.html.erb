@@ -1,7 +1,10 @@
 <li class="flight-card">
   <p style="font-weight: bold">
-    <i class="fa-solid fa-plane"></i> Fly from <%= flight.departure_city %> to <%= flight.arrival_city %> on <%= flight.flight_number %>
+    <i class="fa-solid fa-plane"></i> Fly from <%= flight.departure_city %> to <%= flight.arrival_city %>
   </p>
-  <p><i class="fa-solid fa-plane-departure"></i> Departure: <%= flight.start_time.strftime("%-d %b, %l.%M%P") %>
-  &nbsp;&nbsp;&nbsp; <i class="fa-solid fa-plane-arrival"></i> Arrival: <%= flight.end_time.strftime("%-d %b, %l.%M%P") %></p>
+  <p><%= flight.flight_number %></p>
+  <div class="flight-times">
+    <p><i class="fa-solid fa-plane-departure"></i> Departure: <%= flight.start_time.strftime("%-d %b, %l.%M%P") %></p>
+    <p><i class="fa-solid fa-plane-arrival"></i> Arrival: <%= flight.end_time.strftime("%-d %b, %l.%M%P") %></p>
+  </div>
 </li>
