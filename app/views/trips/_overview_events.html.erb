@@ -17,9 +17,52 @@
           data-sortable-handle-value=".handle"
           data-highest-position="<%= highest_position %>"
           data-action="order-updated@window->sortable#updatePositions">
-        <% events.each_with_index do |event, index| %>
-          <%= render "trips/event", event: event, index: index, trip: trip %>
-        <% end %>
+
+          <% if flights %>
+            <% flights.each do |flight| %>
+              <% if flight.start_time.day == events[0].start_time.day and flight.start_time.day == trip.start_date.to_datetime.day %>
+                <%= render "trips/flight", flight: flight %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <% if hotels %>
+            <% hotels.each do |hotel| %>
+              <% booking_dates = (hotel.start_time.to_date..hotel.end_time.to_date).to_a %>
+              <% booking_dates.each do |booking| %>
+                <% if events[0].start_time.day == booking.day %>
+                  <% if hotel.start_time.to_date == booking %>
+                    <li class="hotel-card">
+                      <p><i class="fa-solid fa-bed"></i> Today you're checking into <strong><%= hotel.name %></strong> (check in from <%= hotel.start_time.strftime("%l%P") %>) </p>
+                      <p><%= hotel.address %></p>
+                    </li>
+                  <% elsif hotel.end_time.to_date == booking %>
+                    <li class="hotel-card">
+                      <p><i class="fa-solid fa-bed"></i> This morning you're checking out of <strong><%= hotel.name %></strong> (check out by <%= hotel.end_time.strftime("%l%P") %>) </p>
+                      <p><%= hotel.address %></p>
+                    </li>
+                  <% else %>
+                    <li class="hotel-card">
+                      <p><i class="fa-solid fa-bed"></i> Tonight you're staying at <strong><%= hotel.name %></strong></p>
+                      <p><%= hotel.address %></p>
+                    </li>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <% events.each_with_index do |event, index| %>
+            <%= render "trips/event", event: event, index: index, trip: trip %>
+          <% end %>
+
+          <% if flights %>
+            <% flights.each do |flight| %>
+              <% if flight.start_time.day == events[0].start_time.day and flight.start_time.day == trip.end_date.to_datetime.day %>
+                <%= render "trips/flight", flight: flight %>
+              <% end %>
+            <% end %>
+          <% end %>
         </ul>
       </div>
     <% end %>

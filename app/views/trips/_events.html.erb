@@ -1,13 +1,13 @@
 <div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections order-updated@window->maps#updateMarkers">
   <div class="icons">
-    <p class="icon" data-action="click->directions#showDirections"><i class="fa-solid fa-van-shuttle"></i></p>
     <%= link_to trip_overview_path(@trip) do %>
-      <p class="icon"><i class="fa-solid fa-calendar-days"></i></p>
+      <p class="icon" title="See all days"><i class="fa-solid fa-calendar-days"></i></p>
     <% end %>
-    <p class="icon" data-bs-toggle="modal" data-bs-target="#staticBackdropFlight"><i class="fa-solid fa-plane-departure"></i>
+    <p class="icon" data-action="click->directions#showDirections" title="See transport times"><i class="fa-solid fa-van-shuttle"></i></p>
+    <p class="icon" data-bs-toggle="modal" data-bs-target="#staticBackdropFlight" title="Add flights"><i class="fa-solid fa-plane-departure"></i>
       <%= render "flights/modal", trip: @trip, flight: @flight %>
     </p>
-    <p class="icon" data-bs-toggle="modal" data-bs-target="#staticBackdropHotel"><i class="fa-solid fa-hotel"></i>
+    <p class="icon" data-bs-toggle="modal" data-bs-target="#staticBackdropHotel" title="Add hotels"><i class="fa-solid fa-hotel"></i>
       <%= render "hotels/modal", trip: @trip, flight: @hotel %>
     </p>
   </div>
@@ -17,10 +17,54 @@
     data-sortable-handle-value=".handle"
     data-action="order-updated@window->sortable#updatePositions"
     data-date="<%= events[0].start_time %>">
+
+    <% if flights %>
+      <% flights.each do |flight| %>
+        <% if flight.start_time.day == events[0].start_time.day and flight.start_time.day == trip.start_date.to_datetime.day %>
+          <%= render "trips/flight", flight: flight %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if hotels %>
+      <% hotels.each do |hotel| %>
+        <% booking_dates = (hotel.start_time.to_date..hotel.end_time.to_date).to_a %>
+        <% booking_dates.each do |booking| %>
+          <% if events[0].start_time.day == booking.day %>
+            <% if hotel.start_time.to_date == booking %>
+              <li class="hotel-card">
+                <p><i class="fa-solid fa-bed"></i> Today you're checking into <strong><%= hotel.name %></strong> (check in from <%= hotel.start_time.strftime("%l%P") %>) </p>
+                <p><%= hotel.address %></p>
+              </li>
+            <% elsif hotel.end_time.to_date == booking %>
+              <li class="hotel-card">
+                <p><i class="fa-solid fa-bed"></i> This morning you're checking out of <strong><%= hotel.name %></strong> (check out by <%= hotel.end_time.strftime("%l%P") %>) </p>
+                <p><%= hotel.address %></p>
+              </li>
+            <% else %>
+              <li class="hotel-card">
+                <p><i class="fa-solid fa-bed"></i> Tonight you're staying at <strong><%= hotel.name %></strong></p>
+                <p><%= hotel.address %></p>
+              </li>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
     <% if events %>
       <% events.each_with_index do |event, index| %>
         <%= render "event", event: event, index: index, trip: trip %>
       <% end %>
     <% end %>
+
+    <% if flights %>
+      <% flights.each do |flight| %>
+        <% if flight.start_time.day == events[0].start_time.day and flight.start_time.day == trip.end_date.to_datetime.day %>
+          <%= render "trips/flight", flight: flight %>
+        <% end %>
+      <% end %>
+    <% end %>
+
   </ul>
 </div>
