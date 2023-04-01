@@ -46,10 +46,8 @@ class TripsController < ApplicationController
   def overview
     @trip = Trip.find(params[:trip_id])
     # select the events selected by user
-    @events = @trip.events.where(selected: true).order(:start_time, :position)
-    if @events.empty?
-      @events = @trip.events.order(:start_time, :position)
-    end
+    @events = @trip.events.where.not(start_time: nil).order(:start_time, :position)
+
     @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
     @events_by_day = {}
     @all_dates.each do |date|
