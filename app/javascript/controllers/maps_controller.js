@@ -49,8 +49,14 @@ export default class extends Controller {
 
   singleEvent() {
     let current_index = this.addressTargets.indexOf(event.target);
+    let to_geocode
+    if (this.placeIdTargets[current_index].innerText === "") {
+      to_geocode = {address: this.addressTargets[current_index].innerText}
+    } else {
+      to_geocode = {placeId: this.placeIdTargets[current_index].innerText }
+    }
     new google.maps.Geocoder()
-    .geocode({ placeId: this.placeIdTargets[current_index].innerText })
+    .geocode(to_geocode)
     .then(({ results }) => {
       if (results[0]) {
         this.map = new google.maps.Map(this.mapTarget, {
@@ -63,7 +69,6 @@ export default class extends Controller {
           position: results[0].geometry.location,
         });
         const infowindow = new google.maps.InfoWindow()
-        console.log(results[0])
         infowindow.setContent(results[0].formatted_address);
         infowindow.open(this.map, marker);
       }
