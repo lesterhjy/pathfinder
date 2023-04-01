@@ -8,8 +8,16 @@ class TripsController < ApplicationController
     redirect_to trip_recommendations_path(@trip)
   end
 
+  def index
+    @trips = current_user.trips
+  end
+
   def show
     @trip = Trip.find(params[:id])
+    # creating association with trip and user
+    unless UserTrip.where(user_id: current_user.id, trip_id: @trip.id).exists?
+      UserTrip.create(user_id: current_user.id, trip_id: @trip.id)
+    end
     @event = Event.new
     @flight = Flight.new
     @hotel = Hotel.new
