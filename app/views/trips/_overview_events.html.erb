@@ -1,0 +1,26 @@
+  <div class="all-events">
+    <% events_by_day.values.each_with_index do |events, index| %>
+      <div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections">
+        <div class="date">
+          <h3>
+          <strong>Day <%= index + 1 %></strong> |
+          <small><%= all_dates[index].strftime("%e %b") %></small>
+          </h3>
+        </div>
+        <div class="icons">
+          <p class="icon" data-action="click->directions#showDirections"><i class="fa-solid fa-van-shuttle"></i></p>
+        </div>
+        <ul
+          data-controller="sortable toggle"
+          data-sortable-resource-name-value="event"
+          data-date="<%= all_dates[index] %>"
+          data-sortable-handle-value=".handle"
+          data-highest-position="<%= highest_position %>"
+          data-action="order-updated@window->sortable#updatePositions">
+        <% events.each_with_index do |event, index| %>
+          <%= render "trips/event", event: event, index: index, trip: trip %>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>

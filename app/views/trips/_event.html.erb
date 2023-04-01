@@ -13,7 +13,7 @@
     <%= event.position %>
     <div class="position" style="text-align: right" data-sortable-target="position"><h3><%= index + 1 %></h3></div>
     <div class="event-inner-card" data-edit-event-target="card">
-      <%= render "event_details", event: event, trip: trip %>
+      <%= render "trips/event_details", event: event, trip: trip %>
     </div>
 
   <div class="event-directions" data-directions-target="directions">
