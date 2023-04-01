@@ -43,8 +43,5 @@ application.register("sortable", SortableController)
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
 
-import TripFormController from "./trip_form_controller"
-application.register("trip-form", TripFormController)
-
 import TypedJsController from "./typed_js_controller"
 application.register("typed-js", TypedJsController)
