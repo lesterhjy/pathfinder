@@ -27,7 +27,7 @@ class TripsController < ApplicationController
     @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
     @events_by_day = {}
     @all_dates.each do |date|
-      events_that_day = @events.select { |e| e.start_time.day == date.day }
+      events_that_day = @events.select { |e| e.start_time.day == date.day }.sort_by { |e| e.position }
       @events_by_day[date.day] = events_that_day
     end
     # events for the first day - will show as default on the trip show page
@@ -53,7 +53,7 @@ class TripsController < ApplicationController
     @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
     @events_by_day = {}
     @all_dates.each do |date|
-      events_that_day = @events.select { |e| e.start_time.day == date.day }
+      events_that_day = @events.select { |e| e.start_time.day == date.day }.sort_by { |e| e.position }
       @events_by_day[date.day] = events_that_day
     end
     @highest_position = @events.last.position
