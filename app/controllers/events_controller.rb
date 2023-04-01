@@ -39,8 +39,6 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @events = @trip.events
     @events_that_day = @events.where.not(start_time: nil).order(:position).select { |event| event.start_time.day == @event.start_time.day }
-    old_index = @events_that_day.index(@event)
-    old_position = @event.position
     new_index = event_params[:position].to_i - 1
     new_position = @events_that_day[new_index].position
     @event.insert_at(new_position)
