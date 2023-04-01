@@ -1,3 +1,5 @@
 <% recommendations.shuffle.each do |event| %>
-  <%= render "recommendations/recommendation_infos", categories: @categories, trip: @trip, event: event %>
+  <% if event.category != nil %>
+    <%= render "recommendations/recommendation_infos", categories: @categories, trip: @trip, event: event %>
+  <% end %>
 <% end %>

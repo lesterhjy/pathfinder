@@ -60,15 +60,22 @@
   font-size: 14px;
 }
 
+.recommendation-card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+  height: 70px;
+}
+
+.recommendation-card-title i {
+  margin-right: 10px
+}
 
 .recommendation-card-infos {
   text-align: justify;
   padding: 15px;
   position: relative;
-}
-
-.recommendation-card-infos i {
-  margin-right: 10px
 }
 
 .recommendation-description {
