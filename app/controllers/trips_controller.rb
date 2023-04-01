@@ -13,8 +13,10 @@ class TripsController < ApplicationController
     @flights = @trip.flights
     @hotels = @trip.hotels
     @event = Event.new
+    @flight = Flight.new
+    @hotel = Hotel.new
     # get events for different sources
-    @recommendations = Event.where(trip: @trip, source: 'google', start_time: nil)
+    @recommendations = Event.where(trip: @trip, source: 'google', selected: nil, start_time: nil)
     @self_created = Event.where(trip: @trip, source: 'self')
     # filtering all events associated with the trip
     @events = @trip.events

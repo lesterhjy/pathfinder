@@ -18,3 +18,11 @@ flatpickr(".datetimepicker", {
   altFormat: "j M Y, h.i K",
   minDate: "today"
 })
+
+flatpickr(".trip-recommendation-datetimepicker", {
+  enableTime: false,
+  minDate: false,
+  altInput: true,
+  altFormat: "F j, Y",
+  dateFormat: "Y-m-d"
+})
