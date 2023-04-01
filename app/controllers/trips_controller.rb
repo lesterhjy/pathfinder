@@ -12,7 +12,7 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
     @event = Event.new
     # get events for different sources
-    @recommendations = Event.where(trip: @trip, source: 'google', selected: nil)
+    @recommendations = Event.where(trip: @trip, source: 'google', start_time: nil)
     @self_created = Event.where(trip: @trip, source: 'self')
     # filtering all events associated with the trip
     @events = @trip.events
