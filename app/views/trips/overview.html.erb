@@ -1,32 +1,11 @@
+<% content_for :head do %>
+  <meta name="turbo-visit-control" content="reload">
+<% end %>
+
 <div class="container-fluid mt-3">
   <div class="intro">
     <h2>Your <%= pluralize(@events_by_day.length, "days") %> in <strong><%= @trip.destination %></strong></h2>
     <%= link_to "See day-by-day view", trip_path(@trip) %>
   </div>
-  <div class="all-events">
-    <% @events_by_day.values.each_with_index do |events, index| %>
-      <div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections">
-        <div class="date">
-          <h3>
-          <strong>Day <%= index + 1 %></strong> |
-          <small><%= @all_dates[index].strftime("%e %b") %></small>
-          </h3>
-        </div>
-        <div class="icons">
-          <p class="icon" data-action="click->directions#showDirections"><i class="fa-solid fa-van-shuttle"></i></p>
-        </div>
-        <ul
-          data-controller="sortable toggle"
-          data-sortable-resource-name-value="event"
-          data-date="<%= @all_dates[index] %>"
-          data-sortable-handle-value=".handle"
-          data-highest-position="<%= @highest_position %>"
-          data-action="order-updated@window->sortable#updatePositions">
-        <% events.each_with_index do |event, index| %>
-          <%= render "event", event: event, index: index, trip: @trip %>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-  </div>
+  <%= render "overview_events", trip: @trip, events_by_day: @events_by_day, all_dates: @all_dates, highest_position: @highest_position %>
 </div>

@@ -27,6 +27,7 @@ export default class extends Sortable {
   }
 
   remove(event) {
+    console.log(event.to.dataset)
     const newDate = event.to.dataset.date
     const url = event.item.dataset.sortableMoveUrl
     const oldPosition = parseInt(event.item.dataset.position, 10)
