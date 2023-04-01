@@ -37,6 +37,7 @@ input[type="radio"] {
 }
 
 .trip-tab-content {
+  padding: 30px;
   display: flex;
   align-items: center;
   flex-flow: column;
@@ -52,6 +53,7 @@ input[type="radio"] {
   &:nth-of-type(2) { background-color: $tab-color2;}
   &:nth-of-type(3) { background-color: $tab-color3;}
   &:nth-of-type(4) { background-color: $tab-color4;}
+
 }
 
 .trip-tab-recommendation-container {
