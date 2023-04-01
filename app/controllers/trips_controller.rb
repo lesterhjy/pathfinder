@@ -10,6 +10,8 @@ class TripsController < ApplicationController
 
   def show
     @trip = Trip.find(params[:id])
+    @flights = @trip.flights
+    @hotels = @trip.hotels
     @event = Event.new
     # get events for different sources
     @recommendations = Event.where(trip: @trip, source: 'google', start_time: nil)
@@ -21,6 +23,7 @@ class TripsController < ApplicationController
       @clusters = events_clustering(@events)
       generate_event_start_time(event_generation)
     end
+    # gathering the events for the show page
     @events = @events.where.not(start_time: nil).order(:start_time, :position)
     @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
     @events_by_day = {}
@@ -39,7 +42,7 @@ class TripsController < ApplicationController
     respond_to do |format|
       format.html
       # this renders the tab info when you click on a specific day
-      format.text { render partial: 'trips/events', locals: { events: @events, trip: @trip }, formats: [:html] }
+      format.text { render partial: 'trips/events', locals: { events: @events, trip: @trip, flights: @flights, hotels: @hotels }, formats: [:html] }
     end
   end
 

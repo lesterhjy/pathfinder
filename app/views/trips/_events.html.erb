@@ -11,10 +11,20 @@
     data-sortable-handle-value=".handle"
     data-action="order-updated@window->sortable#updatePositions"
     data-date="<%= events[0].start_time %>">
+
+    <% if flights %>
+      <% flights.each do |flight| %>
+        <% if flight.start_time.day == events[0].start_time.day %>
+          <%= render "trips/flight", flight: flight %>
+        <% end %>
+      <% end %>
+    <% end %>
+
     <% if events %>
       <% events.each_with_index do |event, index| %>
         <%= render "event", event: event, index: index, trip: trip %>
       <% end %>
     <% end %>
+
   </ul>
 </div>
