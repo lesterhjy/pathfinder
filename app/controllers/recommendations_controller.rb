@@ -7,6 +7,7 @@ class RecommendationsController < ApplicationController
     @flight = Flight.new
     @hotel = Hotel.new
     @trip = Trip.find(params[:trip_id])
+    @days = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a.length
     @categories = search_categories
     if @trip.events.empty?
       @categories.each_value do |categories|
