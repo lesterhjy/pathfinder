@@ -16,6 +16,9 @@ application.register("directions", DirectionsController)
 import EditEventController from "./edit_event_controller"
 application.register("edit-event", EditEventController)
 
+import EventsLoaderController from "./events_loader_controller"
+application.register("events-loader", EventsLoaderController)
+
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 
