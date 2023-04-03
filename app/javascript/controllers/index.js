@@ -22,6 +22,15 @@ application.register("events-loader", EventsLoaderController)
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 
+import FlatpickrEventsController from "./flatpickr_events_controller"
+application.register("flatpickr-events", FlatpickrEventsController)
+
+import FlatpickrFlightsController from "./flatpickr_flights_controller"
+application.register("flatpickr-flights", FlatpickrFlightsController)
+
+import FlatpickrHotelsController from "./flatpickr_hotels_controller"
+application.register("flatpickr-hotels", FlatpickrHotelsController)
+
 import FlightFormController from "./flight_form_controller"
 application.register("flight-form", FlightFormController)
 

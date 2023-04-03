@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
+  height: calc(100vh - 60px);
 
 }
 
@@ -191,6 +192,6 @@ ul {
 }
 
 #map {
-  height: 100vh;
-  position: sticky;
+  height: 100%;
+  // position: sticky;
 }
