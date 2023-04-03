@@ -29,7 +29,7 @@ class TripsController < ApplicationController
     # filtering all events associated with the trip
     @events = @trip.events
     # geoclustering events and populating trip
-    unless @trip.generated == true
+    unless @trip.skip == true || @trip.generated == true
       @clusters = events_clustering(@events)
       generate_event_start_time(event_generation)
     end
@@ -39,14 +39,15 @@ class TripsController < ApplicationController
     @events_by_day = {}
     @all_dates.each do |date|
       events_that_day = @events.select { |e| e.start_time.day == date.day }.sort_by { |e| e.position }
-      @events_by_day[date.day] = events_that_day
+      @events_by_day[date] = events_that_day
     end
     # events for the first day - will show as default on the trip show page
-    @first_day_events = @events_by_day[@all_dates.first.day]
+    @first_day_events = @events_by_day.first
+    raise
 
     # when a tab is clicked, it will send a request to get the day's events
-    if params[:day].present?
-      @events = @events_by_day[params[:day].to_i]
+    if params[:date].present?
+      @events = @events_by_day.select { |k, _v| k == params[:date] }
     end
 
     respond_to do |format|
@@ -72,10 +73,16 @@ class TripsController < ApplicationController
     @highest_position = @events.last.position
   end
 
+  def update
+    @trip = Trip.find(params[:id])
+    @trip.update(trip_params)
+    redirect_to @trip
+  end
+
   private
 
   def trip_params
-    params.require(:trip).permit(:destination, :start_date, :end_date, :latitude, :longitude)
+    params.require(:trip).permit(:destination, :start_date, :end_date, :latitude, :longitude, :skip)
   end
 
   def events_clustering(events)

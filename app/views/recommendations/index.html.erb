@@ -33,10 +33,9 @@
             I'm ready, plan my trip for me!
           </button>
         <% end %>
-        <%= link_to trip_path(params[:trip_id]) do %>
-          <button type="button" class="fat-btn">
-            Skip - I want to plan my own trip
-          </button>
+        <%= simple_form_for(@trip) do |f| %>
+          <%= f.button :submit, "Skip - I want to plan my own trip", class: "fat-btn" %>
+          <%= f.input :skip, as: :hidden, input_html: { value: true } %>
         <% end %>
       </div>
       <div class="content-box" data-controller="events-loader" >
