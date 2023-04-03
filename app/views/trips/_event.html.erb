@@ -1,4 +1,6 @@
-<% if @categories[:shopping].any? { |type| event.category.include?(type)} %>
+<% if event.category == nil %>
+  <% bg_color = "var(--orange)" %>
+<% elsif @categories[:shopping].any? { |type| event.category.include?(type)} %>
   <% bg_color = "var(--lightgreen)" %>
 <% elsif @categories[:food].any? { |type| event.category.include?(type)} %>
   <% bg_color = "var(--pink)" %>
