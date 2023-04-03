@@ -22,8 +22,6 @@ export default class extends Controller {
         // console.log(eventTarget.dataset)
         if (index < this.eventTargets.length - 1) {
 
-          console.log(eventTarget.parentElement.parentElement)
-
           let origin_latitude = parseFloat(eventTarget.parentElement.dataset.latitude)
           let origin_longitude = parseFloat(eventTarget.parentElement.dataset.longitude)
           let origin_placeId = eventTarget.parentElement.dataset.placeId

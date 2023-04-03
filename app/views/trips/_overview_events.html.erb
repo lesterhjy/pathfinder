@@ -31,22 +31,33 @@
               <% booking_dates = (hotel.start_time.to_date..hotel.end_time.to_date).to_a %>
               <% booking_dates.each do |booking| %>
                 <% if events[0].start_time.day == booking.day %>
+                  <li
+                      data-latitude=<%= hotel.latitude%>
+                      data-longitude=<%= hotel.longitude %>
+                    >
                   <% if hotel.start_time.to_date == booking %>
-                    <li class="hotel-card">
+                    <div class="hotel-card" data-directions-target="event">
                       <p><i class="fa-solid fa-bed"></i> Today you're checking into <strong><%= hotel.name %></strong> (check in from <%= hotel.start_time.strftime("%l%P") %>) </p>
                       <p><%= hotel.address %></p>
-                    </li>
+                    </div>
                   <% elsif hotel.end_time.to_date == booking %>
-                    <li class="hotel-card">
+                    <div class="hotel-card" data-directions-target="event">
                       <p><i class="fa-solid fa-bed"></i> This morning you're checking out of <strong><%= hotel.name %></strong> (check out by <%= hotel.end_time.strftime("%l%P") %>) </p>
                       <p><%= hotel.address %></p>
-                    </li>
+                    </div>
                   <% else %>
-                    <li class="hotel-card">
-                      <p><i class="fa-solid fa-bed"></i> Tonight you're staying at <strong><%= hotel.name %></strong></p>
+                    <div class="hotel-card" data-directions-target="event">
+                      <p><i class="fa-solid fa-bed"></i> This morning you're setting off from <strong><%= hotel.name %></strong></p>
                       <p><%= hotel.address %></p>
-                    </li>
+                    </div>
                   <% end %>
+                  <div class="event-directions" data-directions-target="directions">
+                    <div class="arrow" data-directions-target="arrow"></div>
+                    <div data-directions-target="driving" class="direction"></div>
+                    <div data-directions-target="transit" class="direction"></div>
+                    <div data-directions-target="walking" class="direction"></div>
+                  </div>
+                  </li>
                 <% end %>
               <% end %>
             <% end %>

@@ -41,6 +41,9 @@ class TripsController < ApplicationController
       events_that_day = @events.select { |e| e.start_time.to_date == date }.sort_by { |e| e.position }
       @events_by_day[date] = events_that_day
     end
+
+    @categories = search_categories
+
     # events for the first day - will show as default on the trip show page
     @first_day_events = @events_by_day.first[1]
     @first_day_date = @events_by_day.first[0]
@@ -76,6 +79,7 @@ class TripsController < ApplicationController
     else
       @highest_position = 1
     end
+    @categories = search_categories
   end
 
   def update
@@ -138,5 +142,31 @@ class TripsController < ApplicationController
       end
       date += 1
     end
+  end
+
+  def search_categories
+    { shopping: ["book_store",
+                 "electronics_store",
+                 "clothing_store",
+                 "shoe_store",
+                 "furniture_store",
+                 "jewelry_store",
+                 "department_store",
+                 "shopping_mall"],
+      attraction: ["casino",
+                   "library",
+                   "movie_theater",
+                   "bowling_alley",
+                   "amusement_park",
+                   "museum",
+                   "zoo",
+                   "park",
+                   "art_gallery",
+                   "tourist_attraction"],
+      food: ["bar",
+             "cafe",
+             "bakery",
+             "restaurant",
+             "night_club"] }
   end
 end
