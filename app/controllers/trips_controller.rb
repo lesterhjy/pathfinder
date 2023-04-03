@@ -29,30 +29,32 @@ class TripsController < ApplicationController
     # filtering all events associated with the trip
     @events = @trip.events
     # geoclustering events and populating trip
-    unless @trip.generated == true
+    unless @trip.skip == true || @trip.generated == true
       @clusters = events_clustering(@events)
       generate_event_start_time(event_generation)
     end
     # gathering the events for the show page
     @events = @events.where.not(start_time: nil).order(:start_time, :position)
-    @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
+    @all_dates = (@trip.start_date.to_date..@trip.end_date.to_date).to_a
     @events_by_day = {}
     @all_dates.each do |date|
-      events_that_day = @events.select { |e| e.start_time.day == date.day }.sort_by { |e| e.position }
-      @events_by_day[date.day] = events_that_day
+      events_that_day = @events.select { |e| e.start_time.to_date == date }.sort_by { |e| e.position }
+      @events_by_day[date] = events_that_day
     end
     # events for the first day - will show as default on the trip show page
-    @first_day_events = @events_by_day[@all_dates.first.day]
+    @first_day_events = @events_by_day.first[1]
+    @first_day_date = @events_by_day.first[0]
 
     # when a tab is clicked, it will send a request to get the day's events
-    if params[:day].present?
-      @events = @events_by_day[params[:day].to_i]
+    if params[:date].present?
+      @events = @events_by_day[params[:date].to_date]
+      @date = params[:date].to_date
     end
 
     respond_to do |format|
       format.html
       # this renders the tab info when you click on a specific day
-      format.text { render partial: 'trips/events', locals: { events: @events, trip: @trip, flights: @flights, hotels: @hotels }, formats: [:html] }
+      format.text { render partial: 'trips/events', locals: { events: @events, date: @date, trip: @trip, flights: @flights, hotels: @hotels }, formats: [:html] }
     end
   end
 
@@ -69,13 +71,23 @@ class TripsController < ApplicationController
       events_that_day = @events.select { |e| e.start_time.day == date.day }.sort_by { |e| e.position }
       @events_by_day[date.day] = events_that_day
     end
-    @highest_position = @events.last.position
+    if @events.last
+      @highest_position = @events.last.position
+    else
+      @highest_position = 1
+    end
+  end
+
+  def update
+    @trip = Trip.find(params[:id])
+    @trip.update(trip_params)
+    redirect_to @trip
   end
 
   private
 
   def trip_params
-    params.require(:trip).permit(:destination, :start_date, :end_date, :latitude, :longitude)
+    params.require(:trip).permit(:destination, :start_date, :end_date, :latitude, :longitude, :skip)
   end
 
   def events_clustering(events)

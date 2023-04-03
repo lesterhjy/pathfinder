@@ -43,10 +43,22 @@
   border-radius: 20px;
   color: var(--green);
   opacity: 0.8;
-  transition: 0.3s;
   margin: 10px;
 }
 
 .fat-btn:hover {
-  background-color: #dc1a1a52;
+  opacity: 0.8;
+  font-weight: bold;
+  padding: 10px 40px;
+  background-color: var(--green);
+  border: 2px solid var(--green);
+  border-radius: 20px;
+  color: white;
+  opacity: 0.8;
+  transition: 0.5s;
+  margin: 10px;
+
+  p {
+    color: white;
+  }
 }

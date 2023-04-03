@@ -27,6 +27,14 @@
     height: 30px;
     width: 30px;
     margin: 0;
+    border: none;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all ease 0.3s;
+  }
+
+  .icon:hover {
+    transform: scale(1.1);
   }
 
   .position {
@@ -37,7 +45,8 @@
 
     h3 {
       font-size: 15px;
-      padding: 6px 10px;
+      height: 30px;
+      width: 30px;
     }
   }
 
