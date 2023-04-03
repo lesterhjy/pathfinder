@@ -39,8 +39,18 @@
           </button>
         <% end %>
       </div>
-      <div class="recommendation-container content-box">
-        <%= render "recommendation_list", recommendations: @recommendations %>
+      <div class="content-box" data-controller="events-loader" >
+        <div class="" id="events-loader">
+          <h1><span data-controller="loading"></span></h1>
+          <br>
+        </div>
+        <div class="d-none" id="events-loaded">
+          <h1>Look what we've found for you.</h1>
+          <br>
+        </div>
+        <div class="recommendation-container" data-events-loader-target="events" id="event-list">
+          <%= render "recommendation_list", recommendations: @recommendations %>
+        </div>
       </div>
     </div>
   </div>
