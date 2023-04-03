@@ -3,12 +3,48 @@ class CreateEventsJob < ApplicationJob
   require "open-uri"
   queue_as :default
 
-  def perform(categories, trip)
+  def perform(trip)
+    # Sidekiq performs jobs at least once, and not only once. So it will queue up the same jobs multiple times.
+    # To prevent Sidekiq from running the process multiple times, Trips now have a "created_events" attribute.
+    # The first job queed by Sidekiq will flip the attribute to "True", and prevent the other jobs from running.
+    trip.update(created_events: true)
+    return unless trip.created_events
+
+    @recommended_events = []
+    categories = search_categories
     categories.each_value do |group|
       group.each do |category|
-        get_recommendation_details(get_nearby_recommendations(category, trip), trip)
+        get_nearby_recommendations(category, trip)
       end
     end
+    @recommended_events = @recommended_events.uniq
+    get_recommendation_details(@recommended_events, trip)
+  end
+
+  def search_categories
+    { shopping: ["book_store",
+                 "electronics_store",
+                 "clothing_store",
+                 "shoe_store",
+                 "furniture_store",
+                 "jewelry_store",
+                 "department_store",
+                 "shopping_mall"],
+      attraction: ["casino",
+                   "library",
+                   "movie_theater",
+                   "bowling_alley",
+                   "amusement_park",
+                   "museum",
+                   "zoo",
+                   "park",
+                   "art_gallery",
+                   "tourist_attraction"],
+      food: ["bar",
+             "cafe",
+             "bakery",
+             "restaurant",
+             "night_club"] }
   end
 
   def get_nearby_recommendations(category, trip)
@@ -18,16 +54,13 @@ class CreateEventsJob < ApplicationJob
     nearby_search = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{location}&radius=#{radius}&type=#{category}&key=#{ENV["GOOGLE_API_KEY"]}")
     nearby_search_results = JSON.parse(URI.open(nearby_search).read)
 
-    recommendations_overview = []
-    nearby_search_results["results"].each do |result|
-      recommendations_overview.append(result["place_id"])
+    nearby_search_results["results"].first(3).each do |result|
+      @recommended_events.append(result["place_id"])
     end
-
-    recommendations_overview
   end
 
   def get_recommendation_details(recommendations_overview, trip)
-    recommendations_overview.first(1).each do |recommendation|
+    recommendations_overview.each do |recommendation|
       if Event.where(trip_id: trip.id, source_id: recommendation).empty?
         place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
         place_details = JSON.parse(URI.open(place_details_search).read)["result"]

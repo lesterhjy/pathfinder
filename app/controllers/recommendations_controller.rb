@@ -7,9 +7,7 @@ class RecommendationsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @days = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a.length
     @categories = search_categories
-    if @trip.events.empty?
-      CreateEventsJob.perform_later(@categories, @trip)
-    end
+    CreateEventsJob.perform_later(@trip) if @trip.events.empty?
     @recommendations = Event.where(trip_id: params[:trip_id])
     respond_to do |format|
       format.html
