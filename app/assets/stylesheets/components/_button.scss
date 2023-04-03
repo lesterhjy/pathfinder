@@ -48,5 +48,12 @@
 }
 
 .fat-btn:hover {
-  background-color: #dc1a1a52;
+  background-color: var(--green);
+  color: white;
+  transition: 0.3s;
+  opacity: 0.8;
+
+  p {
+    color: white;
+  }
 }
