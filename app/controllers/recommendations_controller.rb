@@ -1,7 +1,5 @@
 class RecommendationsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index]
-  require "json"
-  require "open-uri"
 
   def index
     @flight = Flight.new
@@ -9,14 +7,12 @@ class RecommendationsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @days = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a.length
     @categories = search_categories
-    if @trip.events.empty?
-      @categories.each_value do |categories|
-        categories.each do |category|
-          get_recommendation_details(get_nearby_recommendations(category))
-        end
-      end
-    end
+    CreateEventsJob.perform_later(@trip) if @trip.events.empty?
     @recommendations = Event.where(trip_id: params[:trip_id])
+    respond_to do |format|
+      format.html
+      format.text { render partial: "recommendations/recommendation_list", locals: {recommendations: @recommendations}, formats: [:html] }
+    end
   end
 
   private
@@ -44,48 +40,6 @@ class RecommendationsController < ApplicationController
              "cafe",
              "bakery",
              "restaurant",
-             "night_club"], }
-  end
-
-  def get_nearby_recommendations(category)
-    location = "#{@trip.latitude}%2C#{@trip.longitude}"
-    radius = '50000'
-
-    nearby_search = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{location}&radius=#{radius}&type=#{category}&key=#{ENV["GOOGLE_API_KEY"]}")
-    nearby_search_results = JSON.parse(URI.open(nearby_search).read)
-
-    recommendations_overview = []
-    nearby_search_results["results"].each do |result|
-      recommendations_overview.append(result["place_id"])
-    end
-
-    recommendations_overview
-  end
-
-  def get_recommendation_details(recommendations_overview)
-    recommendations_overview.first(3).each do |recommendation|
-      if Event.where(trip_id: @trip.id, source_id: recommendation).empty?
-        place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
-        place_details = JSON.parse(URI.open(place_details_search).read)["result"]
-        if place_details.key?("photos")
-          event = Event.new
-          event.trip = @trip
-          event.name = place_details["name"]
-          event.source = 'google'
-          event.source_id = place_details["place_id"]
-          event.latitude = place_details["geometry"]["location"]["lat"]
-          event.longitude = place_details["geometry"]["location"]["lng"]
-          event.address = place_details["formatted_address"]
-          event.category = place_details["types"]
-          event.website = place_details["website"] if place_details.key?("website")
-          event.phone = place_details["international_phone_number"] if place_details.key?("international_phone_number")
-          event.photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{place_details["photos"][0]["photo_reference"]}&key=#{ENV["GOOGLE_API_KEY"]}"
-          event.rating = place_details["rating"]
-          event.review = place_details["reviews"]
-          event.description = place_details["editorial_summary"]["overview"].capitalize if place_details.key?("editorial_summary")
-          event.save
-        end
-      end
-    end
+             "night_club"] }
   end
 end
