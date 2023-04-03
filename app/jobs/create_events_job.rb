@@ -7,9 +7,9 @@ class CreateEventsJob < ApplicationJob
     # Sidekiq performs jobs at least once, and not only once. So it will queue up the same jobs multiple times.
     # To prevent Sidekiq from running the process multiple times, Trips now have a "created_events" attribute.
     # The first job queed by Sidekiq will flip the attribute to "True", and prevent the other jobs from running.
-    trip.update(created_events: true)
-    return unless trip.created_events
+    return if trip.created_events
 
+    trip.update(created_events: true)
     @recommended_events = []
     categories = search_categories
     categories.each_value do |group|

@@ -6,23 +6,22 @@ export default class extends Controller {
 
   connect() {
     console.log("events-loader connected")
-    console.log(this.eventsTarget.innerHTML)
-    this.fetchInterval(this.fetchFun, 3000, 10)
+    this.fetchInterval(this.fetchFun, 1000, 40)
+    setTimeout(this.loadedCard, 42000)
   }
 
   fetchInterval(callback, delay, repetitions) {
     var runs = 0
     var intervalID = setInterval(function () {
       callback()
-      if (++runs === repetitions) {
+      runs += 1
+      if (runs > repetitions) {
         clearInterval(intervalID);
-        document.querySelector("#event-loader").classList.add("d-none");
       }
     }, delay)
   }
 
   fetchFun() {
-    console.log("running")
     const url = document.URL
 
     fetch(url, {
@@ -34,5 +33,15 @@ export default class extends Controller {
         const eventList = document.querySelector("#event-list")
         eventList.innerHTML = data
       })
+  }
+
+  loadedCard() {
+    document.querySelector("#events-loader").classList.add("d-none");
+    document.querySelector("#events-loaded").classList.remove("d-none");
+    const eventsCard = document.querySelectorAll(".recommendation-card-loading")
+    eventsCard.forEach((card) => {
+      card.classList.remove("recommendation-card-loading")
+      card.classList.add("recommendation-card")
+    })
   }
 }
