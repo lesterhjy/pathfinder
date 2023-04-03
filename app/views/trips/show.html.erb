@@ -75,10 +75,10 @@
           <% @self_created.each_with_index do |sc, index| %>
             <li class="event handle"
               data-index="<%= index + 1 %>"
-              data-latitude=<%= sc.latitude%>
-              data-longitude=<%= sc.longitude %>
-              data-position=<%= sc.position %>
-              data-place-id=<%= sc.source_id %>
+              data-latitude="<%= sc.latitude%>"
+              data-longitude="<%= sc.longitude %>"
+              data-position="<%= sc.position %>"
+              data-place-id="<%= if sc.source_id then sc.source_id else nil end %>"
               data-sortable-update-url="<%= update_position_path(sc.trip_id, sc) %>"
               data-sortable-move-url="<%= move_lists_path(sc.trip_id, sc) %>">
 

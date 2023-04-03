@@ -66,10 +66,14 @@ ul {
   top: 10px;
 
   h3 {
-    font-weight: bold;
-    padding: 10px 15px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
     background-color: var(--red);
+    opacity: 0.9;
     color: var(--white);
     border: 1px solid var(--white);
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
