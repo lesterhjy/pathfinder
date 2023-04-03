@@ -2,7 +2,7 @@
 .trip-overview {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 60px;
 
 }
 
@@ -25,13 +25,20 @@
 
 .icons {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
-  top: -20px;
-  right: 0px;
+  top: 0px;
+  right: -40px;
 
   a {
     opacity: 1;
   }
+
+  p {
+    margin: 0;
+  }
+
 }
 
 .icon {
@@ -39,12 +46,11 @@
   background-color: var(--white);
   height: 40px;
   width: 40px;
-  margin-right: 10px;
-  border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--green);
+
 }
 
 ul {
@@ -183,5 +189,4 @@ ul {
 #map {
   height: 100vh;
   position: sticky;
-  top: 0;
 }

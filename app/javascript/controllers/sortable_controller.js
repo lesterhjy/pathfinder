@@ -28,10 +28,18 @@ export default class extends Sortable {
 
   remove(event) {
     console.log(event.to.dataset)
-    const newDate = event.to.dataset.date
+    let newDate
+    if (event.to.dataset.date) {
+      newDate = event.to.dataset.date
+    } else {
+      newDate = null
+    }
+    console.log(newDate)
+
     const url = event.item.dataset.sortableMoveUrl
     const oldPosition = parseInt(event.item.dataset.position, 10)
     let newPosition
+
 
     if (event.item.nextElementSibling) { // there is something under the item that was moved, so take ref from that
       newPosition = parseInt(event.item.nextElementSibling.dataset.position, 10)
