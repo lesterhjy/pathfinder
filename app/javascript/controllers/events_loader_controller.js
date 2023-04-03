@@ -6,8 +6,12 @@ export default class extends Controller {
 
   connect() {
     console.log("events-loader connected")
-    this.fetchInterval(this.fetchFun, 1000, 40)
-    setTimeout(this.loadedCard, 42000)
+    if (this.eventsTarget.innerHTML.includes("recommendation-card-loading")) {
+      this.loadedCard()
+    } else {
+      this.fetchInterval(this.fetchFun, 1000, 40)
+      setTimeout(this.loadedCard, 42000)
+    }
   }
 
   fetchInterval(callback, delay, repetitions) {
