@@ -2,8 +2,8 @@
 action: "submit->hotel-form#send" } do |f| %>
   <%= f.input :name %>
   <%= f.input :address %>
-  <%= f.input :start_time, as: :string, input_html: {class: "datetimepicker"}, label: "Check in" %>
-  <%= f.input :end_time, as: :string, input_html: {class: "datetimepicker"}, label: "Check out" %>
+  <%= f.input :start_time, as: :string, input_html: { data: { controller: "flatpickr-hotels" }}, label: "Check in" %>
+  <%= f.input :end_time, as: :string, input_html: { data: { controller: "flatpickr-hotels" }}, label: "Check out" %>
   <%= f.input :note %>
   <div class="modal-footer">
     <%= f.button :submit, class: "btn" %>
