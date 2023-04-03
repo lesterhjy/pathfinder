@@ -1,75 +1,86 @@
-    <div class="event-photo-and-details">
-      <div class="event-photo" style="background-image: url('<%= event.photo %>')"></div>
-      <div class="basic-details">
+<div class="event-photo-and-details">
+  <div class="event-photo" style="background-image: url('<%= event.photo %>')"></div>
+    <div class="basic-details">
 
-        <div class="name-address">
+      <div class="name-address">
 
-          <p style="font-weight: bold" data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
-            <%= event.name %>
-          </p>
-          <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-            <%= f.input :name, input_html: {class: "inline-edit"} %>
-          <% end %>
-
-          <p class="address" data-action="dblclick->edit-event#displayForm click->maps#singleEvent" data-edit-event-target="field" data-maps-target="address">
-            <%= event.address %>
-          </p>
-          <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-            <%= f.input :address, input_html: {class: "inline-edit"} %>
-          <% end %>
-
-        </div>
-
-        <p class="info-toggle" data-action="click->toggle#toggleInfo" data-edit-event-target="sign">+</p>
-
-      </div>
-      <div class="coordinates d-none">
-        <p data-maps-target="latitude"><%= event.latitude%></p>
-        <p data-maps-target="longitude"><%= event.longitude %></p>
-        <p data-maps-target="placeId"><%= event.source_id %></p>
-      </div>
-    </div>
-    <div class="more-info d-none" data-toggle-target="info" data-edit-event-target="info">
-
-      <div class="more-event-details">
-
-        <p style="margin-right: 30px; margin-bottom: 10px;" data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
-          <%= event.description %>
-        </p>
-        <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-          <%= f.input :description, input_html: {class: "inline-edit"} %>
-        <% end %>
-
-        <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field"><strong><a href="<%= event.website %>" target="_blank">Website</a></strong></p>
-        <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-          <%= f.input :website, input_html: {class: "inline-edit"} %>
-        <% end %>
-
-        <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
-          <strong>Phone:</strong> <%= event.phone %>
-        </p>
-        <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-          <%= f.input :phone, input_html: {class: "inline-edit"}  %>
-        <% end %>
-
-        <br>
-
-        <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field" class="note">
-          <% if event.note && event.note != "" %>
-            <strong>Note:</strong> <%= event.note %>
+        <p style="font-weight: bold" data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
+          <% if event.category == nil %>
+            <i class="fa-solid fa-user"></i>
+          <% elsif @categories[:food].any? { |type| event.category.include?(type)} %>
+            <i class="fa-solid fa-utensils"></i>
           <% else %>
-            Double click to add a note
+            <i class="fa-solid fa-mountain-city"></i>
           <% end %>
+          &nbsp;
+          <%= event.name %>
         </p>
         <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-          <%= f.input :note, input_html: {class: "inline-edit"} %>
+          <%= f.input :name, input_html: {class: "inline-edit"} %>
+        <% end %>
+
+        <p class="address" data-action="dblclick->edit-event#displayForm click->maps#singleEvent" data-edit-event-target="field" data-maps-target="address">
+          <%= event.address %>
+        </p>
+        <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
+          <%= f.input :address, input_html: {class: "inline-edit"} %>
         <% end %>
 
       </div>
-      <div class="modify-event" style="text-align: right">
-        <%= link_to trip_event_path(trip, event), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-          <i class="fa-solid fa-trash-can"></i>
+
+      <p class="info-toggle" data-action="click->toggle#toggleInfo" data-edit-event-target="sign">+</p>
+
+    </div>
+
+    <div class="coordinates d-none">
+      <p data-maps-target="latitude"><%= event.latitude%></p>
+      <p data-maps-target="longitude"><%= event.longitude %></p>
+      <p data-maps-target="placeId"><%= event.source_id %></p>
+    </div>
+
+  </div>
+
+  <div class="more-info d-none" data-toggle-target="info" data-edit-event-target="info">
+
+    <div class="more-event-details">
+
+      <p style="margin-right: 30px; margin-bottom: 10px;" data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
+        <%= event.description %>
+      </p>
+      <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
+        <%= f.input :description, input_html: {class: "inline-edit"} %>
+      <% end %>
+
+      <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field"><strong><a href="<%= event.website %>" target="_blank">Website</a></strong></p>
+      <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
+        <%= f.input :website, input_html: {class: "inline-edit"} %>
+      <% end %>
+
+      <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
+        <strong>Phone:</strong> <%= event.phone %>
+      </p>
+      <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
+        <%= f.input :phone, input_html: {class: "inline-edit"}  %>
+      <% end %>
+
+      <br>
+
+      <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field" class="note">
+        <% if event.note && event.note != "" %>
+          <strong>Note:</strong> <%= event.note %>
+        <% else %>
+          Double click to add a note
         <% end %>
-      </div>
+      </p>
+      <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
+        <%= f.input :note, input_html: {class: "inline-edit"} %>
+      <% end %>
+
+    </div>
+    <div class="modify-event" style="text-align: right">
+      <%= link_to trip_event_path(trip, event), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+        <i class="fa-solid fa-trash-can"></i>
+      <% end %>
     </div>
   </div>
+</div>
