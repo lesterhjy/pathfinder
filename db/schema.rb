@@ -64,6 +64,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_142304) do
     t.bigint "trip_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
     t.index ["trip_id"], name: "index_hotels_on_trip_id"
   end
 

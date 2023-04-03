@@ -22,6 +22,8 @@ export default class extends Controller {
         // console.log(eventTarget.dataset)
         if (index < this.eventTargets.length - 1) {
 
+          console.log(eventTarget.parentElement.parentElement)
+
           let origin_latitude = parseFloat(eventTarget.parentElement.dataset.latitude)
           let origin_longitude = parseFloat(eventTarget.parentElement.dataset.longitude)
           let origin_placeId = eventTarget.parentElement.dataset.placeId
@@ -53,7 +55,7 @@ export default class extends Controller {
               if (mode === 'DRIVING') {
                 icon = '<i class="fa-solid fa-car-side"></i>'
                 this.drivingTargets[index].innerHTML =
-                    `<a href="https://www.google.com/maps/dir/?api=1&origin=origin&origin_place_id=${origin_placeId}&destination=destination&destination_place_id=${destination_placeId}&&travelmode=driving" target="_blank">
+                    `<a href="https://www.google.com/maps/dir/?api=1&origin=${origin_latitude}%2C${origin_longitude}&origin_place_id=${origin_placeId}&destination=${destination_latitude}%2C${destination_longitude}&destination_place_id=${destination_placeId}&&travelmode=driving" target="_blank">
                       <p class="direction">
                         <small>${icon} ${duration}
                         </small>
@@ -62,7 +64,7 @@ export default class extends Controller {
               } else if (mode === 'TRANSIT') {
                 icon = '<i class="fa-solid fa-train-subway"></i>'
                 this.transitTargets[index].innerHTML =
-                  `<a href="https://www.google.com/maps/dir/?api=1&origin=origin&origin_place_id=${origin_placeId}&destination=destination&destination_place_id=${destination_placeId}&&travelmode=transit" target="_blank">
+                  `<a href="https://www.google.com/maps/dir/?api=1&origin=${origin_latitude}%2C${origin_longitude}&origin_place_id=${origin_placeId}&destination=${destination_latitude}%2C${destination_longitude}&destination_place_id=${destination_placeId}&&travelmode=transit" target="_blank">
                     <p class="direction">
                       <small>${icon} ${duration}
                       </small>
@@ -70,9 +72,8 @@ export default class extends Controller {
                   </a>`
               } else if (mode === 'WALKING') {
                 icon = '<i class="fa-solid fa-person-hiking"></i>'
-                console.log(origin_placeId, destination_placeId)
                 this.walkingTargets[index].innerHTML =
-                  `<a href="https://www.google.com/maps/dir/?api=1&origin=origin&origin_place_id=${origin_placeId}&destination=destination&destination_place_id=${destination_placeId}&&travelmode=walking" target="_blank">
+                  `<a href="https://www.google.com/maps/dir/?api=1&origin=${origin_latitude}%2C${origin_longitude}&origin_place_id=${origin_placeId}&destination=${destination_latitude}%2C${destination_longitude}&destination_place_id=${destination_placeId}&&travelmode=walking" target="_blank">
                     <p class="direction">
                       <small>${icon} ${duration}
                       </small>

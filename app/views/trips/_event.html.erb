@@ -1,10 +1,10 @@
 
 <li class="event handle"
   data-index="<%= index %>"
-  data-latitude=<%= event.latitude%>
-  data-longitude=<%= event.longitude %>
-  data-position=<%= event.position %>
-  data-place-id=<%= event.source_id %>
+  data-latitude="<%= event.latitude%>"
+  data-longitude="<%= event.longitude %>"
+  data-position="<%= event.position %>"
+  data-place-id= "<%= event.source_id %>"
   data-sortable-update-url="<%= update_position_path(event.trip_id, event) %>"
   data-sortable-move-url="<%= move_lists_path(event.trip_id, event) %>"
 >
