@@ -1,6 +1,3 @@
-<% date = events[0] %>
-<% events = events[1] %>
-
 <div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections order-updated@window->maps#updateMarkers">
   <div class="icons">
     <%= link_to trip_overview_path(@trip) do %>
