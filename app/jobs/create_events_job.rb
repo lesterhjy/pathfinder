@@ -61,27 +61,25 @@ class CreateEventsJob < ApplicationJob
 
   def get_recommendation_details(recommendations_overview, trip)
     recommendations_overview.each do |recommendation|
-      if Event.where(trip_id: trip.id, source_id: recommendation).empty?
-        place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
-        place_details = JSON.parse(URI.open(place_details_search).read)["result"]
-        if place_details.key?("photos")
-          event = Event.new
-          event.trip = trip
-          event.name = place_details["name"]
-          event.source = 'google'
-          event.source_id = place_details["place_id"]
-          event.latitude = place_details["geometry"]["location"]["lat"]
-          event.longitude = place_details["geometry"]["location"]["lng"]
-          event.address = place_details["formatted_address"]
-          event.category = place_details["types"]
-          event.website = place_details["website"] if place_details.key?("website")
-          event.phone = place_details["international_phone_number"] if place_details.key?("international_phone_number")
-          event.photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{place_details["photos"][0]["photo_reference"]}&key=#{ENV["GOOGLE_API_KEY"]}"
-          event.rating = place_details["rating"]
-          event.review = place_details["reviews"]
-          event.description = place_details["editorial_summary"]["overview"].capitalize if place_details.key?("editorial_summary")
-          event.save
-        end
+      place_details_search = URI("https://maps.googleapis.com/maps/api/place/details/json?place_id=#{recommendation}&key=#{ENV["GOOGLE_API_KEY"]}")
+      place_details = JSON.parse(URI.open(place_details_search).read)["result"]
+      if place_details.key?("photos")
+        event = Event.new
+        event.trip = trip
+        event.name = place_details["name"]
+        event.source = 'google'
+        event.source_id = place_details["place_id"]
+        event.latitude = place_details["geometry"]["location"]["lat"]
+        event.longitude = place_details["geometry"]["location"]["lng"]
+        event.address = place_details["formatted_address"]
+        event.category = place_details["types"]
+        event.website = place_details["website"] if place_details.key?("website")
+        event.phone = place_details["international_phone_number"] if place_details.key?("international_phone_number")
+        event.photo = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=#{place_details["photos"][0]["photo_reference"]}&key=#{ENV["GOOGLE_API_KEY"]}"
+        event.rating = place_details["rating"]
+        event.review = place_details["reviews"]
+        event.description = place_details["editorial_summary"]["overview"].capitalize if place_details.key?("editorial_summary")
+        event.save
       end
     end
   end
