@@ -24,10 +24,10 @@
     </div>
 
     <div class="trip-tab">
-      <input type="radio" name="name" checked="checked" />
+      <input type="radio" name="name" title="See map" checked="checked" />
       <div id="map" data-maps-target="map" data-action="google-maps-callback@window->maps#initMap"></div>
 
-      <input type="radio" name="name" />
+      <input type="radio" name="name" title="See recommendations" />
       <div class="trip-tab-content trip-recommendation other-activities">
         <h3 style="font-weight: bold; text-align: center">Check out these other activities</h3>
         <ul
@@ -62,7 +62,7 @@
         </ul>
       </div>
 
-      <input type="radio" name="name" />
+      <input type="radio" name="name" title="See own activities" />
       <div class="trip-tab-content trip-recommendation list-own-activities">
         <ul
           data-controller="sortable"
@@ -97,7 +97,7 @@
       </div>
 
 
-      <input type="radio" name="name" />
+      <input type="radio" name="name" title="Create own activities" />
       <div class="trip-tab-content create-own-activities">
         <h3 style="font-weight: bold">Create your own activities</h3>
         <div class="trip-tab-recommendation-container">
