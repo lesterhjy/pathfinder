@@ -34,6 +34,9 @@ application.register("flatpickr-hotels", FlatpickrHotelsController)
 import FlightFormController from "./flight_form_controller"
 application.register("flight-form", FlightFormController)
 
+import FlipcardController from "./flipcard_controller"
+application.register("flipcard", FlipcardController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

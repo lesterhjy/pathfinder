@@ -6,17 +6,52 @@
   padding: 0;
 }
 
-.recommendation-card {
-  width: 270px;
-  overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  border-radius: 10px;
-  transition: all ease 0.5s;
+.super-recommendation-card-holder {
   margin-bottom: 20px;
+  height: 500px;
+  width: 270px;
+}
+
+.recommendation-card-holder {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.8s ease;
+}
+
+.recommendation-card-holder.isflipped {
+  transform: rotateY(180deg);
+}
+
+.recommendation-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all ease 0.5s;
 }
 
 .recommendation-card:hover {
   transform: scale(1.02);
+}
+
+.recommendation-card-back {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  transform: rotateY(180deg);
+  align-items: center;
+  justify-content: center;
+}
+
+.card-logo {
+  font-size: 150px;
+  color: #2F4F4F;
 }
 
 .recommendation-card-food {
@@ -41,7 +76,7 @@
   background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #e8e8e8 6px ), repeating-linear-gradient( #c6def555, #c6def5 );
 }
 
-.recommendation-card > img {
+.recommendation-card-holder img {
   height: 250px;
   width: 100%;
   object-fit: cover;
@@ -126,7 +161,6 @@
 }
 
 .recommendation-card-loading {
-  width: 270px;
   overflow: hidden;
   margin-bottom: 20px;
   border-radius: 10px;
