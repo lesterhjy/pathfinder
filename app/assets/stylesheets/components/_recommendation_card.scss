@@ -19,7 +19,7 @@
   transition: all 0.8s ease;
 }
 
-.recommendation-card-holder:hover {
+.recommendation-card-holder.isflipped {
   transform: rotateY(180deg);
 }
 

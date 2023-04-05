@@ -1,5 +1,5 @@
-<div class="super-recommendation-card-holder">
-  <div class="recommendation-card-holder">
+<div class="super-recommendation-card-holder" data-controller="flipcard" >
+  <div class="recommendation-card-holder" data-flipcard-target="card">
     <% if categories[:shopping].any? { |type| event["category"].include?(type)} %>
       <div class="recommendation-card-loading recommendation-card-shopping" data-controller="add-event" data-add-event-target="card">
         <div class="recommendation-card-title">
@@ -32,12 +32,12 @@
         %>
           <% if event.selected %>
             <%= f.input :selected, :as => :hidden, input_html: { value: nil } %>
-            <button type="submit" class="btn-ghost" data-add-event-target="add">
+            <button type="submit" class="btn-ghost" data-add-event-target="add" data-action="click->flipcard#flip">
               Remove
             </button>
           <% else %>
             <%= f.input :selected, :as => :hidden, input_html: { value: true } %>
-            <button type="submit" class="btn-ghost" data-add-event-target="add">
+            <button type="submit" class="btn-ghost" data-add-event-target="add" data-action="click->flipcard#flip">
               Add
             </button>
           <% end %>
@@ -46,15 +46,15 @@
     </div>
     <% if categories[:shopping].any? { |type| event["category"].include?(type)} %>
       <div class="recommendation-card-back recommendation-card-shopping">
-        <p>Some text</p>
+        <h1><i class="fa-solid fa-meteor"></h1>
       </div>
     <% elsif categories[:food].any? { |type| event["category"].include?(type)} %>
       <div class="recommendation-card-back recommendation-card-food">
-        <p>Some text</p>
+        <h1><i class="fa-solid fa-meteor"></h1>
       </div>
     <% else %>
       <div class="recommendation-card-back recommendation-card-attraction">
-        <p>Some text</p>
+        <h1><i class="fa-solid fa-meteor"></h1>
       </div>
     <% end %>
   </div>
