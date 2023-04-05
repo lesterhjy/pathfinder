@@ -73,10 +73,9 @@ ul {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: var(--red);
-    opacity: 0.9;
-    color: var(--white);
-    border: 1px solid var(--white);
+    background-color: var(--white);
+    color: var(--black);
+    border: 2px solid var(--black);
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
 }
