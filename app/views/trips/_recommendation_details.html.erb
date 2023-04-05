@@ -6,9 +6,17 @@
 
         <div class="name-address">
 
-          <p style="font-weight: bold" data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
-            <%= event.name %>
-          </p>
+         <p style="font-weight: bold" data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
+          <% if event.category == nil %>
+            <i class="fa-solid fa-user"></i>
+          <% elsif @categories[:food].any? { |type| event.category.include?(type)} %>
+            <i class="fa-solid fa-utensils"></i>
+          <% else %>
+            <i class="fa-solid fa-mountain-city"></i>
+          <% end %>
+          &nbsp;
+          <%= event.name %>
+        </p>
           <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
             <%= f.input :name, input_html: {class: "inline-edit"} %>
           <% end %>

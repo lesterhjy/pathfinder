@@ -1,44 +1,61 @@
-<% if categories[:shopping].any? { |type| event["category"].include?(type)} %>
-  <div class="recommendation-card-loading recommendation-card-shopping" data-controller="add-event" data-add-event-target="card">
-    <div class="recommendation-card-title">
-      <h2><i class="fa-solid fa-store"></i><%= event["name"] %></h2>
-    </div>
-<% elsif categories[:food].any? { |type| event["category"].include?(type)} %>
-  <div class="recommendation-card-loading recommendation-card-food" data-controller="add-event" data-add-event-target="card">
-    <div class="recommendation-card-title">
-      <h2><i class="fa-solid fa-utensils"></i><%= event["name"] %></h2>
-    </div>
-<% else %>
-  <div class="recommendation-card-loading recommendation-card-attraction" data-controller="add-event" data-add-event-target="card">
-    <div class="recommendation-card-title">
-      <h2><i class="fa-solid fa-mountain-city"></i><%= event["name"] %></h2>
-    </div>
-<% end %>
-  <img src="<%= event["photo"] %>" />
-  <div class="recommendation-card-infos">
-    <% if event.description != nil %>
-      <p class="recommendation-description"><%= event["description"] %></p>
+<div class="super-recommendation-card-holder" data-controller="flipcard" >
+  <div class="recommendation-card-holder" data-flipcard-target="card">
+    <% if categories[:shopping].any? { |type| event["category"].include?(type)} %>
+      <div class="recommendation-card-loading recommendation-card-shopping" data-controller="add-event" data-add-event-target="card">
+        <div class="recommendation-card-title">
+          <h2><i class="fa-solid fa-store"></i><%= event["name"] %></h2>
+        </div>
+    <% elsif categories[:food].any? { |type| event["category"].include?(type)} %>
+      <div class="recommendation-card-loading recommendation-card-food" data-controller="add-event" data-add-event-target="card">
+        <div class="recommendation-card-title">
+          <h2><i class="fa-solid fa-utensils"></i><%= event["name"] %></h2>
+        </div>
+    <% else %>
+      <div class="recommendation-card-loading recommendation-card-attraction" data-controller="add-event" data-add-event-target="card">
+        <div class="recommendation-card-title">
+          <h2><i class="fa-solid fa-mountain-city"></i><%= event["name"] %></h2>
+        </div>
     <% end %>
-    <p class="recommendation-address"><%= event["address"] %></p>
-    <%= simple_form_for [trip, event],
-      html: {
-        data: {
-          add_event_target: "form",
-          action: "submit->add-event#create"
-        }
-      } do |f|
-    %>
-      <% if event.selected %>
-        <%= f.input :selected, :as => :hidden, input_html: { value: nil } %>
-        <button type="submit" class="btn-ghost" data-add-event-target="add">
-          Remove
-        </button>
-      <% else %>
-        <%= f.input :selected, :as => :hidden, input_html: { value: true } %>
-        <button type="submit" class="btn-ghost" data-add-event-target="add">
-          Add
-        </button>
-      <% end %>
+      <img src="<%= event["photo"] %>" />
+      <div class="recommendation-card-infos">
+        <% if event.description != nil %>
+          <p class="recommendation-description"><%= event["description"] %></p>
+        <% end %>
+        <p class="recommendation-address"><%= event["address"] %></p>
+        <%= simple_form_for [trip, event],
+          html: {
+            data: {
+              add_event_target: "form",
+              action: "submit->add-event#create"
+            }
+          } do |f|
+        %>
+          <% if event.selected %>
+            <%= f.input :selected, :as => :hidden, input_html: { value: nil } %>
+            <button type="submit" class="btn-ghost" data-add-event-target="add" data-action="click->flipcard#flip">
+              Remove
+            </button>
+          <% else %>
+            <%= f.input :selected, :as => :hidden, input_html: { value: true } %>
+            <button type="submit" class="btn-ghost" data-add-event-target="add" data-action="click->flipcard#flip">
+              Add
+            </button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <% if categories[:shopping].any? { |type| event["category"].include?(type)} %>
+      <div class="recommendation-card-back recommendation-card-shopping">
+        <div class="card-logo"><i class="fa-solid fa-meteor"></i></div>
+      </div>
+    <% elsif categories[:food].any? { |type| event["category"].include?(type)} %>
+      <div class="recommendation-card-back recommendation-card-food">
+        <div class="card-logo"><i class="fa-solid fa-meteor"></i></div>
+      </div>
+    <% else %>
+      <div class="recommendation-card-back recommendation-card-attraction">
+        <div class="card-logo"><i class="fa-solid fa-meteor"></i></div>
+      </div>
     <% end %>
   </div>
 </div>
