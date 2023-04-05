@@ -57,6 +57,7 @@ gem "acts_as_list"
 gem "kmeans-clusterer"
 gem "sidekiq"
 gem "sidekiq-failures", "~> 1.0"
+gem 'letter_opener', group: :development
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

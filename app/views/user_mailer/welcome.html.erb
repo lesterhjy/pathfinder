@@ -1,5 +1,7 @@
-<h1>User#welcome</h1>
+<p>Hi <%= @user.first_name %> <%= @user.last_name %>,</p>
 
+<p>Thanks for planning your trip with PathFinder!</p>
+<p>You are going to <%= @user.trips.find(26).destination %> from <%= @user.trips.find(26).start_date %> to <%= @user.trips.find(26).end_date %></p>
 <p>
-  <%= @greeting %>, find me in app/views/user_mailer/welcome.html.erb
+  Check out your trip overview <%= link_to "trip", trip_overview_url(26)%>
 </p>
