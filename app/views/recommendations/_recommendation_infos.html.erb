@@ -46,15 +46,15 @@
     </div>
     <% if categories[:shopping].any? { |type| event["category"].include?(type)} %>
       <div class="recommendation-card-back recommendation-card-shopping">
-        <h1><i class="fa-solid fa-meteor"></h1>
+        <div class="card-logo"><i class="fa-solid fa-meteor"></i></div>
       </div>
     <% elsif categories[:food].any? { |type| event["category"].include?(type)} %>
       <div class="recommendation-card-back recommendation-card-food">
-        <h1><i class="fa-solid fa-meteor"></h1>
+        <div class="card-logo"><i class="fa-solid fa-meteor"></i></div>
       </div>
     <% else %>
       <div class="recommendation-card-back recommendation-card-attraction">
-        <h1><i class="fa-solid fa-meteor"></h1>
+        <div class="card-logo"><i class="fa-solid fa-meteor"></i></div>
       </div>
     <% end %>
   </div>

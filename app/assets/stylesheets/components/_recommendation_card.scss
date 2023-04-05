@@ -33,17 +33,25 @@
   transition: all ease 0.5s;
 }
 
-// .recommendation-card:hover {
-//   transform: scale(1.02);
-// }
+.recommendation-card:hover {
+  transform: scale(1.02);
+}
 
 .recommendation-card-back {
   position: absolute;
+  display: flex;
   height: 100%;
   width: 100%;
   backface-visibility: hidden;
   border-radius: 10px;
   transform: rotateY(180deg);
+  align-items: center;
+  justify-content: center;
+}
+
+.card-logo {
+  font-size: 150px;
+  color: #2F4F4F;
 }
 
 .recommendation-card-food {
