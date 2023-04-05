@@ -1,7 +1,7 @@
 <p>Hi <%= @user.first_name %> <%= @user.last_name %>,</p>
 
 <p>Thanks for planning your trip with PathFinder!</p>
-<p>You are going to <%= @user.trips.find(26).destination %> from <%= @user.trips.find(26).start_date %> to <%= @user.trips.find(26).end_date %></p>
+<p>You are going to <%= @trip.destination %> from <%= @trip.start_date %> to <%= @trip.end_date %></p>
 <p>
-  Check out your trip overview <%= link_to "trip", trip_overview_url(26)%>
+  Check out your trip overview <%= link_to "trip", trip_overview_url(@trip)%>
 </p>

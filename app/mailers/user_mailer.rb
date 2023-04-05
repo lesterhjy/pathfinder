@@ -4,11 +4,12 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.welcome.subject
   #
-  def welcome
-    @trip = params[:trip]
+  def welcome(user, trip)
+    @user = user
+    @trip = trip
 
     mail(
-      to: @trip.user.email,
+      to: @user.email,
       subject: "#{@user.trips.find(@trip.id).destination} Itinerary"
     )
     # This will render a view in `app/views/user_mailer`!
