@@ -1,7 +1,7 @@
 $tab-color1: #80d6ff;
-$tab-color2: var(--blue);
-$tab-color3: var(--blue);
-$tab-color4: var(--blue);
+$tab-color2: var(--white);
+$tab-color3: var(--white);
+$tab-color4: var(--white);
 $tab-width: 40px;
 
 .trip-tab {
@@ -21,7 +21,6 @@ input[type="radio"] {
   z-index: 1;
   appearance: none;
   cursor: pointer;
-  margin-right: 10px;
 
   &:nth-of-type(1) {
     top: 10px;
@@ -62,7 +61,6 @@ input[type="radio"] {
   height: 40px;
   outline: $tab-width/2 solid;
   outline-offset: -$tab-width/2;
-  margin: 0;
   padding: 5px;
   z-index: 1;
   appearance: none;
@@ -107,11 +105,23 @@ input[type="radio"] {
   height: 100%;
   transition: transform 0.2s ease;
   transform: translateX(100%);
+  background-color: var(--white);
+  border-left: 4px solid var(--white);
 
-  &:nth-of-type(1) { background-color: $tab-color1;}
-  &:nth-of-type(2) { background-color: $tab-color2;}
-  &:nth-of-type(3) { background-color: $tab-color3;}
-  &:nth-of-type(4) { background-color: $tab-color4;}
+  // background-color: #ffffff;
+  // opacity: 1;
+  // background-image: radial-gradient(#175C1B 0.5px, #ffffff 0.5px);
+  // background-size: 10px 10px;
+
+  // &:nth-of-type(1) { background-color: $tab-color1;}
+  // &:nth-of-type(2) { background-color: $tab-color2;}
+  // &:nth-of-type(3) { background-color: $tab-color3;}
+  // &:nth-of-type(4) { background-color: $tab-color4;}
+
+  h2 {
+    text-align: center;
+    color: var(--red);
+  }
 
 }
 

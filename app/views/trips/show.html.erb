@@ -37,7 +37,7 @@
       <label class="tab-label" for="recommendations"><i class="fa-solid fa-layer-group"></i></label>
       <input type="radio" name="name" title="See recommendations" id="recommendations" />
       <div class="trip-tab-content trip-recommendation other-activities">
-        <h3 style="font-weight: bold; text-align: center">Check out these other activities</h3>
+        <h2>Check out these other activities</h2>
         <ul
           data-controller="sortable"
           data-sortable-resource-name-value="event"
@@ -83,7 +83,7 @@
       <label class="tab-label" for="self-activities"><i class="fa-solid fa-user"></i></label>
       <input type="radio" name="name" title="See own activities" id="self-activities">
       <div class="trip-tab-content trip-recommendation list-own-activities">
-        <h3 style="font-weight: bold; text-align: center">Your activities</h3>
+        <h2>Your activities</h2>
         <% if @self_created.empty? %>
           <br>
           <p>You haven't added any activities yet! Add some to get started.</p>
@@ -124,7 +124,7 @@
       <label class="tab-label" for="add-activities"><i class="fa-solid fa-plus"></i></label>
       <input type="radio" name="name" title="Create own activities" id="add-activities" />
       <div class="trip-tab-content create-own-activities">
-        <h3 style="font-weight: bold">Create your own activities</h3>
+        <h2>Create your own activities</h2>
         <div class="trip-tab-recommendation-container">
           <%= simple_form_for([@trip, @event]) do |f| %>
             <%= f.input :name %>
