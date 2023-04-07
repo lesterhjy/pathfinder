@@ -1,8 +1,5 @@
 <div class="events" data-controller="directions" data-toggle-target="events" data-action="order-updated@window->directions#showDirections order-updated@window->maps#updateMarkers">
   <div class="icons">
-    <%= link_to trip_overview_path(@trip) do %>
-      <p class="icon" title="See all days"><i class="fa-solid fa-calendar-days"></i></p>
-    <% end %>
     <p class="icon" data-action="click->directions#showDirections" title="See transport times"><i class="fa-solid fa-van-shuttle"></i></p>
     <p class="icon" data-bs-toggle="modal" data-bs-target="#staticBackdropFlight" title="Add flights"><i class="fa-solid fa-plane-departure"></i>
       <%= render "flights/modal", trip: @trip, flight: @flight %>

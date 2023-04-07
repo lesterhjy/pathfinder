@@ -37,7 +37,7 @@
 
 .fat-btn {
   font-weight: bold;
-  padding: 10px 40px;
+  padding: 10px 50px;
   background-color: white;
   border: 2px solid var(--green);
   border-radius: 20px;
@@ -49,7 +49,7 @@
 .fat-btn:hover {
   opacity: 0.8;
   font-weight: bold;
-  padding: 10px 40px;
+  padding: 10px 50px;
   background-color: var(--green);
   border: 2px solid var(--green);
   border-radius: 20px;
@@ -61,4 +61,26 @@
   p {
     color: white;
   }
+}
+
+.box-btn {
+  font-weight: bold;
+  padding: 16px 24px;
+  background-color: white;
+  border: 2px solid var(--red);
+  color: var(--red);
+  opacity: 1;
+  margin: 0;
+  border-radius: 0;
+}
+
+.box-btn:hover {
+  font-weight: bold;
+  padding: 16px 24px;
+  background-color: var(--red);
+  border: 2px solid white;
+  color: white;
+  opacity: 1;
+  margin: 0;
+  border-radius: 0;
 }
