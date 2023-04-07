@@ -2,10 +2,11 @@
   <meta name="turbo-visit-control" content="reload">
 <% end %>
 
+<div class="intro">
+  <h2>Your <%= pluralize(@events_by_day.length, "days") %> in <strong><%= @trip.destination %></strong></h2>
+  <%= link_to "See day-by-day view", trip_path(@trip) %>
+</div>
+
 <div class="container-fluid mt-3">
-  <div class="intro">
-    <h2>Your <%= pluralize(@events_by_day.length, "days") %> in <strong><%= @trip.destination %></strong></h2>
-    <%= link_to "See day-by-day view", trip_path(@trip) %>
-  </div>
   <%= render "overview_events", trip: @trip, events_by_day: @events_by_day, all_dates: @all_dates, highest_position: @highest_position, flights: @flights, hotels: @hotels %>
 </div>

@@ -7,11 +7,15 @@ export default class extends Controller {
   static targets = [ "startDate", "endDate" ]
 
   connect() {
-    console.log("flatpickr connected")
     flatpickr(this.startDateTarget, {
       minDate: "today",
+      altInput: true,
+      altFormat: "j M Y",
       // Provide an id for the plugin to work
       plugins: [new rangePlugin({ input: "#end_date"})]})
-    flatpickr(this.endDateTarget, {})
+    flatpickr(this.endDateTarget, {
+      altInput: true,
+      altFormat: "j M Y"
+    })
   }
 }

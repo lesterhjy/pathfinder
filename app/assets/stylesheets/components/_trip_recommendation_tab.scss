@@ -1,8 +1,8 @@
 $tab-color1: #80d6ff;
-$tab-color2: #fab57a;
-$tab-color3: #D9534F;
-$tab-color4: #edf798;
-$tab-width: 24px;
+$tab-color2: var(--blue);
+$tab-color3: var(--blue);
+$tab-color4: var(--blue);
+$tab-width: 40px;
 
 .trip-tab {
   position: relative;
@@ -13,7 +13,7 @@ input[type="radio"] {
   position: absolute;
   right: 0;
   width: $tab-width;
-  height: 25%;
+  height: 40px;
   outline: $tab-width/2 solid;
   outline-offset: -$tab-width/2;
   margin: 0;
@@ -21,48 +21,26 @@ input[type="radio"] {
   z-index: 1;
   appearance: none;
   cursor: pointer;
+  margin-right: 10px;
 
   &:nth-of-type(1) {
     top: 10px;
-    height: 50px;
-    margin-right: 2px;
     outline: none;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/2086/2086028.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
   }
 
   &:nth-of-type(2) {
-    top: 60px;
-    height: 50px;
-    margin-right: 2px;
+    top: 50px;
     outline: none;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/4072/4072251.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
   }
 
   &:nth-of-type(3) {
-    top: 110px;
-    height: 50px;
-    margin-right: 2px;
+    top: 90px;
     outline: none;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/4072/4072061.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
   }
+
   &:nth-of-type(4) {
-    top: 160px;
-    height: 50px;
-    margin-right: 2px;
+    top: 130px;
     outline: none;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/2521/2521826.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
   }
 
   &:checked {
@@ -74,8 +52,51 @@ input[type="radio"] {
   }
 }
 
+.tab-label {
+  font-size: 20px;
+  text-align: center;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  width: $tab-width;
+  height: 40px;
+  outline: $tab-width/2 solid;
+  outline-offset: -$tab-width/2;
+  margin: 0;
+  padding: 5px;
+  z-index: 1;
+  appearance: none;
+  cursor: pointer;
+  // border-radius: 10px;
+  background-color: var(--white);
+  border: 1px solid var(--green);
+  // margin-right: 10px;
+
+
+  &:nth-of-type(1) {
+    top: 10px;
+    outline: none;
+  }
+
+  &:nth-of-type(2) {
+    top: 50px;
+    outline: none;
+  }
+
+  &:nth-of-type(3) {
+    top: 90px;
+    outline: none;
+  }
+
+  &:nth-of-type(4) {
+    top: 130px;
+    outline: none;
+  }
+}
+
 .trip-tab-content {
   padding: 30px;
+  padding-right: 50px;
   display: flex;
   align-items: center;
   flex-flow: column;
