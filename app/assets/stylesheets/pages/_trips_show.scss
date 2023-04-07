@@ -1,3 +1,26 @@
+.intro {
+  background-color: var(--white);
+  color: var(--green);
+  padding: 10px;
+  padding-left: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    color: var(--green);
+  }
+
+  a {
+    color: var(--green);
+    padding: 10px;
+  }
+
+  a:hover {
+    color: var(--green);
+    padding: 10px;
+  }
+}
 
 .trip-overview {
   display: grid;
