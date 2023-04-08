@@ -4,7 +4,13 @@
 
 <div class="intro">
   <h2>Your <%= pluralize(@events_by_day.length, "days") %> in <strong><%= @trip.destination %></strong></h2>
-  <%= link_to "See day-by-day view", trip_path(@trip) %>
+  <div>
+    <%= link_to "See day-by-day view", trip_path(@trip) %>
+    <%= link_to trip_overview_path(@trip, format: :pdf) do %>
+      <i class="fa-solid fa-file-pdf"></i>
+    <% end %>
+    <i class="fa-solid fa-paper-plane"></i>
+  </div>
 </div>
 
 <div class="container-fluid mt-3">

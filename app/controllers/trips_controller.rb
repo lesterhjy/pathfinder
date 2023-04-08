@@ -80,6 +80,16 @@ class TripsController < ApplicationController
       @highest_position = 1
     end
     @categories = search_categories
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: @trip.destination,
+               template: "trips/trip",
+               formats: [:html],
+               disposition: :attachment,
+               layout: 'pdf'
+      end
+    end
   end
 
   def update
