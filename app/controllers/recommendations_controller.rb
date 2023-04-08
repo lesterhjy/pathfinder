@@ -1,10 +1,16 @@
 class RecommendationsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index]
+  skip_after_action :verify_authorized
+  skip_after_action :verify_policy_scoped
 
   def index
+    @trip = Trip.find(params[:trip_id])
+    # creating association with trip and user
+    unless UserTrip.where(user_id: current_user.id, trip_id: @trip.id).exists?
+      UserTrip.create(user_id: current_user.id, trip_id: @trip.id)
+    end
     @flight = Flight.new
     @hotel = Hotel.new
-    @trip = Trip.find(params[:trip_id])
     @days = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a.length
     @categories = search_categories
     CreateEventsJob.perform_later(@trip) if @trip.events.empty?

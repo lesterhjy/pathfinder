@@ -1,6 +1,6 @@
 class CreateRecommendations < ActiveRecord::Migration[7.0]
   def change
-    create_table :recommendations do |t|
+    create_table :recommendations, id: :uuid do |t|
       t.string :name
       t.string :source
       t.string :source_id

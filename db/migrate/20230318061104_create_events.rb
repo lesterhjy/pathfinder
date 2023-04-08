@@ -1,6 +1,6 @@
 class CreateEvents < ActiveRecord::Migration[7.0]
   def change
-    create_table :events do |t|
+    create_table :events, id: :uuid do |t|
       t.string :name
       t.string :source
       t.string :source_id
@@ -17,7 +17,7 @@ class CreateEvents < ActiveRecord::Migration[7.0]
       t.time :start_time
       t.time :end_time
       t.string :review
-      t.references :trip, null: false, foreign_key: true
+      t.uuid :trip_id, null: false, foreign_key: true
 
       t.timestamps
     end
