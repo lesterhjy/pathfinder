@@ -2,12 +2,19 @@
   <meta name="turbo-visit-control" content="reload">
 <% end %>
 
-<div class="intro">
+<div class="intro" style="height:64px;">
   <h2>Your <%= pluralize(@events_by_day.length, "days") %> in <strong><%= @trip.destination %></strong></h2>
-  <%= link_to "See day-by-day view", trip_path(@trip) %>
-  <%= form_with url: send_email_path(@trip) do |f| %>
-     <%= f.button do %><i class="fa-solid fa-paper-plane"></i><% end %>
-  <% end %>
+  <div class="intro" style="height:64px;">
+    <%= link_to "See day-by-day view", trip_path(@trip) %>
+    <%= link_to trip_overview_path(@trip, format: :pdf) do %>
+      <i class="fa-solid fa-file-pdf"></i>
+    <% end %>
+    <%= form_with url: send_email_path(@trip) do |f| %>
+      <%= f.button style:"color:var(--green); border:none; background:none;" do %>
+        <i class="fa-solid fa-paper-plane"></i>
+      <% end %>
+    <% end %>
+  </div>
 </div>
 
 <div class="container-fluid mt-3">
