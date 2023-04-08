@@ -85,10 +85,6 @@
       <input type="radio" name="name" title="See own activities" id="self-activities">
       <div class="trip-tab-content trip-recommendation list-own-activities">
         <h2>Your activities</h2>
-        <% if @self_created.empty? %>
-          <br>
-          <p>You haven't added any activities yet! Add some to get started.</p>
-        <% end %>
         <ul
           data-controller="sortable"
           data-sortable-resource-name-value="event"
@@ -143,3 +139,5 @@
     </div>
   </div>
 </div>
+
+<%= render "shared/footer" %>
