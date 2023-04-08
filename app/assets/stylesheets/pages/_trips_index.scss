@@ -1,12 +1,21 @@
+.trip-index-background {
+  opacity: 1;
+  background-image: radial-gradient(var(--red) 0.5px, #ffffff 0.5px);
+  background-size: 10px 10px;
+  height: 100vh;
+}
+
 .trips-box {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px;
-  flex-direction: column;
-  opacity: 1;
-
+  grid-gap: 30px;
 
   h1, h2, h3 {
     text-align: center;
   }
+}
+
+.trip-links {
+  display: flex;
+  justify-content: space-between;
 }
