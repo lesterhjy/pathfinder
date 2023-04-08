@@ -38,9 +38,11 @@ class EventsController < ApplicationController
 
   def update_position
     @event = Event.find(params[:id])
+    count = check_hotel(@event.start_time.to_date) + check_flight(@event.start_time.to_date)
+
     @events = @trip.events
-    @events_that_day = @events.where.not(start_time: nil).order(:position).select { |event| event.start_time.day == @event.start_time.day }
-    new_index = event_params[:position].to_i - 1
+    @events_that_day = @events.where.not(start_time: nil).select { |e| e.start_time.to_date == @event.start_time.to_date }.sort_by(&:position)
+    new_index = event_params[:position].to_i - 1 - count
     new_position = @events_that_day[new_index].position
     @event.insert_at(new_position)
   end
@@ -58,7 +60,23 @@ class EventsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
   end
 
-  def move_params
+  def check_hotel(date)
+    hotels = @trip.hotels
+    count = 0
+    hotels.each do |hotel|
+      hotel_dates = (hotel.start_time.to_date..hotel.end_time.to_date).to_a
+      count += 1 if hotel_dates.include? date
+    end
+    count
+  end
+
+  def check_flight(date)
+    flights = @trip.flights
+    count = 0
+    flights.each do |flight|
+      count += 1 if date == flight.start_time.to_date && date == @trip.start_date.to_date
+    end
+    count
   end
 
   def event_params
