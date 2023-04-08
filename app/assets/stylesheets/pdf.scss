@@ -1,0 +1,38 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  color: #D9534F
+}
+
+h2 {
+  color: #1b4748;
+}
+
+h3 {
+  color: #4E6E81;
+}
+
+h4 {
+  color: #D9534F;
+}
+
+.header {
+  border-bottom: 3px solid #D9534F;
+}
+
+.trip-photo {
+  width: 100vh;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #fff0db;
+  border-radius: 20px;
+}
+
+.date-header {
+  border-bottom: 1px solid #4E6E81;
+  text-align: center;
+  padding: 20px;
+}

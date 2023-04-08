@@ -65,6 +65,7 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @flights = @trip.flights
     @hotels = @trip.hotels
+    @user = @trip.users.first
     # select the events selected by user
     @events = @trip.events.where.not(start_time: nil).order(:start_time, :position)
 
