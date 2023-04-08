@@ -17,10 +17,6 @@ class TripsController < ApplicationController
     authorize @trip
     @flights = @trip.flights
     @hotels = @trip.hotels
-    # creating association with trip and user
-    unless UserTrip.where(user_id: current_user.id, trip_id: @trip.id).exists?
-      UserTrip.create(user_id: current_user.id, trip_id: @trip.id)
-    end
     @event = Event.new
     @flight = Flight.new
     @hotel = Hotel.new
