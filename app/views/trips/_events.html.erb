@@ -29,8 +29,9 @@
         <% booking_dates.each do |booking| %>
           <% if date == booking %>
             <li
-                data-latitude=<%= hotel.latitude%>
-                data-longitude=<%= hotel.longitude %>
+              class="disabled"
+              data-latitude=<%= hotel.latitude%>
+              data-longitude=<%= hotel.longitude %>
               >
             <% if hotel.start_time.to_date == booking %>
               <div class="hotel-card" data-directions-target="event">
