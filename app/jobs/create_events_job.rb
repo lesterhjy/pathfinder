@@ -65,6 +65,7 @@ class CreateEventsJob < ApplicationJob
       place_details = JSON.parse(URI.open(place_details_search).read)["result"]
       if place_details.key?("photos")
         event = Event.new
+        p place_details["name"]
         event.trip = trip
         event.name = place_details["name"]
         event.source = 'google'
