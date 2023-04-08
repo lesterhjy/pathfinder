@@ -33,12 +33,12 @@
           <% if event.selected %>
             <%= f.input :selected, :as => :hidden, input_html: { value: nil } %>
             <button type="submit" class="btn-ghost" data-add-event-target="add" data-action="click->flipcard#flip">
-              Remove
+              <i class="fa-solid fa-minus"></i>
             </button>
           <% else %>
             <%= f.input :selected, :as => :hidden, input_html: { value: true } %>
             <button type="submit" class="btn-ghost" data-add-event-target="add" data-action="click->flipcard#flip">
-              Add
+              <i class="fa-solid fa-plus"></i>
             </button>
           <% end %>
         <% end %>

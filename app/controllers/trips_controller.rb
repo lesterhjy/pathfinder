@@ -63,14 +63,15 @@ class TripsController < ApplicationController
     authorize @trip
     @flights = @trip.flights
     @hotels = @trip.hotels
+    @user = @trip.users.first
     # select the events selected by user
     @events = @trip.events.where.not(start_time: nil).order(:start_time, :position)
 
-    @all_dates = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a
+    @all_dates = (@trip.start_date.to_date..@trip.end_date.to_date).to_a
     @events_by_day = {}
     @all_dates.each do |date|
-      events_that_day = @events.select { |e| e.start_time.day == date.day }.sort_by { |e| e.position }
-      @events_by_day[date.day] = events_that_day
+      events_that_day = @events.select { |e| e.start_time.to_date == date }.sort_by { |e| e.position }
+      @events_by_day[date] = events_that_day
     end
     if @events.last
       @highest_position = @events.last.position
@@ -94,6 +95,12 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
     @trip.update(trip_params)
     redirect_to @trip
+  end
+
+  def destroy
+    @trip = Trip.find(params[:id])
+    @trip.destroy
+    redirect_to trips_path
   end
 
   private
