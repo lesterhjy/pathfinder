@@ -80,6 +80,19 @@ class TripsController < ApplicationController
       @highest_position = 1
     end
     @categories = search_categories
+    respond_to do |format|
+      format.html
+      format.pdf do
+        # Rails 7
+        # https://github.com/mileszs/wicked_pdf/issues/1005
+        render pdf: "filename",
+               template: "trips/overview",
+               formats: [:html],
+               disposition: :inline,
+               layout: 'pdf'
+      end
+    end
+
   end
 
   def update
