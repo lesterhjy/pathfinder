@@ -28,7 +28,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 5.0"
+gem "redis", "~> 4.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -55,7 +55,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "geocoder"
 gem "acts_as_list"
 gem "kmeans-clusterer"
-gem "sidekiq"
+gem "sidekiq", "~> 6.0"
 gem "sidekiq-failures", "~> 1.0"
 
 group :development, :test do
