@@ -4,9 +4,9 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.welcome.subject
   #
-  def send_email
-    @user = params[:user]
-    @trip = params[:trip]
+  def send_email(trip, user)
+    @trip = trip
+    @user = user
 
     mail(
       from: 'admin@pathfinder.city',
