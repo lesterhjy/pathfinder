@@ -16,12 +16,13 @@ class EventsController < ApplicationController
   end
 
   def update
+    @categories = search_categories
     @recommendations = Event.where(trip_id: params[:id])
     @event = Event.find(params[:id])
     @event.update(event_params)
     respond_to do |format|
       format.html { redirect_to trip_path(@trip) }
-      format.text { render partial: "trips/event_details", locals: { event: @event, trip: @trip }, formats: [:html] }
+      format.text { render partial: "trips/event_details", locals: { event: @event, trip: @trip, categories: @categories }, formats: [:html] }
     end
   end
 
@@ -58,7 +59,6 @@ class EventsController < ApplicationController
   end
 
   def move_params
-
   end
 
   def event_params
@@ -80,5 +80,31 @@ class EventsController < ApplicationController
                                   :end_time,
                                   :position,
                                   :note)
+  end
+
+  def search_categories
+    { shopping: ["book_store",
+                 "electronics_store",
+                 "clothing_store",
+                 "shoe_store",
+                 "furniture_store",
+                 "jewelry_store",
+                 "department_store",
+                 "shopping_mall"],
+      attraction: ["casino",
+                   "library",
+                   "movie_theater",
+                   "bowling_alley",
+                   "amusement_park",
+                   "museum",
+                   "zoo",
+                   "park",
+                   "art_gallery",
+                   "tourist_attraction"],
+      food: ["bar",
+             "cafe",
+             "bakery",
+             "restaurant",
+             "night_club"] }
   end
 end
