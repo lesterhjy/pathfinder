@@ -9,6 +9,8 @@
          <p style="font-weight: bold" data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
           <% if event.category == nil %>
             <i class="fa-solid fa-user"></i>
+          <% elsif @categories[:shopping].any? { |type| event.category.include?(type)} %>
+            <i class="fa-solid fa-store"></i>
           <% elsif @categories[:food].any? { |type| event.category.include?(type)} %>
             <i class="fa-solid fa-utensils"></i>
           <% else %>

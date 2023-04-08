@@ -1,8 +1,39 @@
+<div class="header">
+  <h1 style="text-align: right">pathfinder</h1>
+</div>
+
+<h2>Hey <%= @user.first_name %>, you're going to <strong><%= @trip.destination %></strong>!</h2>
+
+<h3>Trip dates: <%= @trip.start_date.to_datetime.strftime("%e %b %Y") %> to <%= @trip.end_date.to_datetime.strftime("%e %b %Y") %></h3>
+
+<h3>Your flights</h3>
+<% @flights.each do |flight| %>
+  <p style="font-weight: bold"><%= flight.departure_city %> to <%= flight.arrival_city %></p>
+  <p><%= flight.flight_number %></p>
+  <p>Departure: <%= flight.start_time.strftime("%-d %b, %l.%M%P") %></p>
+  <p>Arrival: <%= flight.end_time.strftime("%-d %b, %l.%M%P") %></p>
+  <br>
+<% end %>
+
+<h3>Your acommodation</h3>
+<% @hotels.each do |hotel| %>
+  <p style="font-weight: bold"><%= hotel.name %></p>
+  <p><%= hotel.address %></p>
+  <p>Check in: <%= hotel.start_time.strftime("%-d %b, %l%P") %></p>
+  <p>Check out: <%= hotel.end_time.strftime("%-d %b, %l%P") %></p>
+  <br>
+<% end %>
+
 <% @events_by_day.values.each_with_index do |events, index| %>
-  <h3>Day <%= index + 1 %></h3>
-  <% events.each_with_index do |event, idx| %>
-    <h4>Event <%= idx + 1 %>: <%= event.name %></h4>
-    <p><%= event.address %></p>
-  <% end %>
-  <hr>
+  <div style="page-break-before: always;">
+    <h3 class="date-header">Day <%= index + 1 %> | <%= @all_dates[index].strftime("%e %b")  %></h3>
+
+    <% events.each_with_index do |event, idx| %>
+      <h4><%= idx + 1 %>. <%= event.name %></h4>
+      <p><%= event.address %></p>
+      <% if event.note %>
+      <p><strong>Note:</strong> <%= event.note %></p>
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
