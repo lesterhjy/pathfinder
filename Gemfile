@@ -55,7 +55,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "geocoder"
 gem "acts_as_list"
 gem "kmeans-clusterer"
-gem "sidekiq"
+gem "sidekiq", "~> 6.0"
 gem "sidekiq-failures", "~> 1.0"
 gem 'wicked_pdf'
 gem "wkhtmltopdf-binary", group: :development

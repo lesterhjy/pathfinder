@@ -10,7 +10,7 @@ export default class extends Controller {
       this.loadedCard()
     } else {
       this.fetchInterval(this.fetchFun, 1000, 40)
-      setTimeout(this.loadedCard, 42000)
+      setTimeout(this.loadedCard, 42500)
     }
   }
 
