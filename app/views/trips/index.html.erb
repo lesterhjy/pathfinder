@@ -1,16 +1,16 @@
-<div class="container-fluid">
-  <div class="trips-box">
-    <h1 style="font-weight: bold">Your Trips</h1>
-  </div>
-  <div class="trips-box">
+<div class="container">
+  <h1 style="font-weight: bold; color: var(--white); text-align: center">Your Trips</h1>
+  <div class="trips-box mt-5">
     <% @trips.each do |trip| %>
       <div class="card-trip">
         <div class="card-cover" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://source.unsplash.com/random/?<%= trip.destination %>')">
-          <h1><%= trip.destination %></h1>
+          <%= link_to trip_path(trip.id) do %>
+            <h1><%= trip.destination %></h1>
+          <% end %>
         </div>
         <div class="card-trip-infos">
           <div>
-            <h2><%= pluralize((trip.start_date.to_datetime..trip.end_date.to_datetime).to_a.length, "days") %> from <%= trip.start_date.strftime("%d %B %Y") %> to <%= trip.end_date.strftime("%d %B %Y") %></h2>
+            <h2><%= trip.start_date.strftime("%-d %B %Y") %> to <%= trip.end_date.strftime("%d %B %Y") %></h2>
             <%= link_to "Go to trip", trip_path(trip.id) %>
           </div>
         </div>
