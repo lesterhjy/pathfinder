@@ -88,6 +88,10 @@ class TripsController < ApplicationController
     redirect_to @trip
   end
 
+  def send_email
+    UserMailer.send_email.deliver_now
+  end
+
   private
 
   def trip_params

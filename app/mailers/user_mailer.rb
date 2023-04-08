@@ -4,11 +4,12 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.welcome.subject
   #
-  def welcome(user, trip)
-    @user = user
-    @trip = trip
+  def send_email
+    @user = User.first
+    @trip = Trip.last
 
     mail(
+      from: 'admin@pathfinder.city',
       to: @user.email,
       subject: "#{@user.trips.find(@trip.id).destination} Itinerary"
     )

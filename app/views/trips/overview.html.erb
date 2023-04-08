@@ -5,6 +5,9 @@
 <div class="intro">
   <h2>Your <%= pluralize(@events_by_day.length, "days") %> in <strong><%= @trip.destination %></strong></h2>
   <%= link_to "See day-by-day view", trip_path(@trip) %>
+  <%= form_with url: send_email_path(@trip) do |f| %>
+     <%= f.button do %><i class="fa-solid fa-paper-plane"></i><% end %>
+  <% end %>
 </div>
 
 <div class="container-fluid mt-3">
