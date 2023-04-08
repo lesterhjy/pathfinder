@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_trip, only: [:new, :create, :edit, :update, :destroy, :update_position, :move_lists]
+  skip_after_action :verify_authorized
+  skip_after_action :verify_policy_scoped
 
   def new
     @event = Event.new

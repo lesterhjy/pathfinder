@@ -1,19 +1,20 @@
 class TripsController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[create]
   require "kmeans-clusterer"
 
   def create
     @trip = Trip.new(trip_params)
+    authorize @trip
     @trip.save
     redirect_to trip_recommendations_path(@trip)
   end
 
   def index
-    @trips = current_user.trips
+    @trips = policy_scope(Trip)
   end
 
   def show
     @trip = Trip.find(params[:id])
+    authorize @trip
     @flights = @trip.flights
     @hotels = @trip.hotels
     # creating association with trip and user
@@ -63,6 +64,7 @@ class TripsController < ApplicationController
 
   def overview
     @trip = Trip.find(params[:trip_id])
+    authorize @trip
     @flights = @trip.flights
     @hotels = @trip.hotels
     # select the events selected by user
