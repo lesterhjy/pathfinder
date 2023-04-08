@@ -64,7 +64,7 @@
               data-sortable-update-url="<%= update_position_path(recommendation.trip_id, recommendation) %>"
               data-sortable-move-url="<%= move_lists_path(recommendation.trip_id, recommendation) %>">
 
-              <div class="event-details" data-controller="edit-event" data-maps-target="event" data-directions-target="event" data-toggle-target="event" style="border: 3px solid <%= bg_color %>; background-color: white">
+              <div class="event-details" data-controller="edit-event" data-maps-target="event" data-directions-target="event" data-toggle-target="event" style="border: 3px solid <%= bg_color %>; background-color: <%= bg_color %>">
                 <div class="position" style="text-align: right" data-sortable-target="position"><h3><%= index + 1 %></h3></div>
                 <div class="event-inner-card" data-edit-event-target="card">
                   <%= render "trips/recommendation_details", event: recommendation, trip: @trip %>
@@ -105,7 +105,7 @@
               data-sortable-update-url="<%= update_position_path(sc.trip_id, sc) %>"
               data-sortable-move-url="<%= move_lists_path(sc.trip_id, sc) %>">
 
-              <div class="event-details" data-controller="edit-event" data-maps-target="event" data-directions-target="event" data-toggle-target="event" style="border: 3px solid var(--orange); background-color: white">
+              <div class="event-details" data-controller="edit-event" data-maps-target="event" data-directions-target="event" data-toggle-target="event" style="border: 3px solid var(--orange); background-color: var(--orange)">
                 <div class="position" style="text-align: right" data-sortable-target="position"><h3><%= index + 1 %></h3></div>
                 <div class="event-inner-card" data-edit-event-target="card">
                   <%= render "trips/event_details", event: sc, trip: @trip %>

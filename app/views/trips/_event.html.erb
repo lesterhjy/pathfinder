@@ -18,7 +18,7 @@
   data-sortable-move-url="<%= move_lists_path(event.trip_id, event) %>"
 >
 
-  <div class="event-details" data-controller="edit-event" data-maps-target="event" data-directions-target="event" data-toggle-target="event" data-index=<%= index %> style="border: 3px solid <%= bg_color %>; background-color: white">
+  <div class="event-details" data-controller="edit-event" data-maps-target="event" data-directions-target="event" data-toggle-target="event" data-index=<%= index %> style="border: 3px solid <%= bg_color %>; background-color: <%= bg_color %>">
     <div class="position" style="text-align: right" data-sortable-target="position"><h3><%= index + 1 %></h3></div>
     <div class="event-inner-card" data-edit-event-target="card">
       <%= render "trips/event_details", event: event, trip: trip %>
