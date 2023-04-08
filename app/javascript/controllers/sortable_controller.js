@@ -10,6 +10,11 @@ export default class extends Sortable {
     // The sortable.js instance.
     this.sortable.options.group.name = "lists"
     this.sortable.options.onRemove = this.remove
+    this.sortable.options.ghostClass = "ghost"
+    this.sortable.options.filter = ".disabled"
+    this.sortable.options.onMove = function (evt) {
+      return evt.related.className.indexOf('disabled') === -1;
+    }
 
     // Your options
     this.options
