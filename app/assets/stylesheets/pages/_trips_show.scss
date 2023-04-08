@@ -133,6 +133,14 @@ ul {
   justify-content: space-between;
 }
 
+.name-address {
+  flex-grow: 1;
+}
+
+.info-options {
+
+}
+
 .event {
   position: relative;
   margin-bottom: 5px;
@@ -178,6 +186,7 @@ ul {
   text-align: right;
   cursor: pointer;
   font-size: 30px;
+  margin: 0;
 }
 
 .event-directions {
