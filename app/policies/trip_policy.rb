@@ -30,4 +30,8 @@ class TripPolicy < ApplicationPolicy
   def update?
     record.users.include?(user)
   end
+
+  def send_email?
+    record.users.include?(user)
+  end
 end

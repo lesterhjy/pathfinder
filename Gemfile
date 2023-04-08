@@ -57,6 +57,7 @@ gem "acts_as_list"
 gem "kmeans-clusterer"
 gem "sidekiq", "~> 6.0"
 gem "sidekiq-failures", "~> 1.0"
+gem 'letter_opener', group: :development
 gem 'wicked_pdf'
 gem "wkhtmltopdf-binary", group: :development
 gem "wkhtmltopdf-heroku", group: :production
