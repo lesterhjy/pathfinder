@@ -11,7 +11,12 @@
         <div class="card-trip-infos">
           <div>
             <h2><%= trip.start_date.strftime("%-d %B %Y") %> to <%= trip.end_date.strftime("%d %B %Y") %></h2>
+          </div>
+          <div class="trip-links">
             <%= link_to "Go to trip", trip_path(trip.id) %>
+            <%= link_to trip_path(trip), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+              <i class="fa-solid fa-trash-can"></i>
+            <% end %>
           </div>
         </div>
       </div>
