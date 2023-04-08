@@ -1,0 +1,8 @@
+<% @events_by_day.values.each_with_index do |events, index| %>
+  <h3>Day <%= index + 1 %></h3>
+  <% events.each_with_index do |event, idx| %>
+    <h4>Event <%= idx + 1 %>: <%= event.name %></h4>
+    <p><%= event.address %></p>
+  <% end %>
+  <hr>
+<% end %>
