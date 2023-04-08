@@ -1,12 +1,14 @@
 .trips-box {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
   flex-direction: column;
   opacity: 1;
   background-image: radial-gradient(var(--red) 0.5px, #ffffff 0.5px);
   background-size: 10px 10px;
   border-radius: 50px;
   padding: 30px 10px;
-  margin: 30px;
+  margin-top: 30px;
 
   h1, h2, h3 {
     text-align: center;
