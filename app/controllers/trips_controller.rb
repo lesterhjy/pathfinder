@@ -99,6 +99,7 @@ class TripsController < ApplicationController
 
   def send_email
     @trip = Trip.find(params[:trip_id])
+    authorize @trip
     @user = current_user
     UserMailer.send_email(@trip, @user).deliver_now
   end
