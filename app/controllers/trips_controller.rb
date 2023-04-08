@@ -83,16 +83,13 @@ class TripsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        # Rails 7
-        # https://github.com/mileszs/wicked_pdf/issues/1005
-        render pdf: "filename",
-               template: "trips/overview",
+        render pdf: @trip.destination,
+               template: "trips/trip",
                formats: [:html],
-               disposition: :inline,
+               disposition: :attachment,
                layout: 'pdf'
       end
     end
-
   end
 
   def update
