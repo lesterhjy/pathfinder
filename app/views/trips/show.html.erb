@@ -26,6 +26,7 @@
           <% end %>
         </div>
       </div>
+
       <%= render "events", events: @first_day_events, date: @first_day_date, trip: @trip, flights: @flights, hotels: @hotels %>
     </div>
 
@@ -37,7 +38,7 @@
       <label class="tab-label" for="recommendations"><i class="fa-solid fa-layer-group"></i></label>
       <input type="radio" name="name" title="See recommendations" id="recommendations" />
       <div class="trip-tab-content trip-recommendation other-activities">
-        <h3 style="font-weight: bold; text-align: center">Check out these other activities</h3>
+        <h2>Check out these other activities</h2>
         <ul
           data-controller="sortable"
           data-sortable-resource-name-value="event"
@@ -63,7 +64,7 @@
               data-sortable-update-url="<%= update_position_path(recommendation.trip_id, recommendation) %>"
               data-sortable-move-url="<%= move_lists_path(recommendation.trip_id, recommendation) %>">
 
-              <div class="event-details" data-controller="edit-event" data-maps-target="event" data-directions-target="event" data-toggle-target="event" style="background-color: <%= bg_color %>">
+              <div class="event-details" data-controller="edit-event" data-maps-target="event" data-directions-target="event" data-toggle-target="event" style="border: 3px solid <%= bg_color %>; background-color: <%= bg_color %>">
                 <div class="position" style="text-align: right" data-sortable-target="position"><h3><%= index + 1 %></h3></div>
                 <div class="event-inner-card" data-edit-event-target="card">
                   <%= render "trips/recommendation_details", event: recommendation, trip: @trip %>
@@ -83,11 +84,7 @@
       <label class="tab-label" for="self-activities"><i class="fa-solid fa-user"></i></label>
       <input type="radio" name="name" title="See own activities" id="self-activities">
       <div class="trip-tab-content trip-recommendation list-own-activities">
-        <h3 style="font-weight: bold; text-align: center">Your activities</h3>
-        <% if @self_created.empty? %>
-          <br>
-          <p>You haven't added any activities yet! Add some to get started.</p>
-        <% end %>
+        <h2>Your activities</h2>
         <ul
           data-controller="sortable"
           data-sortable-resource-name-value="event"
@@ -104,7 +101,7 @@
               data-sortable-update-url="<%= update_position_path(sc.trip_id, sc) %>"
               data-sortable-move-url="<%= move_lists_path(sc.trip_id, sc) %>">
 
-              <div class="event-details" data-controller="edit-event" data-maps-target="event" data-directions-target="event" data-toggle-target="event" style="background-color: var(--orange)">
+              <div class="event-details" data-controller="edit-event" data-maps-target="event" data-directions-target="event" data-toggle-target="event" style="border: 3px solid var(--orange); background-color: var(--orange)">
                 <div class="position" style="text-align: right" data-sortable-target="position"><h3><%= index + 1 %></h3></div>
                 <div class="event-inner-card" data-edit-event-target="card">
                   <%= render "trips/event_details", event: sc, trip: @trip %>
@@ -124,7 +121,7 @@
       <label class="tab-label" for="add-activities"><i class="fa-solid fa-plus"></i></label>
       <input type="radio" name="name" title="Create own activities" id="add-activities" />
       <div class="trip-tab-content create-own-activities">
-        <h3 style="font-weight: bold">Create your own activities</h3>
+        <h2>Create your own activities</h2>
         <div class="trip-tab-recommendation-container">
           <%= simple_form_for([@trip, @event]) do |f| %>
             <%= f.input :name %>
@@ -134,7 +131,7 @@
             <%= f.input :start_time, as: :string, label: "Date", input_html: { data: { controller: "flatpickr-events" }} %>
             <%= f.input :photo, as: :hidden, input_html: { value: "https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2831&q=80" } %>
             <%= f.input :source, as: :hidden, input_html: { value: "self" } %>
-            <%= f.button :submit, class: "btn" %>
+            <%= f.button :submit, class: "fat-btn" %>
           <% end %>
         </div>
       </div>
