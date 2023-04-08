@@ -123,12 +123,12 @@
 }
 
 .btn-ghost {
-  color: #FFFFFF;
-  background-color: #393e41;
+  color: var(--white);
+  background-color: var(--red);
+  border: 2px solid var(--white);
   opacity: 80%;
   margin-right: 10px;
-  border-radius: 10px;
-  border: none;
+  border-radius: 50%;
   font-size: 16px;
   transition: 0.3s ease;
   position: absolute;
@@ -138,20 +138,6 @@
 
 .btn-ghost:hover {
   opacity: 100%;
-}
-
-.btn-ghost {
-  color: #FFFFFF;
-  background-color: #393e41;
-  opacity: 80%;
-  margin-right: 10px;
-  border-radius: 10px;
-  border: none;
-  font-size: 16px;
-  transition: 0.3s ease;
-  position: absolute;
-  right: 0px;
-  top: -35px;
 }
 
 @keyframes shine {
