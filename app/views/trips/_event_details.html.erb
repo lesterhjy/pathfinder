@@ -53,16 +53,20 @@
         <%= f.input :description, input_html: {class: "inline-edit"} %>
       <% end %>
 
-      <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field"><strong><a href="<%= event.website %>" target="_blank">Website</a></strong></p>
-      <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-        <%= f.input :website, input_html: {class: "inline-edit"} %>
+      <% if event.website %>
+        <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field"><strong><a href="<%= event.website %>" target="_blank">Website</a></strong></p>
+        <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
+          <%= f.input :website, input_html: {class: "inline-edit"} %>
+        <% end %>
       <% end %>
 
-      <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
-        <strong>Phone:</strong> <%= event.phone %>
-      </p>
-      <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
-        <%= f.input :phone, input_html: {class: "inline-edit"}  %>
+      <% if event.phone %>
+        <p data-action="dblclick->edit-event#displayForm" data-edit-event-target="field">
+          <strong>Phone:</strong> <%= event.phone %>
+        </p>
+        <%= simple_form_for [event.trip, event], data: {edit_event_target: "form", action: "submit->edit-event#update"}, html: {class: 'd-none'} do |f| %>
+          <%= f.input :phone, input_html: {class: "inline-edit"}  %>
+        <% end %>
       <% end %>
 
       <br>
