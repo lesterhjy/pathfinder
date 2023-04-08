@@ -1,4 +1,7 @@
 class HotelsController < ApplicationController
+  skip_after_action :verify_authorized
+  skip_after_action :verify_policy_scoped
+
   def create
     @trip = Trip.find(params[:trip_id])
     @hotel = Hotel.new(hotel_params)

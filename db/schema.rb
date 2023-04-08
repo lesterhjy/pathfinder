@@ -12,9 +12,10 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_04_03_114134) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "source"
     t.string "source_id"
@@ -29,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_114134) do
     t.string "rating"
     t.string "note"
     t.string "review"
-    t.bigint "trip_id", null: false
+    t.uuid "trip_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "latitude"
@@ -39,37 +40,34 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_114134) do
     t.boolean "selected"
     t.string "description"
     t.integer "position"
-    t.index ["trip_id"], name: "index_events_on_trip_id"
   end
 
-  create_table "flights", force: :cascade do |t|
+  create_table "flights", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "departure_city"
     t.string "arrival_city"
     t.string "flight_number"
-    t.bigint "trip_id", null: false
+    t.uuid "trip_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "start_time"
     t.datetime "end_time"
     t.text "note"
-    t.index ["trip_id"], name: "index_flights_on_trip_id"
   end
 
-  create_table "hotels", force: :cascade do |t|
+  create_table "hotels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.datetime "start_time"
     t.datetime "end_time"
     t.text "note"
-    t.bigint "trip_id", null: false
+    t.uuid "trip_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
-    t.index ["trip_id"], name: "index_hotels_on_trip_id"
   end
 
-  create_table "recommendations", force: :cascade do |t|
+  create_table "recommendations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "source"
     t.string "source_id"
@@ -88,7 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_114134) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "trips", force: :cascade do |t|
+  create_table "trips", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "destination"
     t.date "start_date"
     t.date "end_date"
@@ -101,16 +99,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_114134) do
     t.boolean "skip", default: false
   end
 
-  create_table "user_trips", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "trip_id", null: false
+  create_table "user_trips", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "trip_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["trip_id"], name: "index_user_trips_on_trip_id"
-    t.index ["user_id"], name: "index_user_trips_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -125,9 +121,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_03_114134) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "events", "trips"
-  add_foreign_key "flights", "trips"
-  add_foreign_key "hotels", "trips"
-  add_foreign_key "user_trips", "trips"
-  add_foreign_key "user_trips", "users"
 end

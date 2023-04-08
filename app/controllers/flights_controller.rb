@@ -1,4 +1,7 @@
 class FlightsController < ApplicationController
+  skip_after_action :verify_authorized
+  skip_after_action :verify_policy_scoped
+
   def create
     @trip = Trip.find(params[:trip_id])
     @flight = Flight.new(flight_params)

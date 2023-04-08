@@ -79,7 +79,7 @@ class CreateEventsJob < ApplicationJob
         event.rating = place_details["rating"]
         event.review = place_details["reviews"]
         event.description = place_details["editorial_summary"]["overview"].capitalize if place_details.key?("editorial_summary")
-        event.save
+        event.save!
       end
     end
   end
