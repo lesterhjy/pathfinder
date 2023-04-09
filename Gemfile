@@ -59,8 +59,8 @@ gem "sidekiq", "~> 6.0"
 gem "sidekiq-failures", "~> 1.0"
 gem 'letter_opener', group: :development
 gem 'wicked_pdf'
-gem "wkhtmltopdf-binary", group: :development
-gem "wkhtmltopdf-heroku", group: :production
+gem "wkhtmltopdf-binary"
+# gem "wkhtmltopdf-heroku", group: :production
 gem "pundit"
 
 group :development, :test do
