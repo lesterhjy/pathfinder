@@ -32,7 +32,31 @@ h4 {
 }
 
 .date-header {
-  border-bottom: 1px solid #4E6E81;
   text-align: center;
   padding: 20px;
+}
+
+.flights-and-accommodation {
+  padding: 20px;
+  border: 2px solid #D9534F;
+  border-radius: 20px;
+}
+
+.flights {
+  border-bottom: 2px solid #4E6E81;
+}
+
+.events {
+  padding: 20px;
+  border: 2px solid #4E6E81;
+  border-radius: 20px;
+}
+
+.note {
+  color: #4E6E81;
+  height: 82px;
+  padding: 10px;
+  width: 95%;
+  border: dotted #4E6E81 1px;
+  border-radius: 20px;
 }
