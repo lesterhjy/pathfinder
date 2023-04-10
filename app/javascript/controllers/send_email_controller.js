@@ -12,6 +12,12 @@ export default class extends Controller {
 
   send() {
     console.log("form submitted")
-    Swal.fire('Email Sent!', '', 'success');
+    Swal.fire({text: 'Email sent!',
+                title: '<i class="fa-solid fa-envelope-open-text" style="color: #D9534F"></i>',
+                showConfirmButton: false,
+                width: 400,
+                padding: '1em',
+                background: '#fff0db',
+                timer: 1500});
   }
 }
