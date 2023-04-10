@@ -10,11 +10,13 @@
       <h3>This is so that we can add it to your trip. If you haven't booked anything, fret not - you can add these in at any time.</h3>
       <div class="options">
         <div class="flights-hotels">
-          <button type="button" class="fat-btn" data-bs-toggle="modal" data-bs-target="#staticBackdropFlight">
+          <button type="button" class="fat-btn" style="position:relative;" data-bs-toggle="modal" data-bs-target="#staticBackdropFlight">
+            <p style="border-radius: 50%; width: 25px; position: absolute; top: 1px; left: 1px; background-color: var(--red); color: white; margin-top: -10px; margin-left: -10px; height: 25px; padding: 1px;"><%= @flight_count %></p>
             <p><i class="fa-solid fa-plane-departure"></i> Add flights</p>
           </button>
           <%= render "flights/modal", trip: @trip, flight: @flight %>
-          <button type="button" class="fat-btn" data-bs-toggle="modal" data-bs-target="#staticBackdropHotel">
+          <button type="button" class="fat-btn" style="position:relative;" data-bs-toggle="modal" data-bs-target="#staticBackdropHotel">
+            <p style="border-radius: 50%; width: 25px; position: absolute; top: 1px; left: 1px; background-color: var(--red); color: white; margin-top: -10px; margin-left: -10px; height: 25px; padding: 1px;"><%= @hotel_count %></p>
             <p><i class="fa-solid fa-hotel"></i> Add hotels</p>
           </button>
           <%= render "hotels/modal", trip: @trip, flight: @hotel %>
