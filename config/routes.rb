@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :hotels, only: %i[new create edit update destroy]
   end
   # resources :events, only: [:destroy]
-
+  resources :user_trips, only: [:destroy]
   patch '/trips/:trip_id/events/:id/update_position', to: 'events#update_position', as: 'update_position'
   patch '/trips/:trip_id/events/:id/move_lists', to: 'events#move_lists', as: 'move_lists'
   get '/trips/:trip_id/overview', to: 'trips#overview', as: 'trip_overview'
