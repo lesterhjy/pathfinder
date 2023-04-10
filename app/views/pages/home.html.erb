@@ -1,27 +1,33 @@
 <div class="banner">
   <div id="search" class="container">
-    <div class="row">
+    <div class="row mb-5">
       <h1 id="welcome"><span data-controller="typed-js"></span></h1>
     </div>
     <div class="row">
+      <div class="col"></div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="form-container" data-controller="autocomplete flatpickr trip-form" data-action="google-maps-callback@window->autocomplete#initMap">
+          <div class="row">
+            <%= simple_form_for @trip, data: { trip_form_target: "form", action: "submit->trip-form#send" } do |f| %>
+              <%= f.input :destination, label: "Which city would you like to explore?", input_html: {class: "form-control form-control-lg", data: {autocomplete_target: "field", action: "keydown->autocomplete#keydown"}} %>
+          </div>
+            <%= f.input :latitude, :as => :hidden, input_html: {data: {autocomplete_target: "latitude"}} %>
+            <%= f.input :longitude, :as => :hidden, input_html: {data: {autocomplete_target: "longitude"}} %>
+          <div class="row">
+            <div class="col-5">
+              <%= f.input :start_date, label:  "Start date", input_html: {class: "form-control form-control-sm", data: {flatpickr_target: "startDate"}}, as: :string %>
+            </div>
+            <div class="col-5">
+              <%= f.input :end_date, label: "End date", input_html: {class: "form-control form-control-sm", data: { flatpickr_target: "endDate"}, id: 'end_date' }, as: :string %>
+            </div>
+            <div class="col-2 button-container">
+              <%= f.button :submit, value: "GO!", class: "box-btn" %>
+            </div>
+          </div>
+          <% end %>
+          <div data-autocomplete-target="map"></div>
+        </div>
+      </div>
+      <div class="col"></div>
     </div>
-    <div class="form-container" data-controller="autocomplete flatpickr trip-form" data-action="google-maps-callback@window->autocomplete#initMap">
-      <%= simple_form_for @trip, data: { trip_form_target: "form", action: "submit->trip-form#send" } do |f| %>
-        <%= f.input :destination, label: "Which city would you like to explore?", input_html: {class: "form-control form-control-lg", data: {autocomplete_target: "field", action: "keydown->autocomplete#keydown"}} %>
-        <%= f.input :latitude, :as => :hidden, input_html: {data: {autocomplete_target: "latitude"}} %>
-        <%= f.input :longitude, :as => :hidden, input_html: {data: {autocomplete_target: "longitude"}} %>
-        <div class="row">
-          <div class="col-5">
-            <%= f.input :start_date, label:  "Start date", input_html: {class: "form-control form-control-sm", data: {flatpickr_target: "startDate"}}, as: :string %>
-          </div>
-          <div class ="col-5">
-            <%= f.input :end_date, label: "End date", input_html: {class: "form-control form-control-sm", data: { flatpickr_target: "endDate"}, id: 'end_date' }, as: :string %>
-          </div>
-          <div class="col-2 button-container">
-            <%= f.button :submit, value: "GO!", class: "box-btn" %>
-          </div>
-        <div>
-      <% end %>
-    <div data-autocomplete-target="map"></div>
-  </div>
 </div>
