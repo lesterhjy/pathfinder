@@ -9,7 +9,17 @@
 
   <div class="intro">
     <h2>Your <%= pluralize(@events_by_day.length, "days") %> in <strong><%= @trip.destination %></strong></h2>
-    <%= link_to "See all days", trip_overview_path(@trip) %>
+    <div style="display: flex; align-items: center;">
+      <%= link_to "See all days", trip_overview_path(@trip) %>
+      <%= link_to trip_overview_path(@trip, format: :pdf) do %>
+        <i class="fa-solid fa-file-pdf"></i>
+      <% end %>
+      <%= form_with url: send_email_path(@trip), data: { controller: "send-email", send_email_target: "form", action: "submit->send-email#send"} do |f| %>
+        <%= f.button style:"color:var(--green); border:none; background:none;" do %>
+          <i class="fa-solid fa-paper-plane"></i>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 
   <div class="trip-overview" data-controller="maps toggle" data-action="update-events@window->maps#initMap">
