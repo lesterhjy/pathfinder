@@ -1,8 +1,10 @@
 <div class="banner">
   <div id="search" class="container">
-    <h1 id="welcome"><span data-controller="typed-js"></span></h1>
-    <br>
-    <br>
+    <div class="row">
+      <h1 id="welcome"><span data-controller="typed-js"></span></h1>
+    </div>
+    <div class="row">
+    </div>
     <div class="form-container" data-controller="autocomplete flatpickr trip-form" data-action="google-maps-callback@window->autocomplete#initMap">
       <%= simple_form_for @trip, data: { trip_form_target: "form", action: "submit->trip-form#send" } do |f| %>
         <%= f.input :destination, label: "Which city would you like to explore?", input_html: {class: "form-control form-control-lg", data: {autocomplete_target: "field", action: "keydown->autocomplete#keydown"}} %>
@@ -15,11 +17,11 @@
           <div class ="col-5">
             <%= f.input :end_date, label: "End date", input_html: {class: "form-control form-control-sm", data: { flatpickr_target: "endDate"}, id: 'end_date' }, as: :string %>
           </div>
-          <div class="col button-container">
+          <div class="col-2 button-container">
             <%= f.button :submit, value: "GO!", class: "box-btn" %>
           </div>
         <div>
       <% end %>
-    <div data-autocomplete-target="map">
+    <div data-autocomplete-target="map"></div>
   </div>
 </div>
