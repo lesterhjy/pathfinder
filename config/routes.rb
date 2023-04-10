@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :user_trips, only: [:destroy]
   patch '/trips/:trip_id/events/:id/update_position', to: 'events#update_position', as: 'update_position'
   patch '/trips/:trip_id/events/:id/move_lists', to: 'events#move_lists', as: 'move_lists'
+  get 'trips/:trip_id/invite', to: 'trips#invite', as: 'trip_invite'
   get '/trips/:trip_id/overview', to: 'trips#overview', as: 'trip_overview'
   post "/trips/:trip_id/overview/send_email", to: 'trips#send_email', as: 'send_email'
   # Defines the root path route ("/")
