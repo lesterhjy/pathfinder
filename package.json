@@ -9,6 +9,7 @@
     "bootstrap": "^5.2.3",
     "flatpickr": "^4.6.13",
     "sortablejs": "^1.15.0",
+    "stimulus-clipboard": "^3.3.0",
     "stimulus-sortable": "^4.1.0",
     "sweetalert2": "^11.7.3",
     "typed.js": "^2.0.132",
