@@ -62,6 +62,7 @@ gem 'wicked_pdf'
 gem "wkhtmltopdf-binary"
 # gem "wkhtmltopdf-heroku", group: :production
 gem "pundit"
+gem "sweetalert2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
