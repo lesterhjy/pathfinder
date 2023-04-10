@@ -52,6 +52,9 @@ application.register("maps", MapsController)
 import NewEventsController from "./new_events_controller"
 application.register("new-events", NewEventsController)
 
+import SendEmailController from "./send_email_controller"
+application.register("send-email", SendEmailController)
+
 import SortableController from "./sortable_controller"
 application.register("sortable", SortableController)
 
