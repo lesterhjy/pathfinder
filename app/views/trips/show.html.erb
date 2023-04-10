@@ -9,6 +9,10 @@
 
   <div class="intro">
     <h2>Your <%= pluralize(@events_by_day.length, "days") %> in <strong><%= @trip.destination %></strong></h2>
+    <div data-controller="clipboard" data-clipboard-success-content="Copied!" style="margin-right: 30px">
+      <input class="d-none" type="text" value="<%= request.original_url %>/invite" data-clipboard-target="source" />
+      <button type="button" data-action="clipboard#copy" data-clipboard-target="button" class="fat-btn">Copy this to share your trip!</button>
+    </div>
     <%= link_to "See all days", trip_overview_path(@trip) %>
   </div>
 

@@ -12,6 +12,15 @@ class TripsController < ApplicationController
     @trips = policy_scope(Trip)
   end
 
+  def invite
+    @trip = Trip.find(params[:trip_id])
+    authorize @trip
+    unless UserTrip.where(user_id: current_user.id, trip_id: @trip.id).exists?
+      UserTrip.create(user_id: current_user.id, trip_id: @trip.id)
+    end
+    redirect_to @trip
+  end
+
   def show
     @trip = Trip.find(params[:id])
     authorize @trip
