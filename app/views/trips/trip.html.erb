@@ -6,34 +6,53 @@
 
 <h3>Trip dates: <%= @trip.start_date.to_datetime.strftime("%e %b %Y") %> to <%= @trip.end_date.to_datetime.strftime("%e %b %Y") %></h3>
 
-<h3>Your flights</h3>
-<% @flights.each do |flight| %>
-  <p style="font-weight: bold"><%= flight.departure_city %> to <%= flight.arrival_city %></p>
-  <p><%= flight.flight_number %></p>
-  <p>Departure: <%= flight.start_time.strftime("%-d %b, %l.%M%P") %></p>
-  <p>Arrival: <%= flight.end_time.strftime("%-d %b, %l.%M%P") %></p>
-  <br>
-<% end %>
+<div class="flights-and-accommodation">
+  <% if @flights %>
+    <h3>Your flights</h3>
+    <div class="flights">
+      <% @flights.each_with_index do |flight, index| %>
+        <div class="flight">
+          <h4><%= index + 1 %>. <%= flight.departure_city %> to <%= flight.arrival_city %></h4>
+          <p><%= flight.flight_number %></p>
+          <p><strong>Departure:</strong> <%= flight.start_time.strftime("%-d %b %Y, %l.%M%P") %></p>
+          <p><strong>Arrival:</strong> <%= flight.end_time.strftime("%-d %b %Y, %l.%M%P") %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
-<h3>Your acommodation</h3>
-<% @hotels.each do |hotel| %>
-  <p style="font-weight: bold"><%= hotel.name %></p>
-  <p><%= hotel.address %></p>
-  <p>Check in: <%= hotel.start_time.strftime("%-d %b, %l%P") %></p>
-  <p>Check out: <%= hotel.end_time.strftime("%-d %b, %l%P") %></p>
-  <br>
-<% end %>
+  <% if @hotels %>
+    <h3>Your accommodation</h3>
+    <div class="hotels">
+      <% @hotels.each_with_index do |hotel, index| %>
+        <div class="hotel">
+          <h4><%= index + 1 %>. <%= hotel.name %></h4>
+          <p><%= hotel.address %></p>
+          <p><strong>Check in:</strong> <%= hotel.start_time.strftime("%-d %b %Y, %l.%M%P") %></p>
+          <p><strong>Check out:</strong> <%= hotel.end_time.strftime("%-d %b %Y, %l.%M%P") %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <% @events_by_day.values.each_with_index do |events, index| %>
   <div style="page-break-before: always;">
-    <h3 class="date-header">Day <%= index + 1 %> | <%= @all_dates[index].strftime("%e %b")  %></h3>
+    <h2 class="date-header">Day <%= index + 1 %> | <%= @all_dates[index].strftime("%e %b")  %></h2>
 
-    <% events.each_with_index do |event, idx| %>
-      <h4><%= idx + 1 %>. <%= event.name %></h4>
-      <p><%= event.address %></p>
-      <% if event.note %>
-      <p><strong>Note:</strong> <%= event.note %></p>
+    <div class="events">
+      <% events.each_with_index do |event, idx| %>
+        <div class="event-details">
+        <h4><%= idx + 1 %>. <%= event.name %></h4>
+        <p><strong>Address:</strong> <%= event.address %>&nbsp;&nbsp;<% if event.phone %> |&nbsp;&nbsp; <strong>Phone:</strong>  <%= event.phone %><% end %></p>
+        <div class="note">
+          <p><strong>Note:</strong> <%= event.note %></p>
+        </div>
+        </div>
       <% end %>
-    <% end %>
+    </div>
+
   </div>
 <% end %>
+
+</div>
