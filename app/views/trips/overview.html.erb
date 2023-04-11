@@ -29,7 +29,7 @@
                   <div class="modal-body">
                       <%# <p>Copy link</p> %>
                       <div class="field d-flex align-items-center justify-content-between">
-                          <div data-controller="clipboard" data-clipboard-success-content="Copied!" style="">
+                          <div data-controller="clipboard" data-clipboard-success-content="Copied!">
                             <input style="width: 350px; padding: 5px; border-radius: 20px; color: grey; border: 1px solid grey; background-color: white;" type="text" value="<%= trip_invite_url(@trip) %>" data-clipboard-target="source" />
                             <button type="button" data-action="clipboard#copy" data-clipboard-target="button" class="flat-btn">Copy</button>
                           </div>
