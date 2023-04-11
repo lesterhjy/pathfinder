@@ -66,3 +66,9 @@ application.register("trip-form", TripFormController)
 
 import TypedJsController from "./typed_js_controller"
 application.register("typed-js", TypedJsController)
+
+import { Application } from '@hotwired/stimulus'
+import Clipboard from 'stimulus-clipboard'
+
+const clipboard = Application.start()
+clipboard.register('clipboard', Clipboard)

@@ -15,6 +15,10 @@ class TripPolicy < ApplicationPolicy
     true
   end
 
+  def invite?
+    true
+  end
+
   def create?
     true
   end
