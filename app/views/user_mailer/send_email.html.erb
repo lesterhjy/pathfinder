@@ -1,10 +1,22 @@
-<p>Hi <%= @user.first_name %> <%= @user.last_name %>,</p>
+<div style="width: 800px; margin: auto">
+  <div class="header">
+    <h1 style="color: #D9534F; border-bottom: 2px solid #D9534F"></i> pathfinder</h1>
+  </div>
 
-<p>Thanks for planning your trip with PathFinder!</p>
-<p>You are going to <strong><%= @trip.destination %></strong> from <em><%= @trip.start_date %></em> to <em><%= @trip.end_date %></em></p>
-<p>
-  Check out your trip <%= link_to "overview", trip_overview_url(@trip)%> !
-</p>
-<p>
-  Send this <%= link_to "link", trip_invite_url(@trip) %> to share your trip with friends !
-</p>
+  <h2 style="color: #1b4748">Hey <%= @user.first_name %>, you're going to <strong><%= @trip.destination %></strong>!</h2>
+
+  <p>Thanks for planning your trip with Pathfinder.</p>
+
+  <p>You are going to <strong><%= @trip.destination %></strong> from <%= @trip.start_date.to_datetime.strftime("%e %b %Y") %> to <%= @trip.end_date.to_datetime.strftime("%e %b %Y")%>.</p>
+
+  <p>
+    Check out your trip overview <%= link_to "here", trip_overview_url(@trip)%>.
+  </p>
+  <p>
+    If you want to share your itinerary with friends and family, just share this link with them: <%= trip_invite_url(@trip) %>
+  </p>
+  <br>
+
+  <h3 style="color: #4E6E81">Have a wonderful time,</h3>
+  <h3 style="color: #4E6E81">Team Pathfinder</h3>
+</div>

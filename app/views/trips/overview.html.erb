@@ -7,31 +7,31 @@
   <div style="display: flex; align-items: center;">
     <%= link_to "See day-by-day view", trip_path(@trip) %>
     <%= link_to trip_overview_path(@trip, format: :pdf) do %>
-      <i class="fa-solid fa-file-pdf"></i>
+      <i class="fa-solid fa-download" title="Download pdf"></i>
     <% end %>
     <%= form_with url: send_email_path(@trip), data: { controller: "send-email", send_email_target: "form", action: "submit->send-email#send"} do |f| %>
       <%= f.button style:"color:var(--green); border:none; background:none;" do %>
-        <i class="fa-solid fa-paper-plane"></i>
+        <i class="fa-solid fa-paper-plane" title="Send to yourself"></i>
       <% end %>
     <% end %>
     <!-- Button trigger modal -->
-      <button type="button" style="border: none; background: none;" data-bs-toggle="modal" data-bs-target="#myModel" id="shareBtn" data-bs-placement="top" title="Share link">
-          <i class="fa-solid fa-link"></i>
+      <button type="button" style="border: none; background: none;" data-bs-toggle="modal" data-bs-target="#myModel" id="shareBtn" data-bs-placement="top" title="Share with friends">
+          <i class="fa-solid fa-share" style="margin-left: 5px"></i>
       </button>
       <!-- Modal -->
       <div class="modal fade" id="myModel" tabindex="-1" aria-labelledby="myModelLabel" aria-hidden="true">
           <div class="modal-dialog">
-              <div class="modal-content" style="background-color: var(--white);">
+              <div class="modal-content">
                   <div class="modal-header">
-                      <h5 class="modal-title" id="myModelLabel">Copy this to share your trip!</h5>
+                      <h5 class="modal-title" id="myModelLabel"><i class="fa-solid fa-meteor"></i> Copy the link below to share your trip!</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                       <%# <p>Copy link</p> %>
                       <div class="field d-flex align-items-center justify-content-between">
-                          <div data-controller="clipboard" data-clipboard-success-content="Copied!" style="">
-                            <input style="width: 350px; background-color: white;" type="text" value="<%= trip_invite_url(@trip) %>" data-clipboard-target="source" />
-                            <button type="button" data-action="clipboard#copy" data-clipboard-target="button" class="fat-btn" style="padding: 10px; width: 90px;">Copy</button>
+                          <div data-controller="clipboard" data-clipboard-success-content="Copied!">
+                            <input style="width: 350px; padding: 5px; border-radius: 20px; color: grey; border: 1px solid grey; background-color: white;" type="text" value="<%= trip_invite_url(@trip) %>" data-clipboard-target="source" />
+                            <button type="button" data-action="clipboard#copy" data-clipboard-target="button" class="flat-btn">Copy</button>
                           </div>
                       </div>
                   </div>

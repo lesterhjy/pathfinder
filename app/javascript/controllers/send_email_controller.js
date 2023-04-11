@@ -16,7 +16,6 @@ export default class extends Controller {
                 title: '<i class="fa-solid fa-envelope-open-text" style="color: #D9534F"></i>',
                 showConfirmButton: false,
                 width: 400,
-                padding: '1em',
                 background: '#fff0db',
                 timer: 1500});
   }
