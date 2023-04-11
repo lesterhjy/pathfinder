@@ -15,11 +15,17 @@
   a {
     color: var(--green);
     padding: 10px;
+    opacity: 1;
   }
 
   a:hover {
     color: var(--green);
     padding: 10px;
+  }
+
+  i {
+    color: var(--red);
+    font-size: 20px;
   }
 }
 
@@ -228,4 +234,13 @@ ul {
 
 .ghost {
   opacity: 0;
+}
+
+.modal-content {
+  width: 100%;
+  border-radius: 20px;
+
+  .modal-header {
+    color: var(--red);
+  }
 }
