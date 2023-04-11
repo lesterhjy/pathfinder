@@ -11,6 +11,8 @@ class RecommendationsController < ApplicationController
     end
     @flight = Flight.new
     @hotel = Hotel.new
+    @flight_count = @trip.flights.count
+    @hotel_count = @trip.hotels.count
     @days = (@trip.start_date.to_datetime..@trip.end_date.to_datetime).to_a.length
     @categories = search_categories
     CreateEventsJob.perform_later(@trip) if @trip.events.empty?
