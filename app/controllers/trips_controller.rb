@@ -137,17 +137,22 @@ class TripsController < ApplicationController
   end
 
   def event_generation
+    @events.each do |event|
+      range = @events.length
+      event.position = rand(range)
+    end
     @week_events = []
     selected_events = @events.where(selected: true).pluck(:id)
     unselected_events = @events.where(selected: nil).pluck(:id)
+    number_of_day_events = 6 # Change number of events per day here
     cluster_number = 0
     while cluster_number < @clusters.length
       @day_events = []
-      cluster = @clusters[cluster_number]
+      cluster = @clusters[cluster_number].shuffle
       if cluster.intersection(selected_events) # If user has selected any event belonging to the cluster.
-        cluster.intersection(selected_events).each { |event_id| @day_events.append(event_id) if @day_events.length < 8 } # Inserting events selected by user first
+        cluster.intersection(selected_events).each { |event_id| @day_events.append(event_id) if @day_events.length < number_of_day_events } # Inserting events selected by user first
       end
-      cluster.intersection(unselected_events).each { |event_id| @day_events.append(event_id) if @day_events.length < 8 } # Filling up the gaps with events that were not selected.
+      cluster.intersection(unselected_events).each { |event_id| @day_events.append(event_id) if @day_events.length < number_of_day_events } # Filling up the gaps with events that were not selected.
       @week_events.append(@day_events) # Append the day's events to the week.
       cluster_number += 1
     end
