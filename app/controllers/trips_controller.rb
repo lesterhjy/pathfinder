@@ -102,6 +102,7 @@ class TripsController < ApplicationController
 
   def update
     @trip = Trip.find(params[:id])
+    authorize @trip
     @trip.update(trip_params)
     redirect_to @trip
   end
